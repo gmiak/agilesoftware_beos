@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized(); //Ser till att Flutter har lästs in innan Firebase.
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+  
+  final Future<FirebaseApp> fbApp = Firebase.initializeApp(); //Initierar Firebase
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +27,22 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'BEOS'),
+      home: FutureBuilder( //Väntar på att anslutning till Firebase är klar.
+        future: fbApp,
+        builder: (context, snapshot) {
+          if(snapshot.hasError){
+            print('You have an error!');
+            return Text('Something went wrong!');
+          } else if (snapshot.hasData){
+            return MyHomePage(title: 'BEOS'); //Hämtat klart.
+          }else{
+            return Center(
+              child: CircularProgressIndicator() //Väntar.
+              );
+          }
+        }
+      )
+        
     );
   }
 }
