@@ -13,7 +13,6 @@ main() async {
   //api with out console logs
   TMDB tmdb = TMDB(ApiKeys(apiKey, apiReadAccessTokenV4));
   //print(await tmdb.v3.movies.getPouplar());
-  print(tmdb.v3.networks);
 
   //api with showing all console logs
   TMDB tmdbWithLogs = TMDB(
