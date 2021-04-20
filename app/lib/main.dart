@@ -38,7 +38,7 @@ class _App extends State<MyApp> {
 
     //api with out console logs
     final response = await http.get(
-        "https://api.themoviedb.org/3/movie/popular?api_key=b4cc0c5b697aa656e542ee4110939d7e");
+        "https://api.themoviedb.org/3/movie/popular?api_key=b4cc0c5b697aa656e542ee4110939d7e&page=1");
 
     if (response.statusCode == 200) {
       //Get a dictionary with all popular movies

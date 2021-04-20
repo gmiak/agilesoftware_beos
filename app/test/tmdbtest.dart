@@ -12,14 +12,14 @@ main() async {
 
   //api with out console logs
   TMDB tmdb = TMDB(ApiKeys(apiKey, apiReadAccessTokenV4));
-  //print(await tmdb.v3.movies.getPouplar());
+  print(await tmdb.v3.movies.getPouplar());
 
   //api with showing all console logs
   TMDB tmdbWithLogs = TMDB(
     ApiKeys(apiKey, apiReadAccessTokenV4),
     logConfig: ConfigLogger.showAll(),
   );
-  //print(await tmdbWithLogs.v3.movies.getPouplar());
+  print(await tmdbWithLogs.v3.movies.getPouplar());
 
   //api with showing all console logs
   TMDB tmdbWithCustomLogs = TMDB(
@@ -30,5 +30,5 @@ main() async {
       showErrorLogs: true,
     ),
   );
-  //print(await tmdbWithCustomLogs.v3.movies.getPouplar());
+  print(await tmdbWithCustomLogs.v3.movies.getPouplar());
 }
