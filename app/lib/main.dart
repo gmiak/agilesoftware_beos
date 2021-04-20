@@ -1,3 +1,4 @@
+import 'package:app/movieList.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
                 print('You have an error!');
                 return Text('Something went wrong!');
               } else if (snapshot.hasData) {
-                return MyHomePage(title: 'BeOs'); //Hämtat klart.
+                return MyHomePage(title: 'Home'); //Hämtat klart.
               } else {
                 return Center(child: CircularProgressIndicator() //Väntar.
                     );
@@ -69,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => null),
+              MaterialPageRoute(builder: (context) => MovieList()),
             );
           },
         ),

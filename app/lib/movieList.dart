@@ -3,18 +3,16 @@ import 'package:app/model/movieModelInfo.dart';
 import 'package:app/view/movieViewInfo.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatefulWidget {
+class MovieList extends StatefulWidget {
   @override
-  _App createState() => _App();
+  State<StatefulWidget> createState() {
+    return _MovieList();
+  }
 }
 
-class _App extends State<MyApp> {
+class _MovieList extends State<MovieList> {
   List<MovieModelInfo> _movies = new List<MovieModelInfo>();
-  MovieController movieController = new MovieController(pageCall: 2);
+  MovieController movieController = new MovieController(pageCall: 1);
 
   // Function to initiate the movies
   @override
@@ -35,15 +33,24 @@ class _App extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Movies App',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
+      title: 'Movies App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Movies"),
         ),
-        home: Scaffold(
-          appBar: AppBar(
-            title: Text("BeOs"),
-          ),
-          body: MovieViewInfo(movies: _movies),
-        ));
+        body: MovieViewInfo(movies: _movies),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          label: const Text('Return'),
+          icon: const Icon(Icons.keyboard_return),
+          backgroundColor: Colors.blue,
+        ),
+      ),
+    );
   }
 }
