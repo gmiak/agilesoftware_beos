@@ -30,5 +30,5 @@ main() async {
       showErrorLogs: true,
     ),
   );
-  print(await tmdbWithCustomLogs.v3.movies.getPouplar());
+  //print(await tmdbWithCustomLogs.v3.movies.getPouplar());
 }

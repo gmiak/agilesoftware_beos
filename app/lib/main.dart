@@ -1,9 +1,7 @@
-import 'dart:convert';
-
+import 'package:app/controller/movieController.dart';
 import 'package:app/model/movieModelInfo.dart';
 import 'package:app/view/movieViewInfo.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 void main() {
   runApp(MyApp());
@@ -16,6 +14,8 @@ class MyApp extends StatefulWidget {
 
 class _App extends State<MyApp> {
   List<MovieModelInfo> _movies = new List<MovieModelInfo>();
+  MovieController movieController = new MovieController(pageCall: 2);
+
   // Function to initiate the movies
   @override
   void initState() {
@@ -25,14 +25,14 @@ class _App extends State<MyApp> {
 
   // Function to get all movies we fetched
   void _populateAllMovies() async {
-    final movies = await _fetchAllMovies();
+    final movies = await movieController.fetchAllMovies();
     setState(() {
       _movies = movies;
     });
   }
 
   // Function for fetch all movies
-  Future<List<MovieModelInfo>> _fetchAllMovies() async {
+  /* Future<List<MovieModelInfo>> _fetchAllMovies() async {
     //Api keys.
     var apiKey = 'b4cc0c5b697aa656e542ee4110939d7e';
 
@@ -50,7 +50,7 @@ class _App extends State<MyApp> {
     } else {
       throw Exception("Failed to load movies");
     }
-  }
+  }*/
 
   // This widget is the root of your application.
   @override
