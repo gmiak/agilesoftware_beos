@@ -1,5 +1,5 @@
 /*
-* This class represents the object movie
+* Klassen bygger abstraktionen (en objektmodell) av en film.
 * */
 class MovieModelInfo {
   final String tmdbId;
@@ -13,7 +13,7 @@ class MovieModelInfo {
   MovieModelInfo(
       {this.tmdbId, this.title, this.poster, this.year, this.description});
 
-  // Function which return an instans of movie from Json
+  //Returns an instans of movie from Json
   factory MovieModelInfo.fromJson(Map<String, dynamic> json) {
     return MovieModelInfo(
       tmdbId: json["year"],

@@ -3,6 +3,10 @@ import 'package:app/model/movieModelInfo.dart';
 import 'package:app/view/movieViewInfo.dart';
 import 'package:flutter/material.dart';
 
+/*
+** Main klass för filmlistan.
+** Den klassen kompletterar i stor sett klassen view/MovieViewInfo.
+**/
 class MovieList extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {

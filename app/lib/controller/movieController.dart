@@ -1,10 +1,12 @@
-//Klassen returnerar en lista med filmer. tar argument såsom page, genre etc
-//Instatiera ett object Connection
-
 import 'package:app/networking/connection.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:app/model/movieModelInfo.dart';
+
+/*
+* Klassen returnerar en lista med populära filmer från tmdb
+* tmdb-apiet returnerar cirka 20 filmer/sida
+**/
 
 class MovieController {
   Connection connection;
