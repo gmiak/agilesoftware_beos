@@ -15,7 +15,7 @@ class MovieList extends StatefulWidget {
 }
 
 class _MovieList extends State<MovieList> {
-  List<MovieModelInfo> _movies = new List<MovieModelInfo>();
+  List<MovieModelInfo> _movies = <MovieModelInfo>[];
   MovieController movieController = new MovieController(pageCall: 1);
 
   // Function to initiate the movies

@@ -18,7 +18,7 @@ class Connection {
   //Constructor
   Connection({this.page = 1}) {
     url =
-        "https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&page=${page}";
+        "https://api.themoviedb.org/3/movie/popular?api_key=$apiKey&page=$page";
     tmdb = TMDB(ApiKeys(apiKey, apiReadAccessTokenV4));
   }
 
