@@ -59,8 +59,6 @@ Map<String, int> genreMap = {
 };
 
 class _GenreState extends State<Genre> {
-  Set<String> activeGenres = {};
-
   //List of type MoviGenre which contains the genres. Has a boolean-value in it's class to indicate if active or not
 
   List<MovieGenre> genres = [
@@ -96,8 +94,8 @@ class _GenreState extends State<Genre> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           openDialog().then((onValue) {
-            //Pass the method passBoxes(onValue) to (discover with genres)
-            print(passBoxes(onValue));
+            //Pass the method getIdString(onValue) to (discover with genres)
+            print(getIdString(onValue));
           });
         },
       ),
@@ -126,7 +124,7 @@ class _GenreState extends State<Genre> {
   }
 
 // Generates string of genre ID's
-  String passBoxes(List<MovieGenre> list) {
+  String getIdString(List<MovieGenre> list) {
     StringBuffer sb = StringBuffer();
     String string;
     for (MovieGenre g in list) {
