@@ -1,0 +1,17 @@
+Vecka 5 känns som den har gått fort. Jag har framför allt ordnat med att hitta och förbereda en teknisk lösning på vårt behov av lagring och möjlighet för användares klienter att prata med varandra. Vilket resulterade i en integration av Firebase som bygger på Google cloud storage. 
+
+*What do I want to learn or understand better?
+Förra veckan ville jag lära mig mer om retrospectives/review och har läst på lite för att kunna implementera dessa bättre för gruppen. Jag känner fortfarande att jag vill lära mig mer om speciellt sprint review då den delen av mötet inte gav tillräckligt mycket plats för PO.
+
+
+How can I help someone else, or the entire team, to learn something new?
+Just nu sitter jag som spindeln i nätet och är den som har kunskap i alla delar. De andra har börjat komma ikapp med IMDB men det är viktigt att jag lyckas överlämna information om Firebase med så vi är flera med kunskapen. Detta är initialt påbörjat med ett Programstruktursdokument som snabbt förklarar hur alla projektets delar hänger ihop men kommer behöva kompletteras ytterligare. 
+
+What is my contribution towards the team’s use of Scrum?
+Jag har implementerat användande av daily scrum, sprint review och sprint retrospective. 
+Jag har jobbat med PO på att förbättra standarden av stories och backlog. 
+Jag har påmint gruppen att fylla i KPI:er och att använda daily scrum. 
+
+What is my contribution towards the team’s deliveries?
+I form av scrum master har jag sett till att vi att vi mötte deadlines för kursens reflektioner. 
+Jag har implementerat Firebase så vi kan implementera viktigare stories nästa sprint. 
