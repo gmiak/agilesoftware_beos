@@ -1,5 +1,5 @@
 import 'package:app/controller/movieController.dart';
-import 'package:app/model/movieModelInfo.dart';
+import 'package:app/model/movieModel.dart';
 import 'package:app/view/movieViewInfo.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +15,7 @@ class MovieList extends StatefulWidget {
 }
 
 class _MovieList extends State<MovieList> {
-  List<MovieModelInfo> _movies = <MovieModelInfo>[];
+  List<Movie> _movies = <Movie>[];
   MovieController movieController = new MovieController(pageCall: 1);
 
   // Function to initiate the movies

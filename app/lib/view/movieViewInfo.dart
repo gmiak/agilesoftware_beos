@@ -1,4 +1,4 @@
-import 'package:app/model/movieModelInfo.dart';
+import 'package:app/model/movieModel.dart';
 import 'package:flutter/material.dart';
 
 /*
@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 ** Därmed målas varje filmer med samma format på skärmen.
 **/
 class MovieViewInfo extends StatelessWidget {
-  final List<MovieModelInfo> movies;
+  final List<Movie> movies;
   //constructor
   MovieViewInfo({this.movies});
   @override

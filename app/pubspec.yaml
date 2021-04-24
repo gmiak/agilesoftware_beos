@@ -36,6 +36,7 @@ dependencies:
   firebase_core: ^0.7.0
   firebase_messaging: ^6.0.16
   cloud_firestore: ^0.16.0+1
+  flutter_tindercard: ^0.2.0
 
 
 
