@@ -9,13 +9,22 @@ import 'package:app/model/movieModel.dart';
 **/
 
 class MovieController {
+  //Singleton configuration
+  static final MovieController _movieController = MovieController._internal();
+  MovieController._internal();
+  //local attributs
   Connection connection;
   int pageCall;
+
   //Constructor
-  MovieController({this.pageCall}) {
-    connection = new Connection(page: pageCall);
-    fetchAllMovies();
+  factory MovieController({int page}) {
+    _movieController.pageCall = page;
+    _movieController.connection =
+        new Connection(page: _movieController.pageCall);
+    _movieController.fetchAllMovies();
+    return _movieController;
   }
+
   //Fetches all movies
   Future<List<Movie>> fetchAllMovies() async {
     //api with out console logs
