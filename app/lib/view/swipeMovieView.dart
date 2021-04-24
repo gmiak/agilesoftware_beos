@@ -9,8 +9,9 @@ import 'package:flutter_tindercard/flutter_tindercard.dart';
 **/
 class SwipeMovieView extends StatelessWidget {
   final List<Movie> movies;
+  final Function liked;
   //constructor
-  SwipeMovieView({this.movies});
+  SwipeMovieView({this.movies, this.liked});
   @override
   Widget build(BuildContext context) {
     CardController controller; //Use this to trigger swap.
@@ -40,9 +41,13 @@ class SwipeMovieView extends StatelessWidget {
             } else if (align.x > 0) {
               //Card is RIGHT swiping
             }
+            //print(align.x);
           },
           swipeCompleteCallback: (CardSwipeOrientation orientation, int index) {
             /// Get orientation & index of swiped card!
+            if (orientation == CardSwipeOrientation.RIGHT) {
+              liked();
+            }
           },
         ),
       ),

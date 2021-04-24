@@ -11,6 +11,12 @@ class SwipeMovie extends StatefulWidget {
 class _SwipeMovie extends State<SwipeMovie> with TickerProviderStateMixin {
   List<Movie> _movies = <Movie>[];
   MovieController movieController = MovieController(page: 2);
+  var _result = 0;
+  void _resultat() {
+    setState(() {
+      _result++;
+    });
+  }
 
   // Function to initiate the movies
   @override
@@ -38,7 +44,17 @@ class _SwipeMovie extends State<SwipeMovie> with TickerProviderStateMixin {
         appBar: AppBar(
           title: Text("Swipe"),
         ),
-        body: SwipeMovieView(movies: _movies),
+        body: Column(
+          children: [
+            Padding(padding: EdgeInsets.all(10)),
+            Text(
+              "Like: $_result",
+              style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+            SwipeMovieView(movies: _movies, liked: _resultat),
+          ],
+        ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
             Navigator.pop(context);
