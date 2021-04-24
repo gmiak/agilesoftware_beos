@@ -6,6 +6,9 @@ import 'package:app/model/movieModel.dart';
 /*
 * Klassen returnerar en lista med populära filmer från tmdb
 * tmdb-apiet returnerar cirka 20 filmer/sida
+* Klassen är en Singleton: Iden med singletonklass är alltså att det i programmet bara
+* kommer finnas en och endast en instans av klassen och att den som använder klassen inte behöver veta när
+* den skapas. SingletonKlassen skapas första gången någon ber om en referens till kalssen.
 **/
 
 class MovieController {
