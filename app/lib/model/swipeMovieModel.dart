@@ -1,5 +1,5 @@
 /*
-* Klassen bygger abstraktionen (en objektmodell) av en film.
+* Klassen bygger abstraktionen (en objektmodell) av swipe.
 * */
 import 'package:app/model/movieModel.dart';
 
