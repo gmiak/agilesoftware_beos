@@ -12,7 +12,9 @@ class _SwipeMovie extends State<SwipeMovie> with TickerProviderStateMixin {
   List<Movie> _movies = <Movie>[];
   MovieController movieController = MovieController(page: 2);
   var _result = 0;
-  void _resultat() {
+  void _resultat(int index) {
+    _movies[index].setLiked(true);
+
     setState(() {
       _result++;
     });

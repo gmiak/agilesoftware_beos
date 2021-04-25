@@ -9,6 +9,8 @@ class Movie {
   //final String category;
   final String description;
 
+  bool _liked = false;
+
   //constructor
   Movie({this.tmdbId, this.title, this.poster, this.year, this.description});
 
@@ -26,5 +28,15 @@ class Movie {
   //Returns title
   String getTitle() {
     return title;
+  }
+
+  // Set if the movie was liked
+  void setLiked(bool liked) {
+    this._liked = liked;
+  }
+
+  // Get if the movie was liked
+  bool getLiked() {
+    return this._liked;
   }
 }
