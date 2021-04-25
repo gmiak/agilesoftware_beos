@@ -11,7 +11,7 @@ class LikedList extends StatefulWidget {
 }
 
 class _LikedList extends State<LikedList> {
-  MovieController _movieController = MovieController(page: 2);
+  MovieController _movieController = MovieController();
   List<Movie> _movies = List.empty();
 
   // Function to initiate the movies

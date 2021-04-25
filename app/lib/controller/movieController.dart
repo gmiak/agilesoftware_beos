@@ -18,7 +18,7 @@ class MovieController {
   //local attributs
   Connection connection;
   int pageCall;
-  static List<Movie> _movies = <Movie>[];
+  List<Movie> _movies = <Movie>[];
 
   //Constructor
   factory MovieController({int page}) {
