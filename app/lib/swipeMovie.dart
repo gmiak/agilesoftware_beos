@@ -29,7 +29,7 @@ class _SwipeMovie extends State<SwipeMovie> with TickerProviderStateMixin {
 
   // Function to get all movies we fetched
   void _populateAllMovies() async {
-    final movies = await movieController.fetchAllMovies();
+    final movies = await movieController.getMovies();
     setState(() {
       _movies = movies;
     });

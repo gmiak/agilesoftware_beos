@@ -18,29 +18,37 @@ class MovieController {
   //local attributs
   Connection connection;
   int pageCall;
+  static List<Movie> _movies = <Movie>[];
 
   //Constructor
   factory MovieController({int page}) {
     _movieController.pageCall = page;
     _movieController.connection =
         new Connection(page: _movieController.pageCall);
-    _movieController.fetchAllMovies();
+    _movieController.getMovies();
     return _movieController;
   }
 
   //Fetches all movies
-  Future<List<Movie>> fetchAllMovies() async {
-    //api with out console logs
-    final response = await http.get(connection.getUrl());
-    if (response.statusCode == 200) {
-      //Get a dictionary with all popular movies
-      final result = jsonDecode(response.body);
-      //Get an iterable list of all popular movies from result where key = results
-      Iterable list = result["results"];
-      //Mapping our list to Movie object
-      return list.map((movie) => Movie.fromJson(movie)).toList();
+  Future<List<Movie>> getMovies() async {
+    // Internal cache: Check if list of movies has already been retrieved.
+    if (_movies.isNotEmpty) {
+      return _movies;
     } else {
-      throw Exception("Failed to load movies");
+      //api with out console logs
+      final response = await http.get(connection.getUrl());
+      if (response.statusCode == 200) {
+        //Get a dictionary with all popular movies
+        final result = jsonDecode(response.body);
+        //Get an iterable list of all popular movies from result where key = results
+        Iterable list = result["results"];
+        //Mapping our list to Movie object
+        _movies = list.map((movie) => Movie.fromJson(movie)).toList();
+
+        return _movies;
+      } else {
+        throw Exception("Failed to load movies");
+      }
     }
   }
 }
