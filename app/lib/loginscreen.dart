@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
 
+/*
+Loginskärm som skall använda sig av autentication när man startar appen. 
+*/
+
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -23,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Container(
                     width: 200,
                     height: 150,
-                    child: Image.asset('assets/BeOs_logo.png')),
+                    child: Image.asset('assets/BeOs_logo.png')), //Logotype
               ),
             ),
             Padding(
@@ -65,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: TextButton(
                 onPressed: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => MyHomePage()));
+                      context, MaterialPageRoute(builder: (_) => MyHomePage())); //TODO Åberopa authentication för login.
                 },
                 child: Text(
                   'Login',
