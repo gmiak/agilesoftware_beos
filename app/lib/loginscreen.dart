@@ -23,14 +23,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Container(
                     width: 200,
                     height: 150,
-                    /*decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(50.0)),*/
-                    child: Image.asset('asset/images/BeOs-logo.png')),
+                    child: Image.asset('assets/BeOs_logo.png')),
               ),
             ),
             Padding(
-              //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
                 decoration: InputDecoration(
@@ -80,7 +76,15 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               height: 130,
             ),
-            Text('New User? Create Account')
+            TextButton(
+              onPressed: (){
+                //TODO New user screen goes here
+              },
+              child: Text(
+                'New User? Create Account',
+                style: TextStyle(color: Colors.blue, fontSize: 15),
+              ),
+            )
           ],
         ),
       ),

@@ -60,6 +60,7 @@ flutter:
      - assets/welcome.jpg
      - assets/welcome1.jpg
      - assets/welcome2.jpg
+     - assets/BeOs_logo.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

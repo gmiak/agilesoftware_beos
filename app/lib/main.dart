@@ -2,24 +2,24 @@ import 'package:app/movieList.dart';
 import 'package:app/likedList.dart';
 import 'package:flutter/material.dart';
 import 'package:app/swipeMovie.dart';
+import 'package:app/loginScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+
 Future<void> main() async {
-  WidgetsFlutterBinding
-      .ensureInitialized(); //Ser till att Flutter har lästs in innan Firebase.
+  WidgetsFlutterBinding.ensureInitialized(); //Ser till att Flutter har lästs in innan Firebase.
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
 
-  final Future<FirebaseApp> fbApp =
-      Firebase.initializeApp(); //Initierar Firebase
+  final Future<FirebaseApp> fbApp = Firebase.initializeApp(); //Initierar Firebase
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
+        title: 'BeOs',
         theme: ThemeData(
           // is not restarted.
           primarySwatch: Colors.blue,
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
                 print('You have an error!');
                 return Text('Something went wrong!');
               } else if (snapshot.hasData) {
-                return MyHomePage(title: 'Home'); //Hämtat klart.
+                return LoginScreen(); //Hämtat klart.
               } else {
                 return Center(child: CircularProgressIndicator() //Väntar.
                     );
