@@ -101,6 +101,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 'New User? Create Account',
                 style: TextStyle(color: Colors.blue, fontSize: 15),
               ),
+            ),
+            TextButton(
+              onPressed: () async {
+                await auth.signIn('test@testsson.se', 'testar');
+                Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => MyHomePage()));
+              },
+              child: Text(
+                'Debug',
+                style: TextStyle(color: Colors.blue, fontSize: 15),
+              ),
             )
           ],
         ),
