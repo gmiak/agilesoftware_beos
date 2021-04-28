@@ -1,4 +1,5 @@
 import 'package:app/registerScreen.dart';
+import 'package:app/resetPasswordScreen.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'package:app/networking/authentication.dart';
@@ -62,7 +63,8 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             TextButton(
               onPressed: (){
-                //TODO FORGOT PASSWORD SCREEN GOES HERE
+                Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => ResetPasswordScreen()));
               },
               child: Text(
                 'Forgot Password',
@@ -79,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   await auth.signIn(emailController.text, passwordController.text);
                   await auth.checkAuth();
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => MyHomePage())); //TODO Åberopa authentication för login.
+                      context, MaterialPageRoute(builder: (_) => MyHomePage()));
                 },
                 child: Text(
                   'Login',

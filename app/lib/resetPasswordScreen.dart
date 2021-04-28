@@ -1,28 +1,27 @@
+import 'package:app/loginscreen.dart';
 import 'package:flutter/material.dart';
-import 'main.dart';
 import 'package:app/networking/authentication.dart';
 
 /*
-Registreringsskärm som skall använda sig av autentication när man startar appen. 
+Skärm för att nollställa lösenord som skall använda sig av autentication när man startar appen. 
 */
 
-class RegisterScreen extends StatefulWidget {
+class ResetPasswordScreen extends StatefulWidget {
   @override
-  _RegisterScreenState createState() => _RegisterScreenState();
+  _ResetPasswordScreenState createState() => _ResetPasswordScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
   Authentication auth = Authentication();
     TextEditingController emailController = new TextEditingController();
-  TextEditingController passwordController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Register account"),
+        title: Text("Reset password"),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -46,19 +45,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     hintText: 'Enter valid email id as john.doe@gmail.com'),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 15.0, right: 15.0, top: 15, bottom: 0),
-              //padding: EdgeInsets.symmetric(horizontal: 15),
-              child: TextField(
-                controller: passwordController,
-                obscureText: true,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Password',
-                    hintText: 'Enter secure password'),
-              ),
-            ),
             Container(
               height: 50,
               width: 250,
@@ -66,14 +52,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   color: Colors.blue, borderRadius: BorderRadius.circular(20)),
               child: TextButton(
                 onPressed: () async {
-                  await auth.signUp(emailController.text, passwordController.text);
-                  await auth.signIn(emailController.text, passwordController.text);
+                  await auth.resetPassword(emailController.text);
                   await auth.checkAuth();
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => MyHomePage()));
+                      context, MaterialPageRoute(builder: (_) => LoginScreen()));
                 },
                 child: Text(
-                  'Register',
+                  'Reset',
                   style: TextStyle(color: Colors.white, fontSize: 25),
                 ),
               ),
