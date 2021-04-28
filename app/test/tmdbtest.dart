@@ -21,7 +21,7 @@ main() async {
   );
   print(await tmdbWithLogs.v3.movies.getPouplar());
 
-  //api with showing all console logs
+  /*api with showing all console logs
   TMDB tmdbWithCustomLogs = TMDB(
     ApiKeys(apiKey, apiReadAccessTokenV4),
     logConfig: ConfigLogger(
@@ -29,6 +29,6 @@ main() async {
       showLogs: true,
       showErrorLogs: true,
     ),
-  );
+  );*/
   //print(await tmdbWithCustomLogs.v3.movies.getPouplar());
 }
