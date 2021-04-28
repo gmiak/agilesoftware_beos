@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
+import 'package:app/networking/authentication.dart';
 
 /*
 Loginskärm som skall använda sig av autentication när man startar appen. 
@@ -11,6 +12,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+  Authentication auth = Authentication();
+    TextEditingController emailController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
+                controller: emailController,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Email',
@@ -44,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
               //padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
-
+                controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -67,7 +74,9 @@ class _LoginScreenState extends State<LoginScreen> {
               decoration: BoxDecoration(
                   color: Colors.blue, borderRadius: BorderRadius.circular(20)),
               child: TextButton(
-                onPressed: () {
+                onPressed: () async {
+                  await auth.signIn(emailController.text, passwordController.text);
+                  await auth.checkAuth();
                   Navigator.push(
                       context, MaterialPageRoute(builder: (_) => MyHomePage())); //TODO Åberopa authentication för login.
                 },
