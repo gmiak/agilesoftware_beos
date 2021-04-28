@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 /*
 Klass som sköter backend för autentisiering, signup, login och nollställning av lösenord. 
@@ -27,10 +26,10 @@ Future<void> checkAuth() async { //Kollar om inloggad.
   }
 }
 
-Future<void> signUp() async { //Logik för att skapa konto
+Future<void> signUp(String _email, String _password) async { //Logik för att skapa konto
   try {
     await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: "albin.rossle@gmail.com", password: "123456"); //Gör om för att ta in info från tangentbord.
+        email: _email, password: _password); 
     print("Success");
   } on FirebaseAuthException catch (e) {
     if (e.code == 'weak-password') {
@@ -43,10 +42,10 @@ Future<void> signUp() async { //Logik för att skapa konto
   }
 }
 
-Future<void> signIn() async { //Logik för login.
+Future<void> signIn(String _email, String _password) async { //Logik för login.
   try {
     await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: "albin.rossle@hotmail.com", password: "123456"); //Gör om för att ta in info från tangentbord.
+        email: _email, password: _password);
     print("Success");
   } on FirebaseAuthException catch (e) {
     if (e.code == 'user-not-found') {
@@ -68,8 +67,8 @@ Future<void> signOut() async { //Logga ut
   }
 }
 
-Future<void> resetPassword() async { //Nollställ lösenord.
-  auth.sendPasswordResetEmail(email: "albin.rossle@gmail.com"); //Gör om för att ta in info från tangentbord.
+Future<void> resetPassword(String _email) async { //Nollställ lösenord.
+  auth.sendPasswordResetEmail(email: _email); //Gör om för att ta in info från tangentbord.
 }
 
 Future<void> verifyEmail() async { 
