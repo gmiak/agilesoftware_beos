@@ -9,13 +9,12 @@ class Authentication {
   //Singleton configuration
   static final Authentication authentication = Authentication._internal();
   Authentication._internal();
+
   //local attributes
-  Firebase fbApp;
   FirebaseAuth auth;
 
   //Constructor
-  factory Authentication(Firebase fbApp) { //tar in en instans av Firebase och skapar en för FirebaseAuth.
-    authentication.fbApp = fbApp;
+  factory Authentication() { //tar in en instans av Firebase och skapar en för FirebaseAuth.
     authentication.auth = FirebaseAuth.instance;
     return authentication;
   }
