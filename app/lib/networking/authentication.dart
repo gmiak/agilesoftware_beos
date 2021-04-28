@@ -46,7 +46,7 @@ Future<void> signUp() async { //Logik för att skapa konto
 Future<void> signIn() async { //Logik för login.
   try {
     await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: "albin.rossle@gmail.com", password: "123456"); //Gör om för att ta in info från tangentbord.
+        email: "albin.rossle@hotmail.com", password: "123456"); //Gör om för att ta in info från tangentbord.
     print("Success");
   } on FirebaseAuthException catch (e) {
     if (e.code == 'user-not-found') {
