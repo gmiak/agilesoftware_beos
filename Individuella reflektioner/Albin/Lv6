@@ -1,0 +1,15 @@
+Vecka 6 har gått bra. Jag har fixat registrering/login och återställning av lösenord. Jag insåg fort att de gick väldigt bra att göra paralellt och att vi hade överskattat tidsåtgång.  
+
+*What do I want to learn or understand better?
+Det har kännts som min efterforskning av  sprint review/retrospective gav resultat i bättre insikt i hinder och gemensamma lärdomar. 
+Något jag behöver ny kunskap om i framtiden är firestore-delen av firebase så jag kan delta bättre i stories som handlar om realtidsuppdateringar i appen. 
+
+How can I help someone else, or the entire team, to learn something new?
+Jag tror att jag delat min kunskap ganska väl inom speciellt TMDB-api:et för att stötta lösningsmetoden till inläsningsalgoritmen. I och med de stories jag löst denna veckan besitter jag mycket kunskap om det grafiska(sidnavigering, widgets och olika dialogrutor) som jag kan dela med mig av. 
+
+What is my contribution towards the team’s use of Scrum?
+Utöver det vanliga jag gjort som scrum master har jag instruerat vikten av att samarbeta med stories för att få sprinten imål istället för att ha första reaktionen att dra in valfri story från backloggen för att alla stories var påbörjade. 
+
+What is my contribution towards the team’s deliveries?
+Stories för att registrera konto/logga in/nollställa lösenord. 
+Jag har drivit diskussion om att vi måste börja ha ett system för att testa och genomföra peer-review. 
