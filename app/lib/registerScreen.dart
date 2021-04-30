@@ -59,6 +59,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     hintText: 'Enter secure password'),
               ),
             ),
+            SizedBox(
+                height: 50
+            ),
             Container(
               height: 50,
               width: 250,
@@ -66,11 +69,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   color: Colors.blue, borderRadius: BorderRadius.circular(20)),
               child: TextButton(
                 onPressed: () async {
-                  await auth.signUp(emailController.text, passwordController.text);
-                  await auth.signIn(emailController.text, passwordController.text);
-                  await auth.checkAuth();
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => MyHomePage()));
+                  await auth.signOut();
+                  String register;
+                  register = await auth.signUp(emailController.text, passwordController.text);
+                  if (register == 'Success') {
+                    await auth.signIn(emailController.text, passwordController.text);
+                    await auth.checkAuth();
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (_) => MyHomePage()));
+                  }
+                  else {
+                    showAlertDialog(context, register);
+                  }
                 },
                 child: Text(
                   'Register',
@@ -81,6 +91,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  showAlertDialog(BuildContext context, String message) {
+
+    // set up the button
+    Widget okButton = TextButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop(); // dismiss dialog
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text(message),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }

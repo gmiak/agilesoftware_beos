@@ -16,11 +16,12 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
 
   Authentication auth = Authentication();
-    TextEditingController emailController = new TextEditingController();
+  TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    auth.signOut();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -78,10 +79,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Colors.blue, borderRadius: BorderRadius.circular(20)),
               child: TextButton(
                 onPressed: () async {
-                  await auth.signIn(emailController.text, passwordController.text);
+                  await auth.signOut();
+                  String login;
+                  login = await auth.signIn(emailController.text, passwordController.text);
                   await auth.checkAuth();
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => MyHomePage()));
+                  if (login == 'Success') {
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (_) => MyHomePage()));
+                  }
+                  else {
+                    showAlertDialog(context, login);
+                  }
                 },
                 child: Text(
                   'Login',
@@ -116,6 +124,33 @@ class _LoginScreenState extends State<LoginScreen> {
           ],
         ),
       ),
+    );
+  }
+
+    showAlertDialog(BuildContext context, String message) {
+
+    // set up the button
+    Widget okButton = TextButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop(); // dismiss dialog
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text(message),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }
