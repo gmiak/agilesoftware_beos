@@ -39,6 +39,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Image.asset('assets/BeOs_logo.png')), //Logotype
               ),
             ),
+            SizedBox(
+                height: 50
+            ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
@@ -98,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             SizedBox(
-              height: 130,
+              height: 100,
             ),
             TextButton(
               onPressed: (){

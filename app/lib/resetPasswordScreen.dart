@@ -35,6 +35,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     child: Image.asset('assets/BeOs_logo.png')), //Logotype
               ),
             ),
+            SizedBox(
+                height: 50
+            ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
@@ -44,6 +47,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     labelText: 'Email',
                     hintText: 'Enter valid email id as john.doe@gmail.com'),
               ),
+            ),
+            SizedBox(
+                height: 30
             ),
             Container(
               height: 50,
@@ -66,6 +72,33 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  showAlertDialog(BuildContext context, String message) {
+
+    // set up the button
+    Widget okButton = TextButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop(); // dismiss dialog
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text(message),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }

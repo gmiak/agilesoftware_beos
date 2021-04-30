@@ -36,6 +36,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Image.asset('assets/BeOs_logo.png')), //Logotype
               ),
             ),
+            SizedBox(
+                height: 50
+            ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
