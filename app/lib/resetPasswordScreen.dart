@@ -1,4 +1,4 @@
-import 'package:app/loginscreen.dart';
+import 'package:app/loginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:app/networking/authentication.dart';
 
