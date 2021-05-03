@@ -23,7 +23,7 @@ class _LikedList extends State<LikedList> {
 
   // Function to get all movies we fetched
   void _populateAllMovies() async {
-    final movies = await _movieController.getMovies();
+    final movies = await _movieController.getMovies(null);
 
     setState(() {
       _movies = movies.where((element) => element.getLiked()).toList() ??

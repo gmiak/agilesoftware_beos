@@ -10,7 +10,7 @@ class SwipeMovie extends StatefulWidget {
 
 class _SwipeMovie extends State<SwipeMovie> with TickerProviderStateMixin {
   List<Movie> _movies = <Movie>[];
-  MovieController movieController = MovieController(page: 2);
+  MovieController movieController = MovieController();
   var _result = 0;
   void _resultat(int index) {
     _movies[index].setLiked(true);
@@ -29,7 +29,7 @@ class _SwipeMovie extends State<SwipeMovie> with TickerProviderStateMixin {
 
   // Function to get all movies we fetched
   void _populateAllMovies() async {
-    final movies = await movieController.getMovies();
+    final movies = await movieController.getMovies(null);
     setState(() {
       _movies = movies;
     });

@@ -1,7 +1,12 @@
+import 'dart:math';
+
+import 'package:app/model/appRepository.dart';
+import 'package:app/model/genres.dart';
 import 'package:app/networking/connection.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:app/model/movieModel.dart';
+import 'package:tmdb_api/tmdb_api.dart';
 
 /*
 * Klassen returnerar en lista med populära filmer från tmdb
@@ -12,43 +17,68 @@ import 'package:app/model/movieModel.dart';
 **/
 
 class MovieController {
+  static final AppRepository _appRepository = AppRepository();
   //Singleton configuration
   static final MovieController _movieController = MovieController._internal();
   MovieController._internal();
   //local attributs
   Connection connection;
-  int pageCall;
-  List<Movie> _movies = <Movie>[];
+  Future<void> genrePopulation;
 
   //Constructor
-  factory MovieController({int page}) {
-    _movieController.pageCall = page;
-    _movieController.connection =
-        new Connection(page: _movieController.pageCall);
-    _movieController.getMovies();
+  factory MovieController() {
+    _movieController.connection = new Connection();
+    _movieController.genrePopulation = Genres.populateGenres();
     return _movieController;
   }
 
   //Fetches all movies
-  Future<List<Movie>> getMovies() async {
-    // Internal cache: Check if list of movies has already been retrieved.
-    if (_movies.isNotEmpty) {
+  Future<List<Movie>> getMovies(List<int> genres) async {
+    await this.genrePopulation;
+
+    dynamic movies = connection.getTmdb().v3.discover.getMovies(
+        withGenres: genres != null ? genres.join(",") : "",
+        sortBy: SortMoviesBy.releaseDateDesc);
+
+    if (movies != null) {
+      List<Movie> _movies = <Movie>[];
+      int pageNum = 1;
+      int pageTot = movies["total_pages"];
+
+      while (pageTot >= pageNum) {
+        if (movies != null) {
+          Iterable list = movies["results"];
+
+          if (list.length > 0) {
+            List<Movie> movieResults =
+                list.map((movie) => Movie.fromTmdbJson(movie)).toList();
+            movieResults.shuffle();
+
+            movieResults.getRange(0, (movieResults.length / 2).round());
+          } else {
+            break;
+          }
+
+          if (pageNum >= 3) break;
+
+          pageNum++;
+          movies = connection.getTmdb().v3.discover.getMovies(
+              withGenres: genres != null ? genres.join(",") : "",
+              sortBy: SortMoviesBy.releaseDateDesc,
+              page: pageNum);
+        } else {
+          break;
+        }
+      }
+
+      _appRepository.clearMovies();
+      for (Movie movie in _movies) {
+        _appRepository.addMovie(movie);
+      }
+
       return _movies;
     } else {
-      //api with out console logs
-      final response = await http.get(connection.getUrl());
-      if (response.statusCode == 200) {
-        //Get a dictionary with all popular movies
-        final result = jsonDecode(response.body);
-        //Get an iterable list of all popular movies from result where key = results
-        Iterable list = result["results"];
-        //Mapping our list to Movie object
-        _movies = list.map((movie) => Movie.fromJson(movie)).toList();
-
-        return _movies;
-      } else {
-        throw Exception("Failed to load movies");
-      }
+      throw Exception("Failed to load movies");
     }
   }
 }

@@ -16,7 +16,7 @@ class MovieList extends StatefulWidget {
 
 class _MovieList extends State<MovieList> {
   List<Movie> _movies = <Movie>[];
-  MovieController movieController = MovieController(page: 1);
+  MovieController movieController = MovieController();
 
   // Function to initiate the movies
   @override
@@ -27,7 +27,7 @@ class _MovieList extends State<MovieList> {
 
   // Function to get all movies we fetched
   void _populateAllMovies() async {
-    final movies = await movieController.getMovies();
+    final movies = await movieController.getMovies(null);
     setState(() {
       _movies = movies;
     });
