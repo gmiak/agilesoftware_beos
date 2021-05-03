@@ -6,29 +6,19 @@ import 'package:tmdb_api/tmdb_api.dart';
 **/
 class Connection {
   //Global variabels
-  final apiKey = "b4cc0c5b697aa656e542ee4110939d7e";
-  final apiReadAccessTokenV4 =
+  static final _apiKey = "b4cc0c5b697aa656e542ee4110939d7e";
+  static final _apiReadAccessTokenV4 =
       'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiNGNjMGM1YjY5N2FhNjU2ZTU0MmVlNDExMDkzOWQ3ZSIsInN1YiI6IjYwNzg3NGRkMWIxZjNjMDA1N2I4OGYzNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qN2UHE8GkoB0tCf0X2xGIkJFeXgMkhx8W2-lBv4Cotk';
 
   //Local attributs
-  int page;
-  String url;
-  TMDB tmdb;
+  TMDB _tmdb = TMDB(ApiKeys(_apiKey, _apiReadAccessTokenV4));
 
-  //Constructor
-  Connection({this.page = 1}) {
-    url =
-        "https://api.themoviedb.org/3/movie/popular?api_key=$apiKey&page=$page";
-    tmdb = TMDB(ApiKeys(apiKey, apiReadAccessTokenV4));
-  }
-
-  //Returns url
-  String getUrl() {
-    return url;
+  Future<Map<dynamic, dynamic>> getGenres() async {
+    return await _tmdb.v3.geners.getMovieList();
   }
 
   //Returns tmdb
   TMDB getTmdb() {
-    return tmdb;
+    return _tmdb;
   }
 }
