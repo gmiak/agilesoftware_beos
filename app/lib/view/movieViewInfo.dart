@@ -31,7 +31,7 @@ class MovieViewInfo extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text(movie.title), Text(movie.year)],
+                    children: [Text(movie.title), Text(movie.date)],
                   ),
                 ),
               )
