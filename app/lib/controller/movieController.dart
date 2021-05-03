@@ -34,6 +34,7 @@ class MovieController {
 
   //Fetches all movies
   Future<List<Movie>> getMovies(List<int> genres) async {
+    final Random rnd = new Random();
     await this.genrePopulation;
 
     dynamic movies = connection.getTmdb().v3.discover.getMovies(
@@ -42,32 +43,39 @@ class MovieController {
 
     if (movies != null) {
       List<Movie> _movies = <Movie>[];
-      int pageNum = 1;
+
+      int pageFin = 0;
       int pageTot = movies["total_pages"];
 
-      while (pageTot >= pageNum) {
-        if (movies != null) {
-          Iterable list = movies["results"];
+      if (pageTot > 0) {
+        int pageNum = rnd.nextInt(pageTot) + 1;
 
-          if (list.length > 0) {
-            List<Movie> movieResults =
-                list.map((movie) => Movie.fromTmdbJson(movie)).toList();
-            movieResults.shuffle();
+        while (pageTot >= pageNum) {
+          if (movies != null) {
+            Iterable list = movies["results"];
 
-            movieResults.getRange(0, (movieResults.length / 2).round());
+            if (list.length > 0) {
+              List<Movie> movieResults =
+                  list.map((movie) => Movie.fromTmdbJson(movie)).toList();
+              movieResults.shuffle();
+
+              _movies.addAll(
+                  movieResults.getRange(0, (movieResults.length / 2).round()));
+            } else {
+              break;
+            }
+
+            if (pageFin >= 3) break;
+
+            pageNum = rnd.nextInt(pageTot) + 1;
+            pageFin++;
+            movies = connection.getTmdb().v3.discover.getMovies(
+                withGenres: genres != null ? genres.join(",") : "",
+                sortBy: SortMoviesBy.releaseDateDesc,
+                page: pageNum);
           } else {
             break;
           }
-
-          if (pageNum >= 3) break;
-
-          pageNum++;
-          movies = connection.getTmdb().v3.discover.getMovies(
-              withGenres: genres != null ? genres.join(",") : "",
-              sortBy: SortMoviesBy.releaseDateDesc,
-              page: pageNum);
-        } else {
-          break;
         }
       }
 
