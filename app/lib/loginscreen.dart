@@ -84,14 +84,19 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () async {
                   await auth.signOut();
                   String login;
-                  login = await auth.signIn(emailController.text, passwordController.text);
-                  await auth.checkAuth();
-                  if (login == 'Success') {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => MyHomePage()));
+                  if (emailController.text.isNotEmpty&& passwordController.text.isNotEmpty) {
+                    login = await auth.signIn(emailController.text, passwordController.text);
+                    await auth.checkAuth();
+                    if (login == 'Success') {
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (_) => MyHomePage()));
+                    }
+                    else {
+                      showAlertDialog(context, login);
+                    }
                   }
                   else {
-                    showAlertDialog(context, login);
+                    showAlertDialog(context, "You must enter both email and password.");
                   }
                 },
                 child: Text(
