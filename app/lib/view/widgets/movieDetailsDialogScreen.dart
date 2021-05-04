@@ -44,11 +44,13 @@ class MovieDetailsDialogScreen extends StatelessWidget {
                     width: _width * 0.40,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
-                      image: DecorationImage(
-                        image: NetworkImage(
-                          "https://image.tmdb.org/t/p/w500${movie.poster}",
-                        ),
-                      ),
+                      image: movie.poster != null
+                          ? DecorationImage(
+                              image: NetworkImage(
+                                "https://image.tmdb.org/t/p/w500${movie.poster}",
+                              ),
+                            )
+                          : null,
                     ),
                   ),
                 ),
