@@ -1,4 +1,5 @@
 import 'package:app/model/movieModel.dart';
+import 'package:app/view/widgets/movieDetailsDialogScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 
@@ -29,9 +30,18 @@ class SwipeMovieView extends StatelessWidget {
           maxHeight: MediaQuery.of(context).size.width * 0.9,
           minWidth: MediaQuery.of(context).size.width * 0.8,
           minHeight: MediaQuery.of(context).size.width * 0.8,
-          cardBuilder: (context, index) => Card(
-            child: Image.network(
-                "https://image.tmdb.org/t/p/w780${movies[index].poster}"),
+          cardBuilder: (context, index) => GestureDetector(
+            onTap: () => {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) => MovieDetailsDialogScreen(
+                        movie: movies[index],
+                      ))
+            },
+            child: Card(
+              child: Image.network(
+                  "https://image.tmdb.org/t/p/w780${movies[index].poster}"),
+            ),
           ),
           cardController: controller = CardController(),
           swipeUpdateCallback: (DragUpdateDetails details, Alignment align) {
