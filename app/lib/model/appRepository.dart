@@ -32,14 +32,14 @@ class AppRepository {
   }
 
   Future<List<Movie>> getLikedMovies() async {
-    List<Movie> movies = <Movie>[];
+    List<Movie> likedMovies = <Movie>[];
 
     await likedMoviesCollection.get().then((snapshot) => {
           for (DocumentSnapshot ds in snapshot.docs)
-            {movies.add(Movie.fromFBJson(ds.data()))}
+            {likedMovies.add(Movie.fromFBJson(ds.data()))}
         });
 
-    return movies;
+    return likedMovies;
   }
 
   Future<DocumentReference> addMovie(Movie movie) async {
