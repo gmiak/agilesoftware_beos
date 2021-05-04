@@ -5,16 +5,17 @@ import 'package:app/swipeMovie.dart';
 import 'package:app/loginScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized(); //Ser till att Flutter har lästs in innan Firebase.
+  WidgetsFlutterBinding
+      .ensureInitialized(); //Ser till att Flutter har lästs in innan Firebase.
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
 
-  final Future<FirebaseApp> fbApp = Firebase.initializeApp(); //Initierar Firebase
+  final Future<FirebaseApp> fbApp =
+      Firebase.initializeApp(); //Initierar Firebase
 
   @override
   Widget build(BuildContext context) {
