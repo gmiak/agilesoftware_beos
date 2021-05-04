@@ -13,6 +13,7 @@ class _CoListState extends State<CoList> {
 
   MovieController _movieController = MovieController();
   List<Movie> _movies = List.empty();
+  TextEditingController emailController = new TextEditingController();
 
   @override
   void initState() {
@@ -35,7 +36,9 @@ class _CoListState extends State<CoList> {
     setState(() {
       switch (index) {
         case 0:
-          {}
+          {
+            openDialog();
+          }
           break;
         case 1:
           {}
@@ -61,15 +64,24 @@ class _CoListState extends State<CoList> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.group_add_sharp),
+            icon: Icon(
+              Icons.group_add_sharp,
+              size: 40,
+            ),
             label: 'Add Friend',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.swipe),
+            icon: Icon(
+              Icons.swipe,
+              size: 40,
+            ),
             label: 'Swipe',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.arrow_left_sharp),
+            icon: Icon(
+              Icons.arrow_left_sharp,
+              size: 40,
+            ),
             label: 'Go Back',
           ),
         ],
@@ -79,4 +91,45 @@ class _CoListState extends State<CoList> {
       ),
     );
   }
+
+  Future<String> openDialog() {
+    return showDialog(
+        context: context,
+        builder: (ctx) {
+          return AlertDialog(
+              title: Text('Users'),
+              actions: <Widget>[
+                IconButton(
+                  iconSize: 40,
+                  icon: Icon(Icons.arrow_left_sharp),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+              content: SingleChildScrollView(
+                  child: Column(
+                children: <Widget>[
+                  Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      child: TextField(
+                        controller: emailController,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Email',
+                            hintText:
+                                'Enter valid email id as john.doe@gmail.com'),
+                      )),
+                  IconButton(
+                    iconSize: 40,
+                    icon: Icon(Icons.add),
+                    onPressed: onPressed,
+                    padding: EdgeInsets.only(top: 20),
+                  )
+                ],
+              )));
+        });
+  }
+
+  void onPressed() {}
 }
