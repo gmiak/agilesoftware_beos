@@ -108,7 +108,7 @@ class MovieDetailsDialogScreen extends StatelessWidget {
                         color: Theme.of(context).primaryColor,
                       ),
                       Text(
-                        movie.year,
+                        movie.date,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
