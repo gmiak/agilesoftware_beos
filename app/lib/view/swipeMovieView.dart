@@ -30,8 +30,10 @@ class SwipeMovieView extends StatelessWidget {
           maxHeight: MediaQuery.of(context).size.width * 0.9,
           minWidth: MediaQuery.of(context).size.width * 0.8,
           minHeight: MediaQuery.of(context).size.width * 0.8,
+          //Making Movie's poster clickable
           cardBuilder: (context, index) => GestureDetector(
             onTap: () => {
+              //Showing a custom dialog with movie's description after the user clicks to the poster.
               showDialog(
                   context: context,
                   builder: (BuildContext context) => MovieDetailsDialogScreen(
