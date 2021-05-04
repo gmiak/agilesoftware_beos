@@ -1,13 +1,14 @@
 import 'package:app/controller/movieController.dart';
 
 class Genres {
-  static final MovieController _movieController = MovieController();
   static final Map<int, String> _genres = new Map<int, String>();
 
   static Future<void> populateGenres() async {
-    dynamic genresResponse = await _movieController.connection.getGenres();
+    dynamic genresResponse = await MovieController.getConnection().getGenres();
 
     if (genresResponse != null) {
+      _genres.clear();
+
       genresResponse.forEach((key, value) {
         for (Map<String, dynamic> map in value) {
           if (map.containsKey("id") && map.containsKey("name"))

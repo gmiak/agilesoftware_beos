@@ -30,8 +30,10 @@ class SwipeMovieView extends StatelessWidget {
           minWidth: MediaQuery.of(context).size.width * 0.8,
           minHeight: MediaQuery.of(context).size.width * 0.8,
           cardBuilder: (context, index) => Card(
-            child: Image.network(
-                "https://image.tmdb.org/t/p/w780${movies[index].poster}"),
+            child: movies[index].poster != null
+                ? Image.network(
+                    "https://image.tmdb.org/t/p/w780${movies[index].poster}")
+                : null,
           ),
           cardController: controller = CardController(),
           swipeUpdateCallback: (DragUpdateDetails details, Alignment align) {

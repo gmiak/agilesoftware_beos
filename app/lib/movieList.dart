@@ -27,7 +27,7 @@ class _MovieList extends State<MovieList> {
 
   // Function to get all movies we fetched
   void _populateAllMovies() async {
-    final movies = await movieController.getMovies(null);
+    final movies = await MovieController.getMovies();
     setState(() {
       _movies = movies;
     });

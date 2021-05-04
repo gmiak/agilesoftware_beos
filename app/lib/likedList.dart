@@ -11,23 +11,21 @@ class LikedList extends StatefulWidget {
 }
 
 class _LikedList extends State<LikedList> {
-  MovieController _movieController = MovieController();
-  List<Movie> _movies = List.empty();
+  List<Movie> _movies = <Movie>[];
 
   // Function to initiate the movies
   @override
   void initState() {
     super.initState();
-    _populateAllMovies();
+    _populateLikedMovies();
   }
 
   // Function to get all movies we fetched
-  void _populateAllMovies() async {
-    final movies = await _movieController.getMovies(null);
+  void _populateLikedMovies() async {
+    final movies = await MovieController.getAppRepository().getLikedMovies();
 
     setState(() {
-      _movies = movies.where((element) => element.getLiked()).toList() ??
-          List.empty();
+      _movies = movies;
     });
   }
 

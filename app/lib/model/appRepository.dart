@@ -20,12 +20,40 @@ class AppRepository {
     return moviesCollection.snapshots();
   }
 
-  addMovie(Movie movie) async {
+  Future<List<Movie>> getMovies() async {
+    List<Movie> movies = <Movie>[];
+
+    await moviesCollection.get().then((snapshot) => {
+          for (DocumentSnapshot ds in snapshot.docs)
+            {movies.add(Movie.fromFBJson(ds.data()))}
+        });
+
+    return movies;
+  }
+
+  Future<List<Movie>> getLikedMovies() async {
+    List<Movie> movies = <Movie>[];
+
+    await likedMoviesCollection.get().then((snapshot) => {
+          for (DocumentSnapshot ds in snapshot.docs)
+            {movies.add(Movie.fromFBJson(ds.data()))}
+        });
+
+    return movies;
+  }
+
+  Future<DocumentReference> addMovie(Movie movie) async {
     return await moviesCollection.add(movie.toJson());
   }
 
-  clearMovies() async {
+  Future<void> clearMovies() async {
     return await moviesCollection.get().then((snapshot) => {
+          for (DocumentSnapshot ds in snapshot.docs) {ds.reference.delete()}
+        });
+  }
+
+  Future<void> clearLikedMovies() async {
+    return await likedMoviesCollection.get().then((snapshot) => {
           for (DocumentSnapshot ds in snapshot.docs) {ds.reference.delete()}
         });
   }
@@ -39,10 +67,7 @@ class AppRepository {
       if (querySnapshot != null) {
         await querySnapshot.then((docData) async => {
               if (docData.size == 0 && liked)
-                {
-                  movie.setLiked(liked),
-                  await likedMoviesCollection.add(movie.toJson())
-                }
+                {await likedMoviesCollection.add(movie.toJson())}
               else if (docData.size != 0 && !liked)
                 {
                   for (QueryDocumentSnapshot doc in docData.docs)

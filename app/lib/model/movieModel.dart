@@ -50,7 +50,8 @@ class Movie {
         poster: json["poster"],
         title: json["title"],
         date: json["date"],
-        genres: json["genres"],
+        genres:
+            (json['genres'] as List)?.map((genre) => genre as String)?.toList(),
         description: json["description"],
         liked: json["liked"]);
   }
