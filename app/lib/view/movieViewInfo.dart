@@ -21,8 +21,10 @@ class MovieViewInfo extends StatelessWidget {
               SizedBox(
                 width: 100,
                 child: ClipRRect(
-                  child: Image.network(
-                      "https://image.tmdb.org/t/p/w500${movie.poster}"),
+                  child: movie.poster != null
+                      ? Image.network(
+                          "https://image.tmdb.org/t/p/w500${movie.poster}")
+                      : null,
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
@@ -31,7 +33,7 @@ class MovieViewInfo extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text(movie.title), Text(movie.year)],
+                    children: [Text(movie.title), Text(movie.date)],
                   ),
                 ),
               )
