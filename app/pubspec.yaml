@@ -37,6 +37,8 @@ dependencies:
   firebase_messaging: ^6.0.16
   cloud_firestore: ^0.16.0+1
   flutter_tindercard: ^0.2.0
+  #splash screen
+  #splashscreen: ^1.2.0
 
 
 
@@ -61,6 +63,7 @@ flutter:
      - assets/welcome1.jpg
      - assets/welcome2.jpg
      - assets/BeOs_logo.png
+     - assets/splash/splash.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,7 +1,7 @@
 import 'package:app/registerScreen.dart';
 import 'package:app/resetPasswordScreen.dart';
+import 'package:app/view/homePageView.dart';
 import 'package:flutter/material.dart';
-import 'main.dart';
 import 'package:app/networking/authentication.dart';
 
 /*
@@ -14,7 +14,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   Authentication auth = Authentication();
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
@@ -39,9 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Image.asset('assets/BeOs_logo.png')), //Logotype
               ),
             ),
-            SizedBox(
-                height: 50
-            ),
+            SizedBox(height: 50),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
@@ -66,9 +63,9 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             TextButton(
-              onPressed: (){
-                Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => ResetPasswordScreen()));
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => ResetPasswordScreen()));
               },
               child: Text(
                 'Forgot Password',
@@ -84,13 +81,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 onPressed: () async {
                   await auth.signOut();
                   String login;
-                  login = await auth.signIn(emailController.text, passwordController.text);
+                  login = await auth.signIn(
+                      emailController.text, passwordController.text);
                   await auth.checkAuth();
                   if (login == 'Success') {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => MyHomePage()));
-                  }
-                  else {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => MyHomePage()));
+                  } else {
                     showAlertDialog(context, login);
                   }
                 },
@@ -104,9 +101,9 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 100,
             ),
             TextButton(
-              onPressed: (){
-                Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => RegisterScreen()));
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => RegisterScreen()));
               },
               child: Text(
                 'New User? Create Account',
@@ -117,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
               onPressed: () async {
                 await auth.signIn('test@testsson.se', 'testar');
                 Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => MyHomePage()));
+                    context, MaterialPageRoute(builder: (_) => MyHomePage()));
               },
               child: Text(
                 'Debug',
@@ -130,8 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-    showAlertDialog(BuildContext context, String message) {
-
+  showAlertDialog(BuildContext context, String message) {
     // set up the button
     Widget okButton = TextButton(
       child: Text("OK"),
