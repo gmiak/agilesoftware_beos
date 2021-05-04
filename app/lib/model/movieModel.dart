@@ -25,7 +25,7 @@ class Movie {
       this.genres,
       this.description,
       liked = false}) {
-    setLiked(liked);
+    this._liked = liked;
   }
 
   //Returns an instans of movie from Json
