@@ -1,12 +1,12 @@
 /*
 * Klassen bygger abstraktionen (en objektmodell) av en film.
 * */
+import 'package:app/controller/movieController.dart';
+
 import 'appRepository.dart';
 import 'genres.dart';
 
 class Movie {
-  static final AppRepository _appRepository = AppRepository();
-
   final int tmdbId;
   final String poster;
   final String title;
@@ -74,7 +74,7 @@ class Movie {
   // Set if the movie was liked
   void setLiked(bool liked) {
     this._liked = liked;
-    _appRepository.updateMovieLiked(this, liked);
+    MovieController.setMovieLiked(this, liked);
   }
 
   // Get if the movie was liked
