@@ -20,17 +20,17 @@ class MovieController {
 
   static final AppRepository _appRepository = AppRepository();
   static final Connection _connection = new Connection();
-  static List<Movie> _movies = <Movie>[];
   static final Random _random = new Random();
+
+  static List<Movie> _movies = <Movie>[];
+  static List<Movie> _likedMovies = <Movie>[];
 
   static Future<Null> _isSettingUp;
   static Future<Null> _isTearingDown;
   static bool _hasSetup = false;
 
   static Future<bool> setUp() async {
-    if (_isSettingUp != null) await _isSettingUp;
-    if (_isTearingDown != null) await _isTearingDown;
-    if (_hasSetup) return true;
+    if (await _sanityCheck()) return true;
 
     var completer = new Completer<Null>();
     _isSettingUp = completer.future;
@@ -43,6 +43,8 @@ class MovieController {
     if (_hasSetup) {
       movies.shuffle();
       _movies.addAll(movies.getRange(0, (movies.length / 2).ceil()));
+
+      _likedMovies = await _appRepository.getLikedMovies() ?? <Movie>[];
     }
 
     completer.complete();
@@ -53,9 +55,7 @@ class MovieController {
 
   static Future<bool> tearDown(
       {bool emptyMoviesDB = false, bool emptyLikedMoviesDB = false}) async {
-    if (_isSettingUp != null) await _isSettingUp;
-    if (_isTearingDown != null) await _isTearingDown;
-    if (!_hasSetup) return true;
+    if (!await _sanityCheck()) return true;
 
     var completer = new Completer<Null>();
     _isTearingDown = completer.future;
@@ -70,11 +70,40 @@ class MovieController {
   }
 
   static Future<List<Movie>> getMovies() async {
-    if (_isSettingUp != null) await _isSettingUp;
-    if (_isTearingDown != null) await _isTearingDown;
-    if (!_hasSetup || _movies == null || _movies.isEmpty) return <Movie>[];
+    if (!await _sanityCheck()) return <Movie>[];
 
     return _movies;
+  }
+
+  static Future<List<Movie>> getMoviesByGenre(String genre) async {
+    if (!await _sanityCheck()) return <Movie>[];
+
+    return _movies.where((movie) => movie.genres.contains(genre));
+  }
+
+  static Future<List<String>> getPresentGenres() async {
+    if (!await _sanityCheck()) return <String>[];
+
+    List<String> presentGenre = <String>[];
+    _movies.forEach((movie) => presentGenre.addAll(movie.genres));
+
+    return presentGenre;
+  }
+
+  static Future<List<Movie>> getLikedMovies() async {
+    if (!await _sanityCheck()) return <Movie>[];
+
+    return _likedMovies;
+  }
+
+  static Future<void> setMovieLiked(Movie movie, bool liked) async {
+    if (!await _sanityCheck()) return;
+
+    if (liked && !_likedMovies.contains(movie))
+      _likedMovies.add(movie);
+    else if (!liked && _likedMovies.contains(movie)) _likedMovies.remove(movie);
+
+    _appRepository.updateMovieLiked(movie, liked);
   }
 
   //Fetches all movies
@@ -132,6 +161,13 @@ class MovieController {
     }
 
     throw Exception("Failed to load movies");
+  }
+
+  static Future<bool> _sanityCheck() async {
+    if (_isSettingUp != null) await _isSettingUp;
+    if (_isTearingDown != null) await _isTearingDown;
+
+    return _hasSetup;
   }
 
   static Connection getConnection() => _connection;
