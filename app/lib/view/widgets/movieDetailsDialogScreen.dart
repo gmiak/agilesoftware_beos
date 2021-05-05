@@ -70,30 +70,32 @@ class MovieDetailsDialogScreen extends StatelessWidget {
               ),
               //Create space between movie's title and movie's genres
               SizedBox(height: padding),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  //Ersättas senare med den riktiga listan med alla genrer
-                  for (int i = 0; i < genre.length; i++)
-                    Card(
-                      elevation: 5,
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            top: 5, bottom: 5, right: 10, left: 10),
-                        child: Column(
-                          children: <Widget>[
-                            Text(
-                              genre[i],
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )
-                          ],
+              Container(
+                height: 42.5,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: <Widget>[
+                    for (int i = 0; i < movie.genres.length; i++)
+                      Card(
+                        elevation: 5,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 7, bottom: 5, right: 10, left: 10),
+                          child: Column(
+                            children: <Widget>[
+                              Text(
+                                movie.genres[i],
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                ],
+                  ],
+                ),
               ),
               //Create space between movie's genres and movie's year
               SizedBox(height: padding),
