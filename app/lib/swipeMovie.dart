@@ -2,6 +2,7 @@ import 'package:app/view/swipeMovieView.dart';
 import 'package:flutter/material.dart';
 import 'package:app/controller/movieController.dart';
 import 'package:app/model/movieModel.dart';
+import 'coList.dart';
 
 class SwipeMovie extends StatefulWidget {
   @override
@@ -41,6 +42,15 @@ class _SwipeMovie extends State<SwipeMovie> with TickerProviderStateMixin {
     });
   }
 
+  void _populateLikedMovies() async {
+    final movies =
+        await MovieController.getAppRepository().getLikedMovies('testList');
+
+    setState(() {
+      _movies = movies;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -65,7 +75,13 @@ class _SwipeMovie extends State<SwipeMovie> with TickerProviderStateMixin {
         ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
-            Navigator.pop(context);
+            //  _populateLikedMovies();
+            //Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => CoList(listId: 'testList')),
+            );
           },
           label: const Text('Return'),
           icon: const Icon(Icons.keyboard_return),
