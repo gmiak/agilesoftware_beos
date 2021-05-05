@@ -139,6 +139,4 @@ class _CoListState extends State<CoList> {
               )));
         });
   }
-
-  void onPressed() {}
 }
