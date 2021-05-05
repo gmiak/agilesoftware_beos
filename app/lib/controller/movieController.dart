@@ -103,7 +103,7 @@ class MovieController {
       _likedMovies.add(movie);
     else if (!liked && _likedMovies.contains(movie)) _likedMovies.remove(movie);
 
-    //_appRepository.updateMovieLiked(movie, liked);
+    _appRepository.updateMovieLiked('testList', movie, liked);
   }
 
   //Fetches all movies
