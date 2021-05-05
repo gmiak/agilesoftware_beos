@@ -57,11 +57,10 @@ class AppRepository {
           for (DocumentSnapshot ds in snapshot.docs) {ds.reference.delete()}
         });
   }
+ 
 
-  //updateMovieLiked fyller ingen funktion. Inte uppdaterad för commonLists. 
-
-  /*updateMovieLiked(Movie movie, bool liked) async {
-    var query = likedMoviesCollection.where("tmdbId", isEqualTo: movie.tmdbId);
+  updateMovieLiked(String listId, Movie movie, bool liked) async {
+    var query = commonLists.doc(listId).collection('likedMovies').where("tmdbId", isEqualTo: movie.tmdbId);
 
     if (query != null) {
       var querySnapshot = query.get();
@@ -69,7 +68,7 @@ class AppRepository {
       if (querySnapshot != null) {
         await querySnapshot.then((docData) async => {
               if (docData.size == 0 && liked)
-                {await likedMoviesCollection.add(movie.toJson())}
+                {await commonLists.doc(listId).collection('likedMovies').add(movie.toJson())}
               else if (docData.size != 0 && !liked)
                 {
                   for (QueryDocumentSnapshot doc in docData.docs)
@@ -78,7 +77,7 @@ class AppRepository {
             });
       }
     }
-  }*/
+  }
 
   Future<void> addMemberToList(String email, String listID) async {
     List<String> memberToAddList = <String>[];
