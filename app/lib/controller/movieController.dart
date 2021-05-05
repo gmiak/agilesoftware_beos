@@ -95,6 +95,10 @@ class MovieController {
 
     return _likedMovies;
   }
+  
+  static Future<void> addMember(String listId, String newMember) async {
+    await _appRepository.addMemberToList(newMember, listId);
+  }
 
   static Future<void> setMovieLiked(Movie movie, bool liked) async {
     if (!await _sanityCheck()) return;

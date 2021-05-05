@@ -10,13 +10,15 @@ class CoList extends StatefulWidget {
   CoList({Key key, @required this.listId}) : super(key: key);
 
   @override
-  _CoListState createState() => _CoListState();
+  _CoListState createState() => _CoListState(listId);
 }
 
 class _CoListState extends State<CoList> {
   int _selectedIndex = 0;
+      String listId;
 
-  MovieController _movieController = MovieController();
+  _CoListState(listId) : this.listId = listId;
+
   List<Movie> _movies = List.empty();
   TextEditingController emailController = new TextEditingController();
 
@@ -42,7 +44,7 @@ class _CoListState extends State<CoList> {
       switch (index) {
         case 0:
           {
-            openDialog();
+            openDialog(listId);
           }
           break;
         case 1:
@@ -97,12 +99,12 @@ class _CoListState extends State<CoList> {
     );
   }
 
-  Future<String> openDialog() {
+  Future<String> openDialog(String listId) {
     return showDialog(
         context: context,
         builder: (ctx) {
           return AlertDialog(
-              title: Text('Users'),
+              title: Text('Enter email to add new list member.'),
               actions: <Widget>[
                 IconButton(
                   iconSize: 40,
@@ -128,7 +130,9 @@ class _CoListState extends State<CoList> {
                   IconButton(
                     iconSize: 40,
                     icon: Icon(Icons.add),
-                    onPressed: onPressed,
+                    onPressed: (){
+                      MovieController.addMember(listId, emailController.text);
+                    },
                     padding: EdgeInsets.only(top: 20),
                   )
                 ],
