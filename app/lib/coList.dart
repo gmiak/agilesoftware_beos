@@ -4,6 +4,11 @@ import 'model/movieModel.dart';
 import 'view/movieViewInfo.dart';
 
 class CoList extends StatefulWidget {
+
+  final String listId;
+
+  CoList({Key key, @required this.listId}) : super(key: key);
+
   @override
   _CoListState createState() => _CoListState();
 }
