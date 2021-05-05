@@ -11,8 +11,7 @@ class CoList extends StatefulWidget {
 class _CoListState extends State<CoList> {
   int _selectedIndex = 0;
 
-  MovieController _movieController = MovieController();
-  List<Movie> _movies = List.empty();
+  List<Movie> _movies = <Movie>[];
   TextEditingController emailController = new TextEditingController();
 
   @override
@@ -23,7 +22,7 @@ class _CoListState extends State<CoList> {
 
   // Function to get all movies we fetched
   void _populateAllMovies() async {
-    final movies = await _movieController.getMovies();
+    final movies = await MovieController.getMovies();
 
     setState(() {
       _movies = movies.where((element) => element.getLiked()).toList() ??
