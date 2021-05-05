@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'controller/movieController.dart';
 import 'model/movieModel.dart';
 import 'view/movieViewInfo.dart';
-import 'addUserToList.dart';
+import 'model/appRepository.dart';
 import 'swipeMovie.dart';
 
 class CoList extends StatefulWidget {
@@ -16,6 +16,7 @@ class CoList extends StatefulWidget {
 class _CoListState extends State<CoList> {
   int _selectedIndex = 0;
   String listId;
+  static final AppRepository _appRepository = AppRepository();
 
   _CoListState(listId) : this.listId = listId;
 
@@ -135,7 +136,8 @@ class _CoListState extends State<CoList> {
                     icon: Icon(Icons.add),
                     onPressed: () {
                       //TODO() Add auth
-                      addMemberToList(emailController.text, listId);
+                      _appRepository.addMemberToList(
+                          emailController.text, listId);
                       emailController.clear();
                       showAlertDialog(context, 'User added');
                     },
