@@ -11,6 +11,7 @@ Future<void> main() async {
 
 // This widget is the root of your application.
 class MyApp extends StatelessWidget {
+
   final Future<FirebaseApp> fbApp =
       Firebase.initializeApp(); //Initierar Firebase
 
