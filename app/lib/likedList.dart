@@ -4,14 +4,23 @@ import 'model/movieModel.dart';
 import 'view/movieViewInfo.dart';
 
 class LikedList extends StatefulWidget {
+
+  final String listId;
+
+  LikedList({Key key, @required this.listId}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
-    return new _LikedList();
+    return new _LikedList(listId);
   }
 }
 
 class _LikedList extends State<LikedList> {
   List<Movie> _movies = <Movie>[];
+    String listId;
+
+  _LikedList(listId) : this.listId = listId; 
+
 
   // Function to initiate the movies
   @override
@@ -22,7 +31,7 @@ class _LikedList extends State<LikedList> {
 
   // Function to get all movies we fetched
   void _populateLikedMovies() async {
-    final movies = await MovieController.getAppRepository().getLikedMovies();
+    final movies = await MovieController.getAppRepository().getLikedMovies(listId);
 
     setState(() {
       _movies = movies;
