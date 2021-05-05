@@ -24,7 +24,7 @@ class MovieViewInfo extends StatelessWidget {
                   child: movie.poster != null
                       ? Image.network(
                           "https://image.tmdb.org/t/p/w500${movie.poster}")
-                      : null,
+                      : Image.asset('assets/missingPoster.png'),
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
