@@ -42,15 +42,6 @@ class _SwipeMovie extends State<SwipeMovie> with TickerProviderStateMixin {
     });
   }
 
-  void _populateLikedMovies() async {
-    final movies =
-        await MovieController.getAppRepository().getLikedMovies('testList');
-
-    setState(() {
-      _movies = movies;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -75,8 +66,6 @@ class _SwipeMovie extends State<SwipeMovie> with TickerProviderStateMixin {
         ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
-            //  _populateLikedMovies();
-            //Navigator.pop(context);
             Navigator.push(
               context,
               MaterialPageRoute(
