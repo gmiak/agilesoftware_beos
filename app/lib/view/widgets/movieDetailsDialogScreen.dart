@@ -50,7 +50,11 @@ class MovieDetailsDialogScreen extends StatelessWidget {
                                 "https://image.tmdb.org/t/p/w500${movie.poster}",
                               ),
                             )
-                          : null,
+                          : DecorationImage(
+                              image: AssetImage(
+                                "assets/missingPoster.png",
+                              ),
+                            ),
                     ),
                   ),
                 ),

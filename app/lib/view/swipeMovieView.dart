@@ -44,7 +44,7 @@ class SwipeMovieView extends StatelessWidget {
               child: movies[index].poster != null
                   ? Image.network(
                       "https://image.tmdb.org/t/p/w780${movies[index].poster}")
-                  : null,
+                  : Image.asset('assets/missingPoster.png'),
             ),
           ),
           cardController: controller = CardController(),
