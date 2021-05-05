@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SwipeMovie()),
+                    MaterialPageRoute(builder: (context) => SwipeMovie(listId: 'testList')),
                   );
                 },
               ),

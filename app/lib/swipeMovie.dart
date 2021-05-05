@@ -4,6 +4,11 @@ import 'package:app/controller/movieController.dart';
 import 'package:app/model/movieModel.dart';
 
 class SwipeMovie extends StatefulWidget {
+  
+  final String listId;
+
+  SwipeMovie({Key key, @required this.listId}) : super(key: key);
+
   @override
   _SwipeMovie createState() => _SwipeMovie();
 }

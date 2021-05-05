@@ -1,3 +1,4 @@
+import 'package:app/swipeMovie.dart';
 import 'package:flutter/material.dart';
 import 'controller/movieController.dart';
 import 'model/movieModel.dart';
@@ -48,7 +49,12 @@ class _CoListState extends State<CoList> {
           }
           break;
         case 1:
-          {}
+          {
+            Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SwipeMovie(listId : listId)),
+                  );
+          }
           break;
         case 2:
           {
