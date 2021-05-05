@@ -7,8 +7,8 @@ class AppRepository {
 
   final CollectionReference moviesCollection =
       FirebaseFirestore.instance.collection('movies');
-  final CollectionReference likedMoviesCollection =
-      FirebaseFirestore.instance.collection('likedMovies');
+  final CollectionReference commonLists =
+      FirebaseFirestore.instance.collection('commonLists');
 
   factory AppRepository() {
     return _appRepository;
@@ -31,10 +31,10 @@ class AppRepository {
     return movies;
   }
 
-  Future<List<Movie>> getLikedMovies() async {
+  Future<List<Movie>> getLikedMovies(String listId) async {
     List<Movie> likedMovies = <Movie>[];
 
-    await likedMoviesCollection.get().then((snapshot) => {
+    await commonLists.doc(listId).collection('likedMovies').get().then((snapshot) => {
           for (DocumentSnapshot ds in snapshot.docs)
             {likedMovies.add(Movie.fromFBJson(ds.data()))}
         });
@@ -52,14 +52,15 @@ class AppRepository {
         });
   }
 
-  Future<void> clearLikedMovies() async {
-    return await likedMoviesCollection.get().then((snapshot) => {
+  Future<void> clearLikedMovies(String listId) async {
+    return await commonLists.doc(listId).collection('likedMovies').get().then((snapshot) => {
           for (DocumentSnapshot ds in snapshot.docs) {ds.reference.delete()}
         });
   }
+ 
 
-  updateMovieLiked(Movie movie, bool liked) async {
-    var query = likedMoviesCollection.where("tmdbId", isEqualTo: movie.tmdbId);
+  updateMovieLiked(String listId, Movie movie, bool liked) async {
+    var query = commonLists.doc(listId).collection('likedMovies').where("tmdbId", isEqualTo: movie.tmdbId);
 
     if (query != null) {
       var querySnapshot = query.get();
@@ -67,7 +68,7 @@ class AppRepository {
       if (querySnapshot != null) {
         await querySnapshot.then((docData) async => {
               if (docData.size == 0 && liked)
-                {await likedMoviesCollection.add(movie.toJson())}
+                {await commonLists.doc(listId).collection('likedMovies').add(movie.toJson())}
               else if (docData.size != 0 && !liked)
                 {
                   for (QueryDocumentSnapshot doc in docData.docs)
@@ -77,4 +78,15 @@ class AppRepository {
       }
     }
   }
+
+  Future<void> addMemberToList(String email, String listID) async {
+    List<String> memberToAddList = <String>[];
+    memberToAddList.add(email);
+
+    CollectionReference collectionReference = FirebaseFirestore.instance.collection('commonLists');
+    collectionReference
+    .doc(listID)
+    .update({'members': FieldValue.arrayUnion(memberToAddList)});
+}
+
 }

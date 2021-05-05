@@ -2,8 +2,6 @@
 * Klassen bygger abstraktionen (en objektmodell) av en film.
 * */
 import 'package:app/controller/movieController.dart';
-
-import 'appRepository.dart';
 import 'genres.dart';
 
 class Movie {
