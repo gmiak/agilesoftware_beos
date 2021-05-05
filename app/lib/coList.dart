@@ -20,7 +20,7 @@ class _CoListState extends State<CoList> {
 
   _CoListState(listId) : this.listId = listId;
 
-  List<Movie> _movies = List.empty();
+  List<Movie> _movies = <Movie>[];
   TextEditingController emailController = new TextEditingController();
 
   @override
