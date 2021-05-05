@@ -1,5 +1,5 @@
+import 'package:app/view/homePageView.dart';
 import 'package:flutter/material.dart';
-import 'main.dart';
 import 'package:app/networking/authentication.dart';
 
 /*
@@ -12,9 +12,8 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-
   Authentication auth = Authentication();
-    TextEditingController emailController = new TextEditingController();
+  TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
 
   @override
@@ -36,9 +35,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: Image.asset('assets/BeOs_logo.png')), //Logotype
               ),
             ),
-            SizedBox(
-                height: 50
-            ),
+            SizedBox(height: 50),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
@@ -62,9 +59,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     hintText: 'Enter secure password'),
               ),
             ),
-            SizedBox(
-                height: 50
-            ),
+            SizedBox(height: 50),
             Container(
               height: 50,
               width: 250,
@@ -74,14 +69,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 onPressed: () async {
                   await auth.signOut();
                   String register;
-                  register = await auth.signUp(emailController.text, passwordController.text);
+                  register = await auth.signUp(
+                      emailController.text, passwordController.text);
                   if (register == 'Success') {
-                    await auth.signIn(emailController.text, passwordController.text);
+                    await auth.signIn(
+                        emailController.text, passwordController.text);
                     await auth.checkAuth();
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => MyHomePage()));
-                  }
-                  else {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => MyHomePage()));
+                  } else {
                     showAlertDialog(context, register);
                   }
                 },
@@ -98,7 +94,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   showAlertDialog(BuildContext context, String message) {
-
     // set up the button
     Widget okButton = TextButton(
       child: Text("OK"),

@@ -1,4 +1,4 @@
-import 'package:app/loginScreen.dart';
+import 'package:app/loginscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:app/networking/authentication.dart';
 
@@ -12,9 +12,8 @@ class ResetPasswordScreen extends StatefulWidget {
 }
 
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
-
   Authentication auth = Authentication();
-    TextEditingController emailController = new TextEditingController();
+  TextEditingController emailController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +34,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     child: Image.asset('assets/BeOs_logo.png')), //Logotype
               ),
             ),
-            SizedBox(
-                height: 50
-            ),
+            SizedBox(height: 50),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
@@ -48,9 +45,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     hintText: 'Enter valid email id as john.doe@gmail.com'),
               ),
             ),
-            SizedBox(
-                height: 30
-            ),
+            SizedBox(height: 30),
             Container(
               height: 50,
               width: 250,
@@ -60,8 +55,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 onPressed: () async {
                   await auth.resetPassword(emailController.text);
                   await auth.checkAuth();
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => LoginScreen()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => LoginScreen()));
                 },
                 child: Text(
                   'Reset',
@@ -76,7 +71,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   }
 
   showAlertDialog(BuildContext context, String message) {
-
     // set up the button
     Widget okButton = TextButton(
       child: Text("OK"),
