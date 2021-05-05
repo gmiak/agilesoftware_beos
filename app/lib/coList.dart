@@ -23,7 +23,7 @@ class _CoListState extends State<CoList> {
 
   // Function to get all movies we fetched
   void _populateAllMovies() async {
-    final movies = await _movieController.getMovies();
+    final movies = await MovieController.getMovies();
 
     setState(() {
       _movies = movies.where((element) => element.getLiked()).toList() ??
