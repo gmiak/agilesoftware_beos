@@ -1,7 +1,5 @@
 import 'package:app/coList.dart';
 import 'package:flutter/material.dart';
-
-import '../likedList.dart';
 import '../movieList.dart';
 import '../swipeMovie.dart';
 
