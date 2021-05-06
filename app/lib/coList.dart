@@ -1,4 +1,4 @@
-import 'package:app/swipeMovie.dart';
+import 'package:app/view/homePageView.dart';
 import 'package:flutter/material.dart';
 import 'controller/movieController.dart';
 import 'model/movieModel.dart';
@@ -30,7 +30,7 @@ class _CoListState extends State<CoList> {
     _populateLikedMovies();
   }
 
-  // Function to get all movies we fetched
+  ///Populates [_movies] with liked movies and uppdates the screen.
   void _populateLikedMovies() async {
     final movies =
         await MovieController.getAppRepository().getLikedMovies(listId);
@@ -40,13 +40,13 @@ class _CoListState extends State<CoList> {
     });
   }
 
-  // TODO() : add functionality to the buttons.
+  ///Activates the functionallity of the diffrent choices in the bottom menu.
   void _onItemTapped(int index) {
     setState(() {
       switch (index) {
         case 0:
           {
-            openDialog(listId);
+            openAddMemberDialog();
           }
           break;
         case 1:
@@ -59,12 +59,21 @@ class _CoListState extends State<CoList> {
           break;
         case 2:
           {
-            Navigator.pop(context);
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MyHomePage(),
+                ));
           }
           break;
       }
     });
   }
+
+  ///Builds the widget with [MovieViewInfo] as body to display the liked movies.
+  ///
+  ///The Widget has a [BottomNavigationBar] with Buttons. One to be able to swipe movies to the list,
+  ///one to be able to add a member to the list, and one to be able to go back to choose other lists.
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +115,8 @@ class _CoListState extends State<CoList> {
     );
   }
 
-  Future<String> openDialog(String listId) {
+  ///Opens a Dialog window to be able to add members to a list.
+  Future<String> openAddMemberDialog() {
     return showDialog(
         context: context,
         builder: (ctx) {
@@ -139,9 +149,10 @@ class _CoListState extends State<CoList> {
                     icon: Icon(Icons.add),
                     onPressed: () {
                       //TODO() Add auth
-                      MovieController.addMember(emailController.text, listId);
+                      MovieController.getAppRepository()
+                          .addMemberToList(emailController.text, listId);
+                      showFeedbackDialog(context, 'User added');
                       emailController.clear();
-                      showAlertDialog(context, 'User added');
                     },
                     padding: EdgeInsets.only(top: 20),
                   )
@@ -150,7 +161,8 @@ class _CoListState extends State<CoList> {
         });
   }
 
-  showAlertDialog(BuildContext context, String message) {
+  /// Gives feedback that a user has been added as a member to a list.
+  showFeedbackDialog(BuildContext context, String message) {
     // set up the button
     Widget okButton = TextButton(
       child: Text("OK"),
