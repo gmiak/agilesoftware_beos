@@ -1,13 +1,13 @@
 import 'package:app/model/movieModel.dart';
 import 'package:flutter/material.dart';
 
-/*
-** Klassen tar in en parameter som är listan av alla filmer,
-** Därmed målas varje filmer med samma format på skärmen.
-**/
+/// Klassen tar in en parameter som är listan av alla filmer,
+///Därmed målas varje filmer med samma format på skärmen.
+
 class MovieViewInfo extends StatelessWidget {
   final List<Movie> movies;
-  //constructor
+
+  ///constructor
   MovieViewInfo({this.movies});
   @override
   Widget build(BuildContext context) {
