@@ -79,14 +79,15 @@ class AppRepository {
     }
   }
 
-  Future<void> addMemberToList(String email, String listID) async {
-    List<String> memberToAddList = <String>[];
-    memberToAddList.add(email);
+  Future<void> addMemberToList(String email, String listId) async {
+    List<String> memberToAddToList = <String>[];
+    memberToAddToList.add(email);
 
     CollectionReference collectionReference = FirebaseFirestore.instance.collection('commonLists');
-    collectionReference
-    .doc(listID)
-    .update({'members': FieldValue.arrayUnion(memberToAddList)});
+
+    await collectionReference
+    .doc(listId)
+    .update({'members': FieldValue.arrayUnion(memberToAddToList)});
 }
 
 }
