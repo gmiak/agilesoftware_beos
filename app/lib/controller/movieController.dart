@@ -44,7 +44,7 @@ class MovieController {
       movies.shuffle();
       _movies.addAll(movies.getRange(0, (movies.length / 2).ceil()));
 
-      _likedMovies = await _appRepository.getLikedMovies() ?? <Movie>[];
+      _likedMovies = await _appRepository.getLikedMovies('testList') ?? <Movie>[];
     }
 
     completer.complete();
@@ -62,7 +62,7 @@ class MovieController {
 
     _movies.clear();
     if (emptyMoviesDB) await _appRepository.clearMovies();
-    if (emptyLikedMoviesDB) await _appRepository.clearLikedMovies();
+    if (emptyLikedMoviesDB) await _appRepository.clearLikedMovies('testList');
 
     _hasSetup = false;
 
@@ -95,6 +95,10 @@ class MovieController {
 
     return _likedMovies;
   }
+  
+  static Future<void> addMember(String listId, String newMember) async {
+    await _appRepository.addMemberToList(newMember, listId);
+  }
 
   static Future<void> setMovieLiked(Movie movie, bool liked) async {
     if (!await _sanityCheck()) return;
@@ -103,7 +107,7 @@ class MovieController {
       _likedMovies.add(movie);
     else if (!liked && _likedMovies.contains(movie)) _likedMovies.remove(movie);
 
-    _appRepository.updateMovieLiked(movie, liked);
+    _appRepository.updateMovieLiked('testList', movie, liked);
   }
 
   //Fetches all movies

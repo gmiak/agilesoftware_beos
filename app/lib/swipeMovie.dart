@@ -2,8 +2,14 @@ import 'package:app/view/swipeMovieView.dart';
 import 'package:flutter/material.dart';
 import 'package:app/controller/movieController.dart';
 import 'package:app/model/movieModel.dart';
+import 'coList.dart';
 
 class SwipeMovie extends StatefulWidget {
+  
+  final String listId;
+
+  SwipeMovie({Key key, @required this.listId}) : super(key: key);
+
   @override
   _SwipeMovie createState() => _SwipeMovie();
 }
@@ -65,7 +71,11 @@ class _SwipeMovie extends State<SwipeMovie> with TickerProviderStateMixin {
         ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => CoList(listId: 'testList')),
+            );
           },
           label: const Text('Return'),
           icon: const Icon(Icons.keyboard_return),

@@ -1,6 +1,5 @@
+import 'package:app/coList.dart';
 import 'package:flutter/material.dart';
-
-import '../likedList.dart';
 import '../movieList.dart';
 import '../swipeMovie.dart';
 
@@ -47,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SwipeMovie()),
+                    MaterialPageRoute(builder: (context) => SwipeMovie(listId: 'testList')),
                   );
                 },
               ),
@@ -61,7 +60,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => LikedList()),
+                    MaterialPageRoute(
+                        builder: (context) => CoList(listId: 'testList')),
                   );
                 },
               ),
