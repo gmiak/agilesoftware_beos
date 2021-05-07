@@ -96,7 +96,6 @@ class AppRepository {
   }
 
   Future<void> getLists(String userEmail) async {
-    //TODO
     List<CommonList> lists = <CommonList>[];
     Query memberQuery = commonLists.where('members', arrayContains: userEmail);
     await memberQuery.get().then((snapshot) => {
