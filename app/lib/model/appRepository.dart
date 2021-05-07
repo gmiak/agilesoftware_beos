@@ -90,4 +90,10 @@ class AppRepository {
     .update({'members': FieldValue.arrayUnion(memberToAddToList)});
 }
 
+  void createList(String listName) {
+    //Skapa nytt dokument i commonLists collection. 
+    //Lägg till users email via addMemberToList. Görs genom firebase.auth.
+
+  }
+
 }
