@@ -1,4 +1,4 @@
-import 'package:app/model/movieModel.dart';
+import 'package:app/model/listModel.dart';
 import 'package:flutter/material.dart';
 
 /// Klassen tar in en parameter som är listan av alla filmer,
@@ -7,35 +7,28 @@ import 'package:flutter/material.dart';
 //TODO Fixa allt.
 
 class ListViewInfo extends StatelessWidget {
-  final List<Movie> movies;
+  final List<CommonList> commonLists;
 
   ///constructor
-  ListViewInfo({this.movies, List commonLists});
+  ListViewInfo({this.commonLists});
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: movies.length,
+      itemCount: commonLists.length,
       itemBuilder: (context, index) {
-        final movie = movies[index];
+        final list = commonLists[index];
         return ListTile(
           title: Row(
             children: [
               SizedBox(
                 width: 100,
-                child: ClipRRect(
-                  child: movie.poster != null
-                      ? Image.network(
-                          "https://image.tmdb.org/t/p/w500${movie.poster}")
-                      : Image.asset('assets/missingPoster.png'),
-                  borderRadius: BorderRadius.circular(10),
-                ),
               ),
               Flexible(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text(movie.title), Text(movie.date)],
+                    children: [Text(list.listName)],
                   ),
                 ),
               )
