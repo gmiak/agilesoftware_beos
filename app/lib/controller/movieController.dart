@@ -24,6 +24,7 @@ class MovieController {
 
   static List<Movie> _movies = <Movie>[];
   static List<Movie> _likedMovies = <Movie>[];
+  static Map<String, bool> _genres = {};
 
   static Future<Null> _isSettingUp;
   static Future<Null> _isTearingDown;
@@ -44,7 +45,13 @@ class MovieController {
       movies.shuffle();
       _movies.addAll(movies.getRange(0, (movies.length / 2).ceil()));
 
-      _likedMovies = await _appRepository.getLikedMovies('testList') ?? <Movie>[];
+      List<String> genres = <String>[];
+      _movies.forEach((movie) => genres.addAll(movie.genres));
+      genres.sort();
+      genres.forEach((genre) => _genres.putIfAbsent(genre, () => false));
+
+      _likedMovies =
+          await _appRepository.getLikedMovies('testList') ?? <Movie>[];
     }
 
     completer.complete();
@@ -61,6 +68,9 @@ class MovieController {
     _isTearingDown = completer.future;
 
     _movies.clear();
+    _likedMovies.clear();
+    _genres.clear();
+
     if (emptyMoviesDB) await _appRepository.clearMovies();
     if (emptyLikedMoviesDB) await _appRepository.clearLikedMovies('testList');
 
@@ -81,13 +91,28 @@ class MovieController {
     return _movies.where((movie) => movie.genres.contains(genre));
   }
 
-  static Future<List<String>> getPresentGenres() async {
-    if (!await _sanityCheck()) return <String>[];
+  static Future<Map<String, bool>> getGenres() async {
+    if (!await _sanityCheck()) return {};
 
-    List<String> presentGenre = <String>[];
-    _movies.forEach((movie) => presentGenre.addAll(movie.genres));
+    return _genres;
+  }
 
-    return presentGenre;
+  static Future<void> selectGenre(String genre, bool selected) async {
+    if (!await _sanityCheck()) return {};
+
+    if (_genres.containsKey(genre)) _genres[genre] = selected;
+  }
+
+  static Future<List<Movie>> getFilteredMovies() async {
+    if (!await _sanityCheck()) return <Movie>[];
+
+    if (!_genres.keys.any((genre) => _genres[genre]))
+      return _movies;
+    else
+      return _movies
+          .where((movie) => movie.genres.any((genre) =>
+              _genres.keys.any((genre1) => _genres[genre1] && genre == genre1)))
+          .toList();
   }
 
   static Future<List<Movie>> getLikedMovies() async {
@@ -95,7 +120,7 @@ class MovieController {
 
     return _likedMovies;
   }
-  
+
   static Future<void> addMember(String listId, String newMember) async {
     await _appRepository.addMemberToList(newMember, listId);
   }
