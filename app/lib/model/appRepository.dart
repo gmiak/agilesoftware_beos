@@ -1,4 +1,4 @@
-import 'package:app/networking/authentication.dart';
+import 'package:app/model/listModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'movieModel.dart';
@@ -95,9 +95,16 @@ class AppRepository {
     addMemberToList(creator, listId);
   }
 
-  Future<void> getLists() async {
+  Future<void> getLists(String userEmail) async {
     //TODO
-    //Se getLikedMovies fast returnera listor för en specifik användare.
+    List<CommonList> lists = <CommonList>[];
+    Query memberQuery = commonLists.where('members', arrayContains: userEmail);
+    await memberQuery.get().then((snapshot) => {
+          for (DocumentSnapshot ds in snapshot.docs)
+            {lists.add(CommonList.fromFBJson(ds.data()))}
+        });
+
+    return lists;
   }
 
 }
