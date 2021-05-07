@@ -1,7 +1,10 @@
 import 'package:app/controller/movieController.dart';
+import 'package:app/loginscreen.dart';
 import 'package:app/model/listModel.dart';
 import 'package:app/view/listViewInfo.dart';
 import 'package:flutter/material.dart';
+import 'package:app/networking/authentication.dart';
+
 
 /*
 ** The App Home Page
@@ -18,6 +21,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
   List<CommonList> _commonLists = <CommonList>[];
   TextEditingController listNameController = new TextEditingController();
+  Authentication auth = Authentication();
   
     @override
     void initState() {
@@ -28,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
     ///Populates [_commonLists] with lists for this user.
     void _populateCommonLists() async {
       final commonLists =
-          await MovieController.getAppRepository().getLists();
+          await MovieController.getAppRepository().getLists(auth.identifyEmail());
   
       setState(() {
         _commonLists = commonLists;
@@ -44,6 +48,12 @@ class _MyHomePageState extends State<MyHomePage> {
               openAddListDialog();
             }
             break;
+          case 1:
+            {
+              auth.signOut();
+              Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => LoginScreen()));
+            }
         }
       });
     }
@@ -70,6 +80,13 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               label: 'Create list',
             ),
+              BottomNavigationBarItem(
+            icon: Icon(
+              Icons.arrow_left_sharp,
+              size: 40,
+            ),
+            label: 'Log out',
+          ),
           ],
           currentIndex: _selectedIndex,
           selectedItemColor: Colors.amber[800],
@@ -109,9 +126,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       iconSize: 40,
                       icon: Icon(Icons.add),
                       onPressed: () {
-                        //TODO() Lägg till lista via AppRepository
                         MovieController.getAppRepository()
-                            .createList(listNameController.text);
+                            .createList(listNameController.text, auth.identifyEmail());
                         showFeedbackDialog(context, 'List created');
                         listNameController.clear();
                       },
