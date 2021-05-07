@@ -17,7 +17,7 @@ class CoList extends StatefulWidget {
 
 class _CoListState extends State<CoList> {
   int _selectedIndex = 0;
-      String listId;
+  String listId;
 
   _CoListState(listId) : this.listId = listId;
 
@@ -79,7 +79,7 @@ class _CoListState extends State<CoList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('common Swipes'),
+        title: Text('Common Swipes'),
       ),
       body: MovieViewInfo(
         movies: _movies,
