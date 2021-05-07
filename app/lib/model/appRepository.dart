@@ -91,9 +91,15 @@ class AppRepository {
 }
 
   void createList(String listName) {
+    //TODO
     //Skapa nytt dokument i commonLists collection. 
     //Lägg till users email via addMemberToList. Görs genom firebase.auth.
 
+  }
+
+  getLists() {
+    //TODO
+    //Se getLikedMovies fast returnera listor för en specifik användare.
   }
 
 }
