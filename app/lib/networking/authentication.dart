@@ -87,6 +87,11 @@ class Authentication {
     User user = FirebaseAuth.instance.currentUser;
     user.sendEmailVerification();
   }
+
+  Future<String> identify() async {
+    return auth.currentUser.email;
+  }
+
 /* Kan användas för att välja ett namn att visa senare. 
 Future<void> setDisplayName() async {
   User user = FirebaseAuth.instance.currentUser;
