@@ -88,7 +88,7 @@ class Authentication {
     user.sendEmailVerification();
   }
 
-  Future<String> identify() async {
+  Future<String> identifyEmail() async {
     return auth.currentUser.email;
   }
 
