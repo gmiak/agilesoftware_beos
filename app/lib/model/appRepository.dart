@@ -1,10 +1,11 @@
+import 'package:app/networking/authentication.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'movieModel.dart';
 
 class AppRepository {
   static final AppRepository _appRepository = AppRepository._internal();
-
+  
   final CollectionReference moviesCollection =
       FirebaseFirestore.instance.collection('movies');
   final CollectionReference commonLists =
@@ -83,21 +84,18 @@ class AppRepository {
     List<String> memberToAddToList = <String>[];
     memberToAddToList.add(email);
 
-    CollectionReference collectionReference = FirebaseFirestore.instance.collection('commonLists');
-
-    await collectionReference
+    await commonLists
     .doc(listId)
     .update({'members': FieldValue.arrayUnion(memberToAddToList)});
 }
 
-  void createList(String listName) {
-    //TODO
-    //Skapa nytt dokument i commonLists collection. 
-    //Lägg till users email via addMemberToList. Görs genom firebase.auth.
-
+  Future<void> createList(String listName, String creator) async {
+    DocumentReference addedDocRef = commonLists.doc();
+    String listId = addedDocRef.id;
+    addMemberToList(creator, listId);
   }
 
-  getLists() {
+  Future<void> getLists() async {
     //TODO
     //Se getLikedMovies fast returnera listor för en specifik användare.
   }
