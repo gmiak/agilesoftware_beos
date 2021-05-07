@@ -1,3 +1,4 @@
+import 'package:app/model/appRepository.dart';
 import 'package:app/view/homePageView.dart';
 import 'package:flutter/material.dart';
 import 'package:app/networking/authentication.dart';
@@ -75,6 +76,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     await auth.signIn(
                         emailController.text, passwordController.text);
                     await auth.checkAuth();
+                    //TODO skapa lista
                     Navigator.push(context,
                         MaterialPageRoute(builder: (_) => MyHomePage()));
                   } else {
