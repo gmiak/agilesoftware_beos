@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 /// Klassen tar in en parameter som är listan av alla filmer,
 ///Därmed målas varje filmer med samma format på skärmen.
 
-//TODO Fixa allt.
-
 class ListViewInfo extends StatelessWidget {
   final List<CommonList> commonLists;
 
