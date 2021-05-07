@@ -59,7 +59,7 @@ void main() {
     });
     //Test on method toJson
     var movie_2_toJson = movie_2.toJson();
-    test('movie_2_toJson liked status should be true', () {
+    test('movie_2_toJson liked status should be false', () {
       expect(movie_2_toJson["liked"], false);
     });
   });
