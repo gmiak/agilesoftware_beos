@@ -20,7 +20,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    auth.signOut();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
