@@ -13,6 +13,7 @@ class Authentication {
 
   //local attributes
   FirebaseAuth auth;
+  String email;
 
   //Constructor
   factory Authentication() {
@@ -90,7 +91,9 @@ class Authentication {
   }
 
   String identifyEmail() {
-    return auth.currentUser.email;
+    //print(auth.currentUser.email);
+    email = auth.currentUser.email;
+     return auth.currentUser.email;
   }
 
 /* Kan användas för att välja ett namn att visa senare. 

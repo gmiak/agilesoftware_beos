@@ -90,8 +90,11 @@ class AppRepository {
 }
 
   Future<void> createList(String listName, String creator) async {
+    List<String> creatorToAdd = <String>[];
+    creatorToAdd.add(creator);
     DocumentReference addedDocRef = commonLists.doc();
     String listId = addedDocRef.id;
+    addedDocRef.set({'members': FieldValue.arrayUnion(creatorToAdd)});
     addMemberToList(creator, listId);
   }
 

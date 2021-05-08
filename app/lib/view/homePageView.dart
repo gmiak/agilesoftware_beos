@@ -25,6 +25,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     _populateCommonLists();
+    
   }
 
   ///Populates [_commonLists] with lists for this user.
@@ -49,7 +50,6 @@ class _MyHomePageState extends State<MyHomePage> {
           break;
         case 1:
           {
-            auth.signOut();
             Navigator.push(
                 context, MaterialPageRoute(builder: (_) => LoginScreen()));
           }
@@ -125,9 +125,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     iconSize: 40,
                     icon: Icon(Icons.add),
                     onPressed: () {
+                      print(auth.email);
                       auth.checkAuth();
                       MovieController.getAppRepository().createList(
-                          listNameController.text, auth.identifyEmail());
+                          listNameController.text, auth.email);
                       showFeedbackDialog(context, 'List created');
                       listNameController.clear();
                     },
