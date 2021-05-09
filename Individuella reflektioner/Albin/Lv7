@@ -1,0 +1,15 @@
+Vecka 7 har vart produktiv men har handlat mer om att jag fått fått klart grunden till mina stories ganska fort men har behövt lägga mer tid på att eliminera buggar. Jag har denna veckan jobbat med backend av att man kan svepa i en lista gemensamt samt fixat grunden för nya huvudskärmen med listor och skapa nya listor. Huvudskärmen är inte helt klar men då jag jobbat med detta på frivilig övertid känns det ok från min sida. 
+
+*What do I want to learn or understand better?
+Det har gått bra att förstå Firestore bättre. Jag känner mig hyfsat bekväm med att göra operationer/queries på databasen.
+Något jag vill förbättra min förståelse av nu är testning. Jag tror att jag har god basförståelse men måste sätta mig ner och börja implementera tester för att se vart min kunskap kanske brister. 
+
+How can I help someone else, or the entire team, to learn something new?
+Denna veckan har jag förmedlat mycket av den grafiska kunskapen jag lärt mig till Andreas, Georges och Dalsher som jobbat mycket med sånt. 
+Den här veckan har vart mycket med Firebase som jag kan dela med mig av. T.ex. har jag upptäckt att firebase_auth.currentUser() inte är att lita på och ger många null-problem då flutter är väldigt känsligt för sådana. 
+
+What is my contribution towards the team’s use of Scrum?
+Förutom det vanliga som Scrum Master har jag även lagt vikt vid att prata om estimeringar och att inte förrändra dem efter storyn är klar utan lägga vikt vid varför den var tyngre än vi inledningsvist trott.
+
+What is my contribution towards the team’s deliveries?
+Stories för att Gemensamma listor och Huvudskärm.
