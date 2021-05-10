@@ -30,9 +30,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   ///Populates [_commonLists] with lists for this user.
   void _populateCommonLists() async {
-    print(MovieController.getAppRepository().getLists(auth.identifyEmail()));
+    print(MovieController.getAppRepository().getLists(auth.email));
     final commonLists =
-        await MovieController.getAppRepository().getLists(auth.identifyEmail());
+        await MovieController.getAppRepository().getLists(auth.email);
 
     setState(() {
       _commonLists = commonLists;
@@ -50,6 +50,8 @@ class _MyHomePageState extends State<MyHomePage> {
           break;
         case 1:
           {
+            auth.signOut();
+            auth.email = null;
             Navigator.push(
                 context, MaterialPageRoute(builder: (_) => LoginScreen()));
           }
