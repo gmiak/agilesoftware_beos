@@ -148,7 +148,6 @@ class _CoListState extends State<CoList> {
                     iconSize: 40,
                     icon: Icon(Icons.add),
                     onPressed: () {
-                      //TODO() Add auth
                       MovieController.getAppRepository()
                           .addMemberToList(emailController.text, listId);
                       showFeedbackDialog(context, 'User added');

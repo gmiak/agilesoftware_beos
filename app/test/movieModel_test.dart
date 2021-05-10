@@ -58,6 +58,7 @@ void main() {
       expect(movie_2.getLiked(), true);
     });
     //Test on method toJson
+    // ignore: non_constant_identifier_names
     var movie_2_toJson = movie_2.toJson();
     test('movie_2_toJson liked status should be true', () {
       expect(movie_2_toJson["liked"], false);

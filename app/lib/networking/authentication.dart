@@ -1,5 +1,4 @@
 import 'package:app/controller/movieController.dart';
-import 'package:app/model/appRepository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 /*
