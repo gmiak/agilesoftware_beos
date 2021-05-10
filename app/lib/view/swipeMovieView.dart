@@ -15,6 +15,7 @@ class SwipeMovieView extends StatelessWidget {
   SwipeMovieView({this.movies, this.liked});
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     CardController controller; //Use this to trigger swap.
     return new Center(
       child: Container(

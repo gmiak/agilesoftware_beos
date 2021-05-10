@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../coList.dart';
 
-//TODO Fixa så det ser snyggt ut.
-
 class ListViewInfo extends StatelessWidget {
   final List<CommonList> commonLists;
 
@@ -16,7 +14,7 @@ class ListViewInfo extends StatelessWidget {
       itemCount: commonLists.length,
       itemBuilder: (context, index) {
         final list = commonLists[index];
-        return ListTile(
+        return ListTile( //TODO Fixa så det ser snyggt ut.
           title: Row(
             children: [
               Flexible(
