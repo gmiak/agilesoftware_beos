@@ -36,6 +36,7 @@ class Authentication {
     try {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: _email, password: _password);
+      email = identifyEmail();
       return "Success";
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -55,6 +56,7 @@ class Authentication {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: _email, password: _password);
       await MovieController.setUp();
+      email = identifyEmail();
       return "Success";
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -72,6 +74,7 @@ class Authentication {
     try {
       await MovieController.tearDown();
       await FirebaseAuth.instance.signOut();
+      email = null;
       print("Success");
     } catch (e) {
       print(e.toString());
