@@ -19,9 +19,6 @@ class ListViewInfo extends StatelessWidget {
         return ListTile(
           title: Row(
             children: [
-              SizedBox(
-                width: 100,
-              ),
               Flexible(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -33,8 +30,14 @@ class ListViewInfo extends StatelessWidget {
               ),
             ],
           ),
-          onTap: Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => CoList(listId: ,))),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => CoList(listId: list.listId),
+              ),
+            );
+          },
         );
       },
     );
