@@ -1,6 +1,8 @@
 import 'package:app/model/listModel.dart';
 import 'package:flutter/material.dart';
 
+import '../coList.dart';
+
 //TODO Fixa så det ser snyggt ut.
 
 class ListViewInfo extends StatelessWidget {
@@ -28,9 +30,11 @@ class ListViewInfo extends StatelessWidget {
                     children: [Text(list.listName)],
                   ),
                 ),
-              )
+              ),
             ],
           ),
+          onTap: Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => CoList(listId: ,))),
         );
       },
     );
