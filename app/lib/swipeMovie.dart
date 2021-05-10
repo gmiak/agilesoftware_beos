@@ -11,15 +11,19 @@ class SwipeMovie extends StatefulWidget {
   SwipeMovie({Key key, @required this.listId}) : super(key: key);
 
   @override
-  _SwipeMovie createState() => _SwipeMovie();
+  _SwipeMovie createState() => _SwipeMovie(listId);
 }
 
 class _SwipeMovie extends State<SwipeMovie> with TickerProviderStateMixin {
   List<Movie> _movies = <Movie>[];
+  String listId;
   MovieController movieController = MovieController();
+
+  _SwipeMovie(listId) : this.listId = listId;
+
   var _result = 0;
   void _resultat(int index) {
-    _movies[index].setLiked(true);
+    _movies[index].setLiked(listId, true);
 
     setState(() {
       _result++;

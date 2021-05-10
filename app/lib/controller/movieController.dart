@@ -125,14 +125,14 @@ class MovieController {
     await _appRepository.addMemberToList(newMember, listId);
   }
 
-  static Future<void> setMovieLiked(Movie movie, bool liked) async {
+  static Future<void> setMovieLiked(String listId, Movie movie, bool liked) async {
     if (!await _sanityCheck()) return;
 
     if (liked && !_likedMovies.contains(movie))
       _likedMovies.add(movie);
     else if (!liked && _likedMovies.contains(movie)) _likedMovies.remove(movie);
 
-    _appRepository.updateMovieLiked('testList', movie, liked);
+    _appRepository.updateMovieLiked(listId, movie, liked);
   }
 
   //Fetches all movies
