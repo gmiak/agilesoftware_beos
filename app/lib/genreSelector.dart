@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'controller/movieController.dart';
+
 class GenreSelector extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -8,25 +10,67 @@ class GenreSelector extends StatefulWidget {
 }
 
 class _GenreSelector extends State<GenreSelector> {
-  bool _isChecked = false;
+  Map<String, bool> _genres = {};
+
+  // Function to initiate the movies
+  @override
+  void initState() {
+    super.initState();
+    _populateGenres();
+  }
+
+  // Function to get all movies we fetched
+  void _populateGenres() async {
+    final genres = await MovieController.getGenres();
+
+    setState(() {
+      _genres = genres;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(border: Border.all(color: Colors.teal)),
-      child: CheckboxListTile(
-        title: const Text('Woolha.com'),
-        subtitle: const Text('A programming blog'),
-        secondary: const Icon(Icons.web),
-        activeColor: Colors.red,
-        checkColor: Colors.yellow,
-        selected: _isChecked,
-        value: _isChecked,
-        onChanged: (bool value) {
-          setState(() {
-            _isChecked = value;
-          });
-        },
+    return MaterialApp(
+      title: 'Movies App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Filter"),
+        ),
+        body: Stack(alignment: Alignment.bottomRight, children: [
+          Container(
+              child: new ListView(
+                  children: _genres.keys.map((String key) {
+            return new CheckboxListTile(
+              title: new Text(key),
+              value: _genres[key],
+              onChanged: (bool value) {
+                setState(() {
+                  _genres[key] = value;
+                  MovieController.selectGenre(key, value);
+                });
+              },
+            );
+          }).toList())),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Padding(
+              padding: EdgeInsets.all(14.0),
+              child: Align(
+                alignment: Alignment.bottomLeft,
+                child: FloatingActionButton.extended(
+                    heroTag: 1,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    label: const Text('Return'),
+                    icon: const Icon(Icons.keyboard_return),
+                    backgroundColor: Colors.blue),
+              ),
+            )
+          ]),
+        ]),
       ),
     );
   }

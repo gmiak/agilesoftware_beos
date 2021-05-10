@@ -1,56 +1,79 @@
+import 'package:app/view/homePageView.dart';
 import 'package:flutter/material.dart';
 import 'controller/movieController.dart';
 import 'model/movieModel.dart';
 import 'view/movieViewInfo.dart';
+import 'swipeMovie.dart';
 
 class CoList extends StatefulWidget {
+
+  final String listId;
+
+  CoList({Key key, @required this.listId}) : super(key: key);
+
   @override
-  _CoListState createState() => _CoListState();
+  _CoListState createState() => _CoListState(listId);
 }
 
 class _CoListState extends State<CoList> {
   int _selectedIndex = 0;
+      String listId;
 
-  MovieController _movieController = MovieController();
-  List<Movie> _movies = List.empty();
+  _CoListState(listId) : this.listId = listId;
+
+  List<Movie> _movies = <Movie>[];
   TextEditingController emailController = new TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _populateAllMovies();
+    _populateLikedMovies();
   }
 
-  // Function to get all movies we fetched
-  void _populateAllMovies() async {
-    final movies = await MovieController.getMovies();
+  ///Populates [_movies] with liked movies and uppdates the screen.
+  void _populateLikedMovies() async {
+    final movies =
+        await MovieController.getAppRepository().getLikedMovies(listId);
 
     setState(() {
-      _movies = movies.where((element) => element.getLiked()).toList() ??
-          List.empty();
+      _movies = movies;
     });
   }
 
-  // TODO() : add functionality to the buttons.
+  ///Activates the functionallity of the diffrent choices in the bottom menu.
   void _onItemTapped(int index) {
     setState(() {
       switch (index) {
         case 0:
           {
-            openDialog();
+            openAddMemberDialog();
           }
           break;
         case 1:
-          {}
+          {
+            Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SwipeMovie(listId : listId)),
+                  );
+          }
           break;
         case 2:
           {
-            Navigator.pop(context);
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MyHomePage(),
+                ));
           }
           break;
       }
     });
   }
+
+  ///Builds the widget with [MovieViewInfo] as body to display the liked movies.
+  ///
+  ///The Widget has a [BottomNavigationBar] with Buttons. One to be able to swipe movies to the list,
+  ///one to be able to add a member to the list, and one to be able to go back to choose other lists.
 
   @override
   Widget build(BuildContext context) {
@@ -92,12 +115,13 @@ class _CoListState extends State<CoList> {
     );
   }
 
-  Future<String> openDialog() {
+  ///Opens a Dialog window to be able to add members to a list.
+  Future<String> openAddMemberDialog() {
     return showDialog(
         context: context,
         builder: (ctx) {
           return AlertDialog(
-              title: Text('Users'),
+              title: Text('Enter email to add new list member.'),
               actions: <Widget>[
                 IconButton(
                   iconSize: 40,
@@ -123,7 +147,13 @@ class _CoListState extends State<CoList> {
                   IconButton(
                     iconSize: 40,
                     icon: Icon(Icons.add),
-                    onPressed: onPressed,
+                    onPressed: () {
+                      //TODO() Add auth
+                      MovieController.getAppRepository()
+                          .addMemberToList(emailController.text, listId);
+                      showFeedbackDialog(context, 'User added');
+                      emailController.clear();
+                    },
                     padding: EdgeInsets.only(top: 20),
                   )
                 ],
@@ -131,5 +161,30 @@ class _CoListState extends State<CoList> {
         });
   }
 
-  void onPressed() {}
+  /// Gives feedback that a user has been added as a member to a list.
+  showFeedbackDialog(BuildContext context, String message) {
+    // set up the button
+    Widget okButton = TextButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop(); // dismiss dialog
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text(message),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 }
