@@ -78,7 +78,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Colors.blue, borderRadius: BorderRadius.circular(20)),
               child: TextButton(
                 onPressed: () async {
-                  await auth.signOut();
                   String login;
                   if (emailController.text.isNotEmpty &&
                       passwordController.text.isNotEmpty) {
