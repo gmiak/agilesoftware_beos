@@ -130,6 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       MovieController.getAppRepository()
                           .createList(listNameController.text, auth.email);
                       showFeedbackDialog(context, 'List created');
+                      _populateCommonLists();
                       listNameController.clear();
                     },
                     padding: EdgeInsets.only(top: 20),
