@@ -86,7 +86,7 @@ class _SwipeMovie extends State<SwipeMovie> with TickerProviderStateMixin {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => CoList(listId: 'testList')),
+                            builder: (context) => CoList(listId: listId)),
                       );
                     },
                     label: const Text('Return'),
