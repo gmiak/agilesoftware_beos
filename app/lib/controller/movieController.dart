@@ -75,6 +75,7 @@ class MovieController {
     if (emptyLikedMoviesDB) await _appRepository.clearLikedMovies('testList');
 
     _hasSetup = false;
+    _isTearingDown = null;
 
     return !_hasSetup;
   }

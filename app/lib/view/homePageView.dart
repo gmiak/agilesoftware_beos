@@ -25,7 +25,6 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     _populateCommonLists();
-    
   }
 
   ///Populates [_commonLists] with lists for this user.
@@ -40,23 +39,22 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   ///Activates the functionallity of the diffrent choices in the bottom menu.
-  void _onItemTapped(int index) {
-    setState(() {
-      switch (index) {
-        case 0:
-          {
-            openAddListDialog();
-          }
-          break;
-        case 1:
-          {
-            auth.signOut();
-            auth.email = null;
-            Navigator.push(
-                context, MaterialPageRoute(builder: (_) => LoginScreen()));
-          }
-      }
-    });
+  Future<void> _onItemTapped(int index) async {
+    switch (index) {
+      case 0:
+        {
+          await openAddListDialog();
+        }
+        break;
+      case 1:
+        {
+          await auth.signOut().then((v) => {
+                auth.email = null,
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => LoginScreen()))
+              });
+        }
+    }
   }
 
   ///Builds the widget with [ListViewInfo] as body to display the liked movies.
@@ -129,8 +127,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: () {
                       print(auth.email);
                       auth.checkAuth();
-                      MovieController.getAppRepository().createList(
-                          listNameController.text, auth.email);
+                      MovieController.getAppRepository()
+                          .createList(listNameController.text, auth.email);
                       showFeedbackDialog(context, 'List created');
                       listNameController.clear();
                     },
