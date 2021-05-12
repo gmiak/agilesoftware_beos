@@ -47,6 +47,17 @@ class AppRepository {
     return likedMovies;
   }
 
+  Future<void> deleteLikedMovie(
+    String listId,
+    Movie movie,
+  ) async {
+    await commonLists
+        .doc(listId)
+        .collection('likedList')
+        .doc(movie.tmdbId.toString())
+        .delete();
+  }
+
   Future<DocumentReference> addMovie(Movie movie) async {
     return await moviesCollection.add(movie.toJson());
   }
@@ -104,11 +115,13 @@ class AppRepository {
         .update({'members': FieldValue.arrayUnion(memberToAddToList)});
   }
 
+
   Future<void> addOwnerToList(String email, String listId) async {
     await commonLists
         .doc(listId)
         .update({'owner': email});
   }
+
 
   Future<void> createList(String listName, String creator) async {
     List<String> creatorToAdd = <String>[];

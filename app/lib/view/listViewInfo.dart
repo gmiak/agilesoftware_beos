@@ -14,7 +14,8 @@ class ListViewInfo extends StatelessWidget {
       itemCount: commonLists.length,
       itemBuilder: (context, index) {
         final list = commonLists[index];
-        return ListTile( //TODO Fixa så det ser snyggt ut.
+        return ListTile(
+          //TODO Fixa så det ser snyggt ut.
           title: Row(
             children: [
               Flexible(
@@ -22,7 +23,11 @@ class ListViewInfo extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text(list.listName)],
+                    children: [
+                      Text(list.listName != null
+                          ? list.listName
+                          : 'default value')
+                    ],
                   ),
                 ),
               ),

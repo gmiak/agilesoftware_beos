@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'controller/movieController.dart';
-import 'model/movieModel.dart';
 import 'view/movieViewInfo.dart';
 
 class LikedList extends StatefulWidget {
-
   final String listId;
 
   LikedList({Key key, @required this.listId}) : super(key: key);
@@ -16,27 +13,11 @@ class LikedList extends StatefulWidget {
 }
 
 class _LikedList extends State<LikedList> {
-  List<Movie> _movies = <Movie>[];
-    String listId;
+  String listId;
 
-  _LikedList(listId) : this.listId = listId; 
-
+  _LikedList(listId) : this.listId = listId;
 
   // Function to initiate the movies
-  @override
-  void initState() {
-    super.initState();
-    _populateLikedMovies();
-  }
-
-  // Function to get all movies we fetched
-  void _populateLikedMovies() async {
-    final movies = await MovieController.getAppRepository().getLikedMovies(listId);
-
-    setState(() {
-      _movies = movies;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +30,9 @@ class _LikedList extends State<LikedList> {
         appBar: AppBar(
           title: Text("Liked"),
         ),
-        body: MovieViewInfo(movies: _movies),
+        body: MovieViewInfo(
+          listId: listId,
+        ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
             Navigator.pop(context);

@@ -11,15 +11,20 @@ import 'genreSelector.dart';
 ** Den klassen kompletterar i stor sett klassen view/MovieViewInfo.
 **/
 class MovieList extends StatefulWidget {
+  final String listId;
+
+  MovieList({Key key, @required this.listId}) : super(key: key);
+
   @override
-  State<StatefulWidget> createState() {
-    return _MovieList();
-  }
+  _MovieList createState() => _MovieList(listId);
 }
 
 class _MovieList extends State<MovieList> {
   List<Movie> _movies = <Movie>[];
   MovieController movieController = MovieController();
+  String listId;
+
+  _MovieList(listId) : this.listId = listId;
 
   // Function to initiate the movies
   @override
@@ -50,7 +55,10 @@ class _MovieList extends State<MovieList> {
           title: Text("Movies"),
         ),
         body: Stack(alignment: Alignment.bottomRight, children: [
-          Container(child: MovieViewInfo(movies: _movies)),
+          Container(
+              child: MovieViewInfo(
+            listId: listId,
+          )),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Padding(
               padding: EdgeInsets.all(14.0),
