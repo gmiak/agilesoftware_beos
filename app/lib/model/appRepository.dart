@@ -115,14 +115,23 @@ class AppRepository {
         .update({'members': FieldValue.arrayUnion(memberToAddToList)});
   }
 
+
+  Future<void> addOwnerToList(String email, String listId) async {
+    await commonLists
+        .doc(listId)
+        .update({'owner': email});
+  }
+
+
   Future<void> createList(String listName, String creator) async {
     List<String> creatorToAdd = <String>[];
     creatorToAdd.add(creator);
     DocumentReference addedDocRef = commonLists.doc();
     String listId = addedDocRef.id;
     addedDocRef.set(
-        {'members': FieldValue.arrayUnion(creatorToAdd), 'listName': listName});
+        {'members': FieldValue.arrayUnion(creatorToAdd), 'listName': listName, 'listId': listId});
     addMemberToList(creator, listId);
+    addOwnerToList(creator, listId);
   }
 
   Future<List<CommonList>> getLists(String userEmail) async {

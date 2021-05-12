@@ -34,10 +34,11 @@ class ListViewInfo extends StatelessWidget {
             ],
           ),
           onTap: () {
+            print(list.getListId());
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => CoList(listId: list.listId),
+                builder: (_) => new CoList(listId: list.listId),
               ),
             );
           },

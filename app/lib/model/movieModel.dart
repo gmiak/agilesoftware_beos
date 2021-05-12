@@ -70,9 +70,9 @@ class Movie {
   }
 
   // Set if the movie was liked
-  void setLiked(bool liked) {
+  void setLiked(String listId, bool liked) {
     this._liked = liked;
-    MovieController.setMovieLiked(this, liked);
+    MovieController.setMovieLiked(listId, this, liked);
   }
 
   // Get if the movie was liked
