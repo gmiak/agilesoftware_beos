@@ -136,6 +136,10 @@ class MovieController {
     _appRepository.updateMovieLiked('testList', movie, liked);
   }
 
+  static Future<void> deleteMovie(String listId, Movie movie) async {
+    await _appRepository.deleteLikedMovie(listId, movie);
+  }
+
   //Fetches all movies
   static Future<List<Movie>> _reloadMovies() async {
     await Genres.populateGenres();

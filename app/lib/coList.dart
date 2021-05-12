@@ -1,12 +1,10 @@
 import 'package:app/view/homePageView.dart';
 import 'package:flutter/material.dart';
 import 'controller/movieController.dart';
-import 'model/movieModel.dart';
-import 'view/movieViewInfo.dart';
 import 'swipeMovie.dart';
+import 'view/movieViewInfo.dart';
 
 class CoList extends StatefulWidget {
-
   final String listId;
 
   CoList({Key key, @required this.listId}) : super(key: key);
@@ -21,24 +19,8 @@ class _CoListState extends State<CoList> {
 
   _CoListState(listId) : this.listId = listId;
 
-  List<Movie> _movies = <Movie>[];
+  
   TextEditingController emailController = new TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    _populateLikedMovies();
-  }
-
-  ///Populates [_movies] with liked movies and uppdates the screen.
-  void _populateLikedMovies() async {
-    final movies =
-        await MovieController.getAppRepository().getLikedMovies(listId);
-
-    setState(() {
-      _movies = movies;
-    });
-  }
 
   ///Activates the functionallity of the diffrent choices in the bottom menu.
   void _onItemTapped(int index) {
@@ -52,9 +34,10 @@ class _CoListState extends State<CoList> {
         case 1:
           {
             Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SwipeMovie(listId : listId)),
-                  );
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SwipeMovie(listId: listId)),
+            );
           }
           break;
         case 2:
@@ -80,9 +63,14 @@ class _CoListState extends State<CoList> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Common Swipes'),
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(right: 150),
+          )
+        ],
       ),
       body: MovieViewInfo(
-        movies: _movies,
+        listId: listId,
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
