@@ -116,7 +116,7 @@ class AppRepository {
     DocumentReference addedDocRef = commonLists.doc();
     String listId = addedDocRef.id;
     addedDocRef.set(
-        {'members': FieldValue.arrayUnion(creatorToAdd), 'listName': listName});
+        {'members': FieldValue.arrayUnion(creatorToAdd), 'listName': listName, 'listId': listId});
     addMemberToList(creator, listId);
     addOwnerToList(creator, listId);
   }
