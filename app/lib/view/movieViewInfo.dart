@@ -86,7 +86,7 @@ class _MovieViewInfoState extends State<MovieViewInfo> {
                 icon: Icons.delete,
                 onTap: () {
                   setState(() {
-                    movie.setLiked(false);
+                    movie.setLiked(listId, false);
                     MovieController.deleteMovie(listId, movie);
                     _movies.removeAt(index);
                   });
