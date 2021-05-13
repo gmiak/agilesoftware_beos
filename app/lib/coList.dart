@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'controller/movieController.dart';
 import 'swipeMovie.dart';
 import 'view/movieViewInfo.dart';
+import 'package:app/networking/authentication.dart';
+import 'view/movieViewInfoOwner.dart';
 
 class CoList extends StatefulWidget {
   final CommonList commonList;
@@ -19,8 +21,8 @@ class _CoListState extends State<CoList> {
   CommonList commonList;
   _CoListState(commonList) : this.commonList = commonList;
 
-  
   TextEditingController emailController = new TextEditingController();
+  Authentication auth = Authentication();
 
   ///Activates the functionallity of the diffrent choices in the bottom menu.
   void _onItemTapped(int index) {
@@ -53,6 +55,14 @@ class _CoListState extends State<CoList> {
     });
   }
 
+  Widget chooseMVI(String email) {
+    if (email == commonList.getListOwner()) {
+      return MovieViewInfoOwner(listId: commonList.getListId());
+    } else {
+      return MovieViewInfo(listId: commonList.getListId());
+    }
+  }
+
   ///Builds the widget with [MovieViewInfo] as body to display the liked movies.
   ///
   ///The Widget has a [BottomNavigationBar] with Buttons. One to be able to swipe movies to the list,
@@ -60,6 +70,7 @@ class _CoListState extends State<CoList> {
 
   @override
   Widget build(BuildContext context) {
+    final String email = auth.email;
     return Scaffold(
       appBar: AppBar(
         title: Text(commonList.getListName()),
@@ -69,9 +80,7 @@ class _CoListState extends State<CoList> {
           )
         ],
       ),
-      body: MovieViewInfo(
-        listId: commonList.getListId(),
-      ),
+      body: chooseMVI(email),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -136,8 +145,8 @@ class _CoListState extends State<CoList> {
                     iconSize: 40,
                     icon: Icon(Icons.add),
                     onPressed: () {
-                      MovieController.getAppRepository()
-                          .addMemberToList(emailController.text, commonList.getListId());
+                      MovieController.getAppRepository().addMemberToList(
+                          emailController.text, commonList.getListId());
                       showFeedbackDialog(context, 'User added');
                       emailController.clear();
                     },
