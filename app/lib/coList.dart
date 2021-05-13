@@ -55,6 +55,7 @@ class _CoListState extends State<CoList> {
     });
   }
 
+  /// Decides wheter to show [MovieViewInfoOwner] or [MovieViewInfo] depending on if current user is owner of list or not.
   Widget chooseMVI(String email) {
     if (email == commonList.getListOwner()) {
       return MovieViewInfoOwner(listId: commonList.getListId());
