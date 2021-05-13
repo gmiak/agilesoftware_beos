@@ -56,9 +56,6 @@ class _CoListState extends State<CoList> {
   }
 
   Widget chooseMVI(String email) {
-    print(email);
-    print(commonList.getListOwner());
-    print(email == commonList.getListOwner());
     if (email == commonList.getListOwner()) {
       return MovieViewInfoOwner(listId: commonList.getListId());
     } else {
