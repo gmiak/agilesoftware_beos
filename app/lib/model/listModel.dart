@@ -16,7 +16,7 @@ class CommonList {
     return CommonList(
         listId: json["listId"],
         listName: json["listName"],
-        listOwner: json["listOwner"],
+        listOwner: json["owner"],
         members:
             (json['members'] as List)?.map((member) => member as String)?.toList(),
         likedMovies:
@@ -26,7 +26,7 @@ class CommonList {
   Map<String, dynamic> toJson() => <String, dynamic>{
         'listId': this.listId,
         'listName': this.listName,
-        'listOwner': this.listOwner,
+        'owner': this.listOwner,
         'members': this.members,
         'likedMovies': this.likedMovies,
       };
