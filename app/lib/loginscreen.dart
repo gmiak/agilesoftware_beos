@@ -87,6 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     if (login == 'Success') {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (_) => MyHomePage()));
+                      // print(auth.identifyEmail());
                     } else {
                       showAlertDialog(context, login);
                     }
