@@ -1,3 +1,4 @@
+import 'package:app/model/listModel.dart';
 import 'package:app/view/homePageView.dart';
 import 'package:flutter/material.dart';
 import 'controller/movieController.dart';
@@ -5,19 +6,18 @@ import 'swipeMovie.dart';
 import 'view/movieViewInfo.dart';
 
 class CoList extends StatefulWidget {
-  final String listId;
+  final CommonList commonList;
 
-  CoList({Key key, @required this.listId}) : super(key: key);
+  CoList({Key key, @required this.commonList}) : super(key: key);
 
   @override
-  _CoListState createState() => _CoListState(listId);
+  _CoListState createState() => _CoListState(commonList);
 }
 
 class _CoListState extends State<CoList> {
   int _selectedIndex = 0;
-  String listId;
-
-  _CoListState(listId) : this.listId = listId;
+  CommonList commonList;
+  _CoListState(commonList) : this.commonList = commonList;
 
   
   TextEditingController emailController = new TextEditingController();
@@ -36,7 +36,7 @@ class _CoListState extends State<CoList> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => SwipeMovie(listId: listId)),
+                  builder: (context) => SwipeMovie(commonList: commonList)),
             );
           }
           break;
@@ -62,7 +62,7 @@ class _CoListState extends State<CoList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Common Swipes'),
+        title: Text(commonList.getListName()),
         actions: <Widget>[
           Padding(
             padding: EdgeInsets.only(right: 150),
@@ -70,7 +70,7 @@ class _CoListState extends State<CoList> {
         ],
       ),
       body: MovieViewInfo(
-        listId: listId,
+        listId: commonList.getListId(),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -137,7 +137,7 @@ class _CoListState extends State<CoList> {
                     icon: Icon(Icons.add),
                     onPressed: () {
                       MovieController.getAppRepository()
-                          .addMemberToList(emailController.text, listId);
+                          .addMemberToList(emailController.text, commonList.getListId());
                       showFeedbackDialog(context, 'User added');
                       emailController.clear();
                     },

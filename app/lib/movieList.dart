@@ -1,4 +1,5 @@
 import 'package:app/controller/movieController.dart';
+import 'package:app/model/listModel.dart';
 import 'package:app/model/movieModel.dart';
 import 'package:app/view/movieViewInfo.dart';
 import 'package:flutter/material.dart';
@@ -70,7 +71,7 @@ class _MovieList extends State<MovieList> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => CoList(listId: 'testList')),
+                            builder: (context) => CoList(commonList: CommonList())),
                       );
                     },
                     label: const Text('Return'),

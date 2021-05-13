@@ -38,7 +38,7 @@ class ListViewInfo extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => new CoList(listId: list.listId),
+                builder: (_) => new CoList(commonList: list),
               ),
             );
           },
