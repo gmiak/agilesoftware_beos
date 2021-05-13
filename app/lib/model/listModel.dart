@@ -5,16 +5,18 @@
 class CommonList {
   final String listId;
   final String listName;
+  final String listOwner;
   final List<String> members;
   final List<String> likedMovies;
 
   //constructor
-  CommonList({this.listId, this.listName, this.members, this.likedMovies});
+  CommonList({this.listId, this.listName, this.listOwner, this.members, this.likedMovies});
 
   factory CommonList.fromFBJson(Map<String, dynamic> json) {
     return CommonList(
         listId: json["listId"],
         listName: json["listName"],
+        listOwner: json["listOwner"],
         members:
             (json['members'] as List)?.map((member) => member as String)?.toList(),
         likedMovies:
@@ -24,6 +26,7 @@ class CommonList {
   Map<String, dynamic> toJson() => <String, dynamic>{
         'listId': this.listId,
         'listName': this.listName,
+        'listOwner': this.listOwner,
         'members': this.members,
         'likedMovies': this.likedMovies,
       };
@@ -38,5 +41,9 @@ class CommonList {
 
   String getListId() {
     return listId;
+  }
+
+  String getListOwner() {
+    return listOwner;
   }
 }
