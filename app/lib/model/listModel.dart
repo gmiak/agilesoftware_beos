@@ -1,6 +1,6 @@
-/*
-* Klassen bygger abstraktionen (en objektmodell) av en lista.
-* */
+
+/// Klassen bygger abstraktionen (en objektmodell) av en lista.
+
 
 class CommonList {
   final String listId;

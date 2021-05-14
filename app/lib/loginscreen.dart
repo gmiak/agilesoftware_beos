@@ -4,10 +4,8 @@ import 'package:app/view/homePageView.dart';
 import 'package:flutter/material.dart';
 import 'package:app/networking/authentication.dart';
 
-/*
-Loginskärm som skall använda sig av autentication när man startar appen. 
-*/
 
+///Loginskärm som skall använda sig av autentication när man startar appen. 
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();

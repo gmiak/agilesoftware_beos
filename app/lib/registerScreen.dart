@@ -2,9 +2,9 @@ import 'package:app/view/homePageView.dart';
 import 'package:flutter/material.dart';
 import 'package:app/networking/authentication.dart';
 
-/*
-Registreringsskärm som skall använda sig av autentication när man startar appen. 
-*/
+
+///Registreringsskärm som skall använda sig av autentication när man startar appen. 
+
 
 class RegisterScreen extends StatefulWidget {
   @override
