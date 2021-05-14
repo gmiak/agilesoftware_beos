@@ -73,66 +73,6 @@ class MovieDetailsDialogScreen extends StatelessWidget {
                   letterSpacing: 2.5,
                 ),
               ),
-              //Create space between movie's title and movie's rating
-              SizedBox(height: padding),
-              RatingBar.builder(
-                initialRating: movie.averageVote,
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  switch (index) {
-                    case 0:
-                      return Icon(
-                        Icons.sentiment_very_dissatisfied,
-                        color: Colors.red,
-                      );
-                    case 1:
-                      return Icon(
-                        Icons.sentiment_dissatisfied,
-                        color: Colors.redAccent,
-                      );
-                    case 2:
-                      return Icon(
-                        Icons.sentiment_neutral,
-                        color: Colors.amber,
-                      );
-                    case 3:
-                      return Icon(
-                        Icons.sentiment_satisfied,
-                        color: Colors.lightGreen,
-                      );
-                    case 4:
-                      return Icon(
-                        Icons.sentiment_very_satisfied,
-                        color: Colors.green,
-                      );
-                    default:
-                      return null;
-                  }
-                },
-                onRatingUpdate: (rating) {},
-                minRating: 0,
-                maxRating: 5,
-                allowHalfRating: true,
-                ignoreGestures: true,
-              ),
-              //Create space between movie's rating box and movie's rating text
-              SizedBox(height: padding / 2),
-              RichText(
-                text: TextSpan(
-                  style: new TextStyle(
-                    fontSize: 16.0,
-                    color: Colors.black,
-                  ),
-                  children: <TextSpan>[
-                    new TextSpan(
-                        text: 'Rating: ',
-                        style: new TextStyle(fontWeight: FontWeight.bold)),
-                    new TextSpan(
-                      text: '${movie.averageVote}/5.0',
-                    ),
-                  ],
-                ),
-              ),
               //Create space between movie's title and movie's genres
               SizedBox(height: padding),
               Container(
