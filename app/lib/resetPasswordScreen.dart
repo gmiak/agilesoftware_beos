@@ -2,9 +2,9 @@ import 'package:app/loginscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:app/networking/authentication.dart';
 
-/*
-Skärm för att nollställa lösenord som skall använda sig av autentication när man startar appen. 
-*/
+
+///Skärm för att nollställa lösenord som skall använda sig av autentication när man startar appen. 
+
 
 class ResetPasswordScreen extends StatefulWidget {
   @override

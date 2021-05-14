@@ -1,44 +1,28 @@
+import 'package:app/model/listModel.dart';
 import 'package:app/view/homePageView.dart';
 import 'package:flutter/material.dart';
 import 'controller/movieController.dart';
-import 'model/movieModel.dart';
-import 'view/movieViewInfo.dart';
 import 'swipeMovie.dart';
+import 'view/movieViewInfo.dart';
+import 'package:app/networking/authentication.dart';
+import 'view/movieViewInfoOwner.dart';
 
 class CoList extends StatefulWidget {
+  final CommonList commonList;
 
-  final String listId;
-
-  CoList({Key key, @required this.listId}) : super(key: key);
+  CoList({Key key, @required this.commonList}) : super(key: key);
 
   @override
-  _CoListState createState() => _CoListState(listId);
+  _CoListState createState() => _CoListState(commonList);
 }
 
 class _CoListState extends State<CoList> {
   int _selectedIndex = 0;
-      String listId;
+  CommonList commonList;
+  _CoListState(commonList) : this.commonList = commonList;
 
-  _CoListState(listId) : this.listId = listId;
-
-  List<Movie> _movies = <Movie>[];
   TextEditingController emailController = new TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    _populateLikedMovies();
-  }
-
-  ///Populates [_movies] with liked movies and uppdates the screen.
-  void _populateLikedMovies() async {
-    final movies =
-        await MovieController.getAppRepository().getLikedMovies(listId);
-
-    setState(() {
-      _movies = movies;
-    });
-  }
+  Authentication auth = Authentication();
 
   ///Activates the functionallity of the diffrent choices in the bottom menu.
   void _onItemTapped(int index) {
@@ -52,9 +36,10 @@ class _CoListState extends State<CoList> {
         case 1:
           {
             Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SwipeMovie(listId : listId)),
-                  );
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SwipeMovie(commonList: commonList)),
+            );
           }
           break;
         case 2:
@@ -70,6 +55,15 @@ class _CoListState extends State<CoList> {
     });
   }
 
+  /// Decides wheter to show [MovieViewInfoOwner] or [MovieViewInfo] depending on if current user is owner of list or not.
+  Widget chooseMVI(String email) {
+    if (email == commonList.getListOwner()) {
+      return MovieViewInfoOwner(listId: commonList.getListId());
+    } else {
+      return MovieViewInfo(listId: commonList.getListId());
+    }
+  }
+
   ///Builds the widget with [MovieViewInfo] as body to display the liked movies.
   ///
   ///The Widget has a [BottomNavigationBar] with Buttons. One to be able to swipe movies to the list,
@@ -77,13 +71,17 @@ class _CoListState extends State<CoList> {
 
   @override
   Widget build(BuildContext context) {
+    final String email = auth.email;
     return Scaffold(
       appBar: AppBar(
-        title: Text('common Swipes'),
+        title: Text(commonList.getListName()),
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(right: 150),
+          )
+        ],
       ),
-      body: MovieViewInfo(
-        movies: _movies,
-      ),
+      body: chooseMVI(email),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -148,9 +146,8 @@ class _CoListState extends State<CoList> {
                     iconSize: 40,
                     icon: Icon(Icons.add),
                     onPressed: () {
-                      //TODO() Add auth
-                      MovieController.getAppRepository()
-                          .addMemberToList(emailController.text, listId);
+                      MovieController.getAppRepository().addMemberToList(
+                          emailController.text, commonList.getListId());
                       showFeedbackDialog(context, 'User added');
                       emailController.clear();
                     },

@@ -1,9 +1,8 @@
 import 'package:tmdb_api/tmdb_api.dart';
 
-/*
-* This class is responsible for the connection with the movie-
-* database "tmdb"
-**/
+
+///This class is responsible for the connection with the movie-database "tmdb"
+
 class Connection {
   TMDB _tmdb;
 

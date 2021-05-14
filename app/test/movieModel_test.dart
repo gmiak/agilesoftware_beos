@@ -54,10 +54,11 @@ void main() {
     });
     //Test on method setLiked
     test('movie_2 liked status should be true', () {
-      movie_2.setLiked(true);
+     // movie_2.setLiked(true); //TODO uppdatera test
       expect(movie_2.getLiked(), true);
     });
     //Test on method toJson
+    // ignore: non_constant_identifier_names
     var movie_2_toJson = movie_2.toJson();
     test('movie_2_toJson liked status should be false', () {
       expect(movie_2_toJson["liked"], false);

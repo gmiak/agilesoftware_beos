@@ -1,3 +1,4 @@
+import 'package:app/model/listModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'movieModel.dart';
@@ -34,12 +35,27 @@ class AppRepository {
   Future<List<Movie>> getLikedMovies(String listId) async {
     List<Movie> likedMovies = <Movie>[];
 
-    await commonLists.doc(listId).collection('likedMovies').get().then((snapshot) => {
-          for (DocumentSnapshot ds in snapshot.docs)
-            {likedMovies.add(Movie.fromFBJson(ds.data()))}
-        });
+    await commonLists
+        .doc(listId)
+        .collection('likedMovies')
+        .get()
+        .then((snapshot) => {
+              for (DocumentSnapshot ds in snapshot.docs)
+                {likedMovies.add(Movie.fromFBJson(ds.data()))}
+            });
 
     return likedMovies;
+  }
+
+  Future<void> deleteLikedMovie(
+    String listId,
+    Movie movie,
+  ) async {
+    await commonLists
+        .doc(listId)
+        .collection('likedList')
+        .doc(movie.tmdbId.toString())
+        .delete();
   }
 
   Future<DocumentReference> addMovie(Movie movie) async {
@@ -53,14 +69,20 @@ class AppRepository {
   }
 
   Future<void> clearLikedMovies(String listId) async {
-    return await commonLists.doc(listId).collection('likedMovies').get().then((snapshot) => {
-          for (DocumentSnapshot ds in snapshot.docs) {ds.reference.delete()}
-        });
+    return await commonLists
+        .doc(listId)
+        .collection('likedMovies')
+        .get()
+        .then((snapshot) => {
+              for (DocumentSnapshot ds in snapshot.docs) {ds.reference.delete()}
+            });
   }
- 
 
   updateMovieLiked(String listId, Movie movie, bool liked) async {
-    var query = commonLists.doc(listId).collection('likedMovies').where("tmdbId", isEqualTo: movie.tmdbId);
+    var query = commonLists
+        .doc(listId)
+        .collection('likedMovies')
+        .where("tmdbId", isEqualTo: movie.tmdbId);
 
     if (query != null) {
       var querySnapshot = query.get();
@@ -68,7 +90,12 @@ class AppRepository {
       if (querySnapshot != null) {
         await querySnapshot.then((docData) async => {
               if (docData.size == 0 && liked)
-                {await commonLists.doc(listId).collection('likedMovies').add(movie.toJson())}
+                {
+                  await commonLists
+                      .doc(listId)
+                      .collection('likedMovies')
+                      .add(movie.toJson())
+                }
               else if (docData.size != 0 && !liked)
                 {
                   for (QueryDocumentSnapshot doc in docData.docs)
@@ -83,11 +110,57 @@ class AppRepository {
     List<String> memberToAddToList = <String>[];
     memberToAddToList.add(email);
 
-    CollectionReference collectionReference = FirebaseFirestore.instance.collection('commonLists');
+    await commonLists
+        .doc(listId)
+        .update({'members': FieldValue.arrayUnion(memberToAddToList)});
+  }
 
-    await collectionReference
-    .doc(listId)
-    .update({'members': FieldValue.arrayUnion(memberToAddToList)});
-}
+  Future<void> deleteMember(
+    String listId,
+    String email,
+  ) async {
+    List<String> memberToRemoveFromList = <String>[];
+    memberToRemoveFromList.add(email);
+    await commonLists
+        .doc(listId)
+        .update({'members': FieldValue.arrayRemove(memberToRemoveFromList)});
+  }
 
+  Future<void> addOwnerToList(String email, String listId) async {
+    await commonLists.doc(listId).update({'owner': email});
+  }
+
+  Future<void> createList(String listName, String creator) async {
+    List<String> creatorToAdd = <String>[];
+    creatorToAdd.add(creator);
+    DocumentReference addedDocRef = commonLists.doc();
+    String listId = addedDocRef.id;
+    addedDocRef.set({
+      'members': FieldValue.arrayUnion(creatorToAdd),
+      'listName': listName,
+      'listId': listId
+    });
+    addMemberToList(creator, listId);
+    addOwnerToList(creator, listId);
+  }
+
+  ///Raderar listan helt från Firestore om man skickar med ägarens email och tar bort användaren annars.
+  Future<void> deleteList(CommonList list, String email) async {
+    if (list.listOwner == email) {
+      commonLists.doc(list.listId).delete();
+    } else {
+      deleteMember(list.listId, email);
+    }
+  }
+
+  Future<List<CommonList>> getLists(String userEmail) async {
+    List<CommonList> lists = <CommonList>[];
+    Query memberQuery = commonLists.where('members', arrayContains: userEmail);
+    await memberQuery.get().then((snapshot) => {
+          for (DocumentSnapshot ds in snapshot.docs)
+            {lists.add(CommonList.fromFBJson(ds.data()))}
+        });
+
+    return lists;
+  }
 }

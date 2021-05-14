@@ -1,3 +1,4 @@
+import 'package:app/model/listModel.dart';
 import 'package:app/view/swipeMovieView.dart';
 import 'package:flutter/material.dart';
 import 'package:app/controller/movieController.dart';
@@ -6,20 +7,24 @@ import 'coList.dart';
 import 'genreSelector.dart';
 
 class SwipeMovie extends StatefulWidget {
-  final String listId;
+  final CommonList commonList;
 
-  SwipeMovie({Key key, @required this.listId}) : super(key: key);
+  SwipeMovie({Key key, @required this.commonList}) : super(key: key);
 
   @override
-  _SwipeMovie createState() => _SwipeMovie();
+  _SwipeMovie createState() => _SwipeMovie(commonList);
 }
 
 class _SwipeMovie extends State<SwipeMovie> with TickerProviderStateMixin {
   List<Movie> _movies = <Movie>[];
+  CommonList commonList;
   MovieController movieController = MovieController();
+
+  _SwipeMovie(commonList) : this.commonList = commonList;
+
   var _result = 0;
   void _resultat(int index) {
-    _movies[index].setLiked(true);
+    _movies[index].setLiked(commonList.getListId(), true);
 
     setState(() {
       _result++;
@@ -82,7 +87,7 @@ class _SwipeMovie extends State<SwipeMovie> with TickerProviderStateMixin {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => CoList(listId: 'testList')),
+                            builder: (context) => CoList(commonList: commonList)),
                       );
                     },
                     label: const Text('Return'),

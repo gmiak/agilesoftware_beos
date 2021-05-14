@@ -1,9 +1,7 @@
 import 'package:app/controller/movieController.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-/*
-Klass som sköter backend för autentisiering, signup, login och nollställning av lösenord. 
-*/
+///Klass som sköter backend för autentisiering, signup, login och nollställning av lösenord.
 
 class Authentication {
   //Singleton configuration
@@ -12,6 +10,7 @@ class Authentication {
 
   //local attributes
   FirebaseAuth auth;
+  String email;
 
   //Constructor
   factory Authentication() {
@@ -21,8 +20,8 @@ class Authentication {
     return authentication;
   }
 
+  ///Kollar om inloggad.
   Future<void> checkAuth() async {
-    //Kollar om inloggad.
     if (auth.currentUser != null) {
       print("Already Signed in as ${auth.currentUser.email}");
     } else {
@@ -30,11 +29,12 @@ class Authentication {
     }
   }
 
+  ///Logik för att skapa konto
   Future<String> signUp(String _email, String _password) async {
-    //Logik för att skapa konto
     try {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: _email, password: _password);
+      email = identifyEmail();
       return "Success";
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -48,12 +48,13 @@ class Authentication {
     }
   }
 
+  ///Logik för login.
   Future<String> signIn(String _email, String _password) async {
-    //Logik för login.
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: _email, password: _password);
       await MovieController.setUp();
+      email = identifyEmail();
       return "Success";
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -66,27 +67,35 @@ class Authentication {
     }
   }
 
+  ///Logga ut
   Future<void> signOut() async {
-    //Logga ut
     try {
       await MovieController.tearDown();
       await FirebaseAuth.instance.signOut();
+      email = null;
       print("Success");
     } catch (e) {
       print(e.toString());
     }
   }
-
+///Nollställ lösenord.
   Future<void> resetPassword(String _email) async {
-    //Nollställ lösenord.
+    
     auth.sendPasswordResetEmail(
-        email: _email); //Gör om för att ta in info från tangentbord.
+        email: _email);
   }
 
+///Verifiera email
   Future<void> verifyEmail() async {
     User user = FirebaseAuth.instance.currentUser;
     user.sendEmailVerification();
   }
+///Hitta email för inloggad användare. Fungerar dåligt från Firebase sida och skall undvikas. 
+  String identifyEmail() {
+    email = auth.currentUser.email;
+    return auth.currentUser.email;
+  }
+
 /* Kan användas för att välja ett namn att visa senare. 
 Future<void> setDisplayName() async {
   User user = FirebaseAuth.instance.currentUser;

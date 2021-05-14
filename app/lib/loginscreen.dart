@@ -4,10 +4,8 @@ import 'package:app/view/homePageView.dart';
 import 'package:flutter/material.dart';
 import 'package:app/networking/authentication.dart';
 
-/*
-Loginskärm som skall använda sig av autentication när man startar appen. 
-*/
 
+///Loginskärm som skall använda sig av autentication när man startar appen. 
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -20,7 +18,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    auth.signOut();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -79,7 +76,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Colors.blue, borderRadius: BorderRadius.circular(20)),
               child: TextButton(
                 onPressed: () async {
-                  await auth.signOut();
                   String login;
                   if (emailController.text.isNotEmpty &&
                       passwordController.text.isNotEmpty) {
@@ -89,6 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     if (login == 'Success') {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (_) => MyHomePage()));
+                      // print(auth.identifyEmail());
                     } else {
                       showAlertDialog(context, login);
                     }

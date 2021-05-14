@@ -7,13 +7,13 @@ import 'package:app/networking/connection.dart';
 import 'package:app/model/movieModel.dart';
 import 'package:tmdb_api/tmdb_api.dart';
 
-/*
-* Klassen returnerar en lista med populära filmer från tmdb
-* tmdb-apiet returnerar cirka 20 filmer/sida
-* Klassen är en Singleton: Iden med singletonklass är alltså att det i programmet bara
-* kommer finnas en och endast en instans av klassen och att den som använder klassen inte behöver veta när
-* den skapas. SingletonKlassen skapas första gången någon ber om en referens till kalssen.
-**/
+
+ ///Klassen returnerar en lista med populära filmer från tmdb
+ /// tmdb-apiet returnerar cirka 20 filmer/sida
+ ///Klassen är en Singleton: Iden med singletonklass är alltså att det i programmet bara
+ ///kommer finnas en och endast en instans av klassen och att den som använder klassen inte behöver veta när
+ ///den skapas. SingletonKlassen skapas första gången någon ber om en referens till kalssen.
+
 
 class MovieController {
   static final int maxPages = 10;
@@ -75,6 +75,7 @@ class MovieController {
     if (emptyLikedMoviesDB) await _appRepository.clearLikedMovies('testList');
 
     _hasSetup = false;
+    _isTearingDown = null;
 
     return !_hasSetup;
   }
@@ -125,14 +126,18 @@ class MovieController {
     await _appRepository.addMemberToList(newMember, listId);
   }
 
-  static Future<void> setMovieLiked(Movie movie, bool liked) async {
+  static Future<void> setMovieLiked(String listId, Movie movie, bool liked) async {
     if (!await _sanityCheck()) return;
 
     if (liked && !_likedMovies.contains(movie))
       _likedMovies.add(movie);
     else if (!liked && _likedMovies.contains(movie)) _likedMovies.remove(movie);
 
-    _appRepository.updateMovieLiked('testList', movie, liked);
+    _appRepository.updateMovieLiked(listId, movie, liked);
+  }
+
+  static Future<void> deleteMovie(String listId, Movie movie) async {
+    await _appRepository.deleteLikedMovie(listId, movie);
   }
 
   //Fetches all movies
