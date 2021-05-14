@@ -2,6 +2,7 @@ import 'package:app/controller/movieController.dart';
 import 'package:app/model/movieModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 /// Klassen tar in en parameter som är listan av alla filmer,
 ///Därmed målas varje filmer med samma format på skärmen.
@@ -74,6 +75,68 @@ class _MovieViewInfoState extends State<MovieViewInfoOwner> {
                             Text(movie.date),
                           ],
                         ),
+                      ),
+                    ),
+                  ],
+                ),
+                subtitle: Row(
+                  children: <Widget>[
+                    RatingBar.builder(
+                      initialRating: movie.averageVote,
+                      itemCount: 5,
+                      itemBuilder: (context, index) {
+                        switch (index) {
+                          case 0:
+                            return Icon(
+                              Icons.sentiment_very_dissatisfied,
+                              color: Colors.red,
+                            );
+                          case 1:
+                            return Icon(
+                              Icons.sentiment_dissatisfied,
+                              color: Colors.redAccent,
+                            );
+                          case 2:
+                            return Icon(
+                              Icons.sentiment_neutral,
+                              color: Colors.amber,
+                            );
+                          case 3:
+                            return Icon(
+                              Icons.sentiment_satisfied,
+                              color: Colors.lightGreen,
+                            );
+                          case 4:
+                            return Icon(
+                              Icons.sentiment_very_satisfied,
+                              color: Colors.green,
+                            );
+                          default:
+                            return null;
+                        }
+                      },
+                      onRatingUpdate: (rating) {},
+                      minRating: 0,
+                      maxRating: 5,
+                      allowHalfRating: true,
+                      ignoreGestures: true,
+                    ),
+                    SizedBox(width: 12),
+                    RichText(
+                      text: TextSpan(
+                        style: new TextStyle(
+                          fontSize: 16.0,
+                          color: Colors.black,
+                        ),
+                        children: <TextSpan>[
+                          new TextSpan(
+                              text: 'Rating: ',
+                              style:
+                                  new TextStyle(fontWeight: FontWeight.bold)),
+                          new TextSpan(
+                            text: '${movie.averageVote}/5.0',
+                          ),
+                        ],
                       ),
                     ),
                   ],
