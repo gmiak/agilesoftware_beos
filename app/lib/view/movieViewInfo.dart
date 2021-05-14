@@ -2,7 +2,7 @@ import 'package:app/controller/movieController.dart';
 import 'package:app/model/movieModel.dart';
 import 'package:flutter/material.dart';
 
-/// Klassen tar in en parameter som är listan av alla filmer,
+/// Klassen tar in en parameter som är ID för en lista,
 ///Därmed målas varje filmer med samma format på skärmen.
 ///Vyn används för icke-ägare till listan.
 
