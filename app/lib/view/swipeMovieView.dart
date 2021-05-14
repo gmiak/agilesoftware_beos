@@ -3,11 +3,11 @@ import 'package:app/view/widgets/movieDetailsDialogScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 
-/*
-** Klassen tar in en parameter som är listan av alla filmer,
-** Därmed målas varje filmer med samma format på skärmen.med syftet
-** att användare ska bärja swipe
-**/
+
+/// Klassen tar in en parameter som är listan av alla filmer,
+/// Därmed målas varje filmer med samma format på skärmen.med syftet
+/// att användare ska bärja svepa.
+
 class SwipeMovieView extends StatelessWidget {
   final List<Movie> movies;
   final Function(int) liked;

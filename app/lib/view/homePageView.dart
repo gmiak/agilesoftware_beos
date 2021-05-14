@@ -5,9 +5,8 @@ import 'package:app/view/listViewInfo.dart';
 import 'package:flutter/material.dart';
 import 'package:app/networking/authentication.dart';
 
-/*
-** The App Home Page
-*/
+///Applikationens huvudsida där man skapar eller går in i listor. 
+
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key}) : super(key: key);
 
@@ -57,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  ///Builds the widget with [ListViewInfo] as body to display the liked movies.
+  ///Builds the widget with [ListViewInfo] as body to display the lists.
   ///
   ///The Widget has a [BottomNavigationBar] with Buttons.
 
@@ -94,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  ///Opens a Dialog window to be able to add members to a list.
+  ///Opens a Dialog window to be able to add a list.
   Future<String> openAddListDialog() {
     return showDialog(
         context: context,
@@ -140,7 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
-  /// Gives feedback that a user has been added as a member to a list.
+  /// Gives feedback that a list has been added.
   showFeedbackDialog(BuildContext context, String message) {
     // set up the button
     Widget okButton = TextButton(
