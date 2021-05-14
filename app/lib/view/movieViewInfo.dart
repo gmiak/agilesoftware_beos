@@ -116,20 +116,19 @@ class _MovieViewInfoState extends State<MovieViewInfo> {
                   allowHalfRating: true,
                   ignoreGestures: true,
                 ),
-                SizedBox(width: 12),
+                SizedBox(width: 8),
                 RichText(
+                  overflow: TextOverflow.ellipsis,
                   text: TextSpan(
                     style: new TextStyle(
-                      fontSize: 16.0,
+                      fontSize: 14.0,
                       color: Colors.black,
                     ),
                     children: <TextSpan>[
                       new TextSpan(
-                          text: 'Rating: ',
-                          style: new TextStyle(fontWeight: FontWeight.bold)),
-                      new TextSpan(
                         text: '${movie.averageVote}/5.0',
                       ),
+                      new TextSpan(text: ' (${movie.totalVotes})'),
                     ],
                   ),
                 ),
