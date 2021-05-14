@@ -14,6 +14,7 @@ class Movie {
   final List<String> genres;
   final String description;
   final double averageVote;
+  final int totalVotes;
 
   bool _liked;
 
@@ -26,6 +27,7 @@ class Movie {
       this.genres,
       this.description,
       this.averageVote,
+      this.totalVotes,
       liked = false}) {
     this._liked = liked;
   }
@@ -48,7 +50,8 @@ class Movie {
         date: json["release_date"],
         genres: _genres,
         description: json["overview"],
-        averageVote: _averageVote);
+        averageVote: _averageVote,
+        totalVotes: json["vote_count"]);
   }
 
   // Source: https://stackoverflow.com/a/66840734
@@ -79,6 +82,7 @@ class Movie {
             (json['genres'] as List)?.map((genre) => genre as String)?.toList(),
         description: json["description"],
         averageVote: json["averageVote"],
+        totalVotes: json["totalVotes"],
         liked: json["liked"]);
   }
 
@@ -90,6 +94,7 @@ class Movie {
         'genres': this.genres,
         'description': this.description,
         'averageVote': this.averageVote,
+        'totalVotes': this.totalVotes,
         'liked': getLiked()
       };
 
