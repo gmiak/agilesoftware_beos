@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 
 import '../coList.dart';
 
+///Klassen bygger list-element som visas på en användares huvudskärm.
 class ListViewInfo extends StatelessWidget {
+  ///Lista av listor för en användare.
   final List<CommonList> commonLists;
 
-  ///constructor
+  ///Konstruktor
   ListViewInfo({this.commonLists});
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,6 @@ class ListViewInfo extends StatelessWidget {
       itemBuilder: (context, index) {
         final list = commonLists[index];
         return ListTile(
-          //TODO Fixa så det ser snyggt ut.
           title: Row(
             children: [
               Flexible(
@@ -34,7 +35,6 @@ class ListViewInfo extends StatelessWidget {
             ],
           ),
           onTap: () {
-            print(list.getListId());
             Navigator.push(
               context,
               MaterialPageRoute(
