@@ -115,23 +115,42 @@ class AppRepository {
         .update({'members': FieldValue.arrayUnion(memberToAddToList)});
   }
 
-
-  Future<void> addOwnerToList(String email, String listId) async {
+  Future<void> deleteMember(
+    String listId,
+    String email,
+  ) async {
+    List<String> memberToRemoveFromList = <String>[];
+    memberToRemoveFromList.add(email);
     await commonLists
         .doc(listId)
-        .update({'owner': email});
+        .update({'members': FieldValue.arrayRemove(memberToRemoveFromList)});
   }
 
+  Future<void> addOwnerToList(String email, String listId) async {
+    await commonLists.doc(listId).update({'owner': email});
+  }
 
   Future<void> createList(String listName, String creator) async {
     List<String> creatorToAdd = <String>[];
     creatorToAdd.add(creator);
     DocumentReference addedDocRef = commonLists.doc();
     String listId = addedDocRef.id;
-    addedDocRef.set(
-        {'members': FieldValue.arrayUnion(creatorToAdd), 'listName': listName, 'listId': listId});
+    addedDocRef.set({
+      'members': FieldValue.arrayUnion(creatorToAdd),
+      'listName': listName,
+      'listId': listId
+    });
     addMemberToList(creator, listId);
     addOwnerToList(creator, listId);
+  }
+
+  ///Raderar listan helt från Firestore om man skickar med ägarens email och tar bort användaren annars.
+  Future<void> deleteList(CommonList list, String email) async {
+    if (list.listOwner == email) {
+      commonLists.doc(list.listId).delete();
+    } else {
+      deleteMember(list.listId, email);
+    }
   }
 
   Future<List<CommonList>> getLists(String userEmail) async {
