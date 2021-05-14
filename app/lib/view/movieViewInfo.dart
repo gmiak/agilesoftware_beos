@@ -1,5 +1,6 @@
 import 'package:app/controller/movieController.dart';
 import 'package:app/model/movieModel.dart';
+import 'package:app/view/widgets/movieDetailsDialogScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -52,12 +53,23 @@ class _MovieViewInfoState extends State<MovieViewInfo> {
               children: <Widget>[
                 SizedBox(
                   width: 100,
-                  child: ClipRRect(
-                    child: movie.poster != null
-                        ? Image.network(
-                            "https://image.tmdb.org/t/p/w500${movie.poster}")
-                        : Image.asset('assets/missingPoster.png'),
-                    borderRadius: BorderRadius.circular(10),
+                  child: InkWell(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) =>
+                            MovieDetailsDialogScreen(
+                          movie: movie,
+                        ),
+                      );
+                    },
+                    child: ClipRRect(
+                      child: movie.poster != null
+                          ? Image.network(
+                              "https://image.tmdb.org/t/p/w500${movie.poster}")
+                          : Image.asset('assets/missingPoster.png'),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                 ),
                 Flexible(

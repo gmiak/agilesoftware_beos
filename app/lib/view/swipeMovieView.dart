@@ -3,9 +3,8 @@ import 'package:app/view/widgets/movieDetailsDialogScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 
-
 /// Klassen tar in en parameter som är listan av alla filmer,
-/// Därmed målas varje filmer med samma format på skärmen.med syftet
+/// Därmed målas varje filmer med samma format på skärmen med syftet
 /// att användare ska bärja svepa.
 
 class SwipeMovieView extends StatelessWidget {
@@ -34,12 +33,13 @@ class SwipeMovieView extends StatelessWidget {
           //Making Movie's poster clickable
           cardBuilder: (context, index) => GestureDetector(
             onTap: () => {
-              //Showing a custom dialog with movie's description after the user clicks to the poster.
+              //Showing a custom dialog with movie's description after the user clicks on the poster.
               showDialog(
-                  context: context,
-                  builder: (BuildContext context) => MovieDetailsDialogScreen(
-                        movie: movies[index],
-                      ))
+                context: context,
+                builder: (BuildContext context) => MovieDetailsDialogScreen(
+                  movie: movies[index],
+                ),
+              )
             },
             child: Card(
               child: movies[index].poster != null
