@@ -108,7 +108,6 @@ class _CoListState extends State<CoList> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
       ),
     );

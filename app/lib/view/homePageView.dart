@@ -81,14 +81,13 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.arrow_left_sharp,
+              Icons.logout,
               size: 40,
             ),
-            label: 'Log out',
+            label: 'Sign out',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
       ),
     );

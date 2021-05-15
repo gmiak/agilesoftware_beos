@@ -64,8 +64,7 @@ class _GenreSelector extends State<GenreSelector> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    label: const Text('Return'),
-                    icon: const Icon(Icons.keyboard_return),
+                    label: const Text('Apply'),
                     backgroundColor: Colors.blue),
               ),
             )
