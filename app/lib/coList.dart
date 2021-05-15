@@ -74,6 +74,7 @@ class _CoListState extends State<CoList> {
     final String email = auth.email;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(commonList.getListName()),
         actions: <Widget>[
           Padding(

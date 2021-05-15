@@ -5,7 +5,7 @@ import 'package:app/view/listViewInfo.dart';
 import 'package:flutter/material.dart';
 import 'package:app/networking/authentication.dart';
 
-///Applikationens huvudsida där man skapar eller går in i listor. 
+///Applikationens huvudsida där man skapar eller går in i listor.
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key}) : super(key: key);
@@ -65,6 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Your lists'),
+        automaticallyImplyLeading: false,
       ),
       body: ListViewInfo(
         commonLists: _commonLists,

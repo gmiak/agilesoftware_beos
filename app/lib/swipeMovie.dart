@@ -61,6 +61,7 @@ class _SwipeMovie extends State<SwipeMovie> with TickerProviderStateMixin {
       ),
       home: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Text("Swipe"),
         ),
         body: Stack(alignment: Alignment.bottomRight, children: [
@@ -87,7 +88,8 @@ class _SwipeMovie extends State<SwipeMovie> with TickerProviderStateMixin {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => CoList(commonList: commonList)),
+                            builder: (context) =>
+                                CoList(commonList: commonList)),
                       );
                     },
                     label: const Text('Return'),

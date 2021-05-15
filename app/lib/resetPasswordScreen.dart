@@ -2,9 +2,7 @@ import 'package:app/loginscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:app/networking/authentication.dart';
 
-
-///Skärm för att nollställa lösenord som skall använda sig av autentication när man startar appen. 
-
+///Skärm för att nollställa lösenord som skall använda sig av autentication när man startar appen.
 
 class ResetPasswordScreen extends StatefulWidget {
   @override
@@ -20,6 +18,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text("Reset password"),
       ),
       body: SingleChildScrollView(
@@ -63,6 +62,16 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   style: TextStyle(color: Colors.white, fontSize: 25),
                 ),
               ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 150, right: 280),
+              child: FloatingActionButton.extended(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  label: const Text('Return'),
+                  icon: const Icon(Icons.keyboard_return),
+                  backgroundColor: Colors.blue),
             ),
           ],
         ),
