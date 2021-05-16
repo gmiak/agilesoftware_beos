@@ -25,9 +25,34 @@ class ListViewInfo extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(list.listName != null
-                          ? list.listName
-                          : 'default value')
+                      SizedBox(
+                        height: 20,
+                      ),
+                      list.listName != null
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                  Icon(
+                                    Icons.list,
+                                    size: 40,
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  Text(list.listName),
+                                ])
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                  Icon(
+                                    Icons.list,
+                                    size: 40,
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  Text('default value'),
+                                ])
                     ],
                   ),
                 ),

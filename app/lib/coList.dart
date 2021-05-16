@@ -1,5 +1,6 @@
 import 'package:app/model/listModel.dart';
 import 'package:app/view/homePageView.dart';
+import 'package:app/view/widgets/themeBlack.dart';
 import 'package:flutter/material.dart';
 import 'controller/movieController.dart';
 import 'swipeMovie.dart';
@@ -84,6 +85,7 @@ class _CoListState extends State<CoList> {
       ),
       body: chooseMVI(email),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: primaryYellow,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(

@@ -1,3 +1,4 @@
+import 'package:app/view/widgets/themeBlack.dart';
 import 'package:flutter/material.dart';
 
 import 'controller/movieController.dart';
@@ -33,7 +34,7 @@ class _GenreSelector extends State<GenreSelector> {
     return MaterialApp(
       title: 'Movies App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: primaryBlack,
       ),
       home: Scaffold(
         appBar: AppBar(
@@ -65,7 +66,7 @@ class _GenreSelector extends State<GenreSelector> {
                       Navigator.pop(context);
                     },
                     label: const Text('Apply'),
-                    backgroundColor: Colors.blue),
+                    backgroundColor: primaryBlackLight),
               ),
             )
           ]),

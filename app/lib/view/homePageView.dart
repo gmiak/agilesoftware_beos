@@ -2,6 +2,7 @@ import 'package:app/controller/movieController.dart';
 import 'package:app/loginscreen.dart';
 import 'package:app/model/listModel.dart';
 import 'package:app/view/listViewInfo.dart';
+import 'package:app/view/widgets/themeBlack.dart';
 import 'package:flutter/material.dart';
 import 'package:app/networking/authentication.dart';
 
@@ -64,19 +65,18 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Your lists'),
+        title: Text('My lists'),
         automaticallyImplyLeading: false,
       ),
       body: ListViewInfo(
         commonLists: _commonLists,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: primaryYellow,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.add_circle_outline_rounded,
-              size: 40,
-            ),
+            icon: Icon(Icons.add_circle_outline_rounded,
+                size: 40, color: Colors.black),
             label: 'Create list',
           ),
           BottomNavigationBarItem(
