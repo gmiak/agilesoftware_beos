@@ -1,4 +1,5 @@
 import 'package:app/view/homePageView.dart';
+import 'package:app/view/widgets/themeBlack.dart';
 import 'package:flutter/material.dart';
 import 'package:app/networking/authentication.dart';
 
@@ -31,7 +32,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: Container(
                     width: 200,
                     height: 150,
-                    child: Image.asset('assets/BeOs_logo.png')), //Logotype
+                    child: Image.asset('assets/logo.png')), //Logotype
               ),
             ),
             SizedBox(height: 50),
@@ -40,7 +41,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: TextField(
                 controller: emailController,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: primaryYellow),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: primaryYellow),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: primaryYellow),
+                        borderRadius: BorderRadius.circular(10.0)),
                     labelText: 'Email',
                     hintText: 'Enter valid email id as john.doe@gmail.com'),
               ),
@@ -53,7 +64,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: primaryYellow),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: primaryYellow),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: primaryYellow),
+                        borderRadius: BorderRadius.circular(10.0)),
                     labelText: 'Password',
                     hintText: 'Enter secure password'),
               ),
@@ -63,7 +84,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               height: 50,
               width: 250,
               decoration: BoxDecoration(
-                  color: Colors.blue, borderRadius: BorderRadius.circular(20)),
+                  color: primaryYellow,
+                  borderRadius: BorderRadius.circular(20)),
               child: TextButton(
                 onPressed: () async {
                   await auth.signOut();
@@ -82,7 +104,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 },
                 child: Text(
                   'Register',
-                  style: TextStyle(color: Colors.white, fontSize: 25),
+                  style: TextStyle(color: primaryBlackLight, fontSize: 25),
                 ),
               ),
             ),
@@ -96,7 +118,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   },
                   label: const Text('Return'),
                   icon: const Icon(Icons.keyboard_return),
-                  backgroundColor: Colors.blue),
+                  backgroundColor: primaryBlackLight),
             ),
             //   )
           ],

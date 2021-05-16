@@ -1,4 +1,5 @@
 import 'package:app/view/widgets/splashScreen.dart';
+import 'package:app/view/widgets/themeBlack.dart';
 import 'package:flutter/material.dart';
 import 'package:app/loginscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'BeOs',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: primaryBlack,
         ),
         home: FutureBuilder(
             //Väntar på att anslutning till Firebase är klar.
