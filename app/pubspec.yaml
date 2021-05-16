@@ -69,6 +69,7 @@ flutter:
      - assets/welcome1.jpg
      - assets/welcome2.jpg
      - assets/BeOs_logo.png
+     - assets/logo.png
      - assets/splash/splash.png
      - assets/missingPoster.png
   #   - images/a_dot_ham.jpeg

@@ -1,6 +1,7 @@
 import 'package:app/registerScreen.dart';
 import 'package:app/resetPasswordScreen.dart';
 import 'package:app/view/homePageView.dart';
+import 'package:app/view/widgets/themeBlack.dart';
 import 'package:flutter/material.dart';
 import 'package:app/networking/authentication.dart';
 
@@ -32,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Container(
                     width: 200,
                     height: 150,
-                    child: Image.asset('assets/BeOs_logo.png')), //Logotype
+                    child: Image.asset('assets/logo.png')), //Logotype
               ),
             ),
             SizedBox(height: 50),
@@ -41,7 +42,17 @@ class _LoginScreenState extends State<LoginScreen> {
               child: TextField(
                 controller: emailController,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: primaryYellow),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: primaryYellow),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: primaryYellow),
+                        borderRadius: BorderRadius.circular(10.0)),
                     labelText: 'Email',
                     hintText: 'Enter valid email id as john.doe@gmail.com'),
               ),
@@ -54,7 +65,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: primaryYellow),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: primaryYellow),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: primaryYellow),
+                        borderRadius: BorderRadius.circular(10.0)),
                     labelText: 'Password',
                     hintText: 'Enter secure password'),
               ),
@@ -66,14 +87,15 @@ class _LoginScreenState extends State<LoginScreen> {
               },
               child: Text(
                 'Forgot Password',
-                style: TextStyle(color: Colors.blue, fontSize: 15),
+                style: TextStyle(color: primaryBlackLight, fontSize: 15),
               ),
             ),
             Container(
               height: 50,
               width: 250,
               decoration: BoxDecoration(
-                  color: Colors.blue, borderRadius: BorderRadius.circular(20)),
+                  color: primaryYellow,
+                  borderRadius: BorderRadius.circular(20)),
               child: TextButton(
                 onPressed: () async {
                   String login;
@@ -96,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 child: Text(
                   'Sign in',
-                  style: TextStyle(color: Colors.white, fontSize: 25),
+                  style: TextStyle(color: primaryBlackLight, fontSize: 25),
                 ),
               ),
             ),
@@ -110,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
               },
               child: Text(
                 'New User? Create Account',
-                style: TextStyle(color: Colors.blue, fontSize: 15),
+                style: TextStyle(color: primaryBlackLight, fontSize: 15),
               ),
             ),
             TextButton(
@@ -121,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
               },
               child: Text(
                 'Debug',
-                style: TextStyle(color: Colors.blue, fontSize: 15),
+                style: TextStyle(color: primaryBlackLight, fontSize: 15),
               ),
             )
           ],
