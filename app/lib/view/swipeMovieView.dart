@@ -1,5 +1,6 @@
 import 'package:app/model/movieModel.dart';
 import 'package:app/view/widgets/movieDetailsDialogScreen.dart';
+import 'package:app/view/widgets/themeBlack.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 

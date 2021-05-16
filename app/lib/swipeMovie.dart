@@ -1,5 +1,6 @@
 import 'package:app/model/listModel.dart';
 import 'package:app/view/swipeMovieView.dart';
+import 'package:app/view/widgets/themeBlack.dart';
 import 'package:flutter/material.dart';
 import 'package:app/controller/movieController.dart';
 import 'package:app/model/movieModel.dart';
@@ -57,7 +58,7 @@ class _SwipeMovie extends State<SwipeMovie> with TickerProviderStateMixin {
     return MaterialApp(
       title: 'Movies App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: primaryBlack,
       ),
       home: Scaffold(
         appBar: AppBar(
@@ -94,7 +95,7 @@ class _SwipeMovie extends State<SwipeMovie> with TickerProviderStateMixin {
                     },
                     label: const Text('Return'),
                     icon: const Icon(Icons.keyboard_return),
-                    backgroundColor: Colors.blue),
+                    backgroundColor: primaryBlackLight),
               ),
             ),
             Padding(
@@ -112,7 +113,7 @@ class _SwipeMovie extends State<SwipeMovie> with TickerProviderStateMixin {
                     },
                     label: const Text('Filter'),
                     icon: const Icon(Icons.filter_list),
-                    backgroundColor: Colors.blue),
+                    backgroundColor: primaryBlackLight),
               ),
             ),
           ]),
