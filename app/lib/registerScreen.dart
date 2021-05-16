@@ -2,9 +2,7 @@ import 'package:app/view/homePageView.dart';
 import 'package:flutter/material.dart';
 import 'package:app/networking/authentication.dart';
 
-
-///Registreringsskärm som skall använda sig av autentication när man startar appen. 
-
+///Registreringsskärm som skall använda sig av autentication när man startar appen.
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -21,6 +19,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text("Register account"),
       ),
       body: SingleChildScrollView(
@@ -87,6 +86,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
             ),
+            Padding(
+              padding: EdgeInsets.only(top: 55, right: 280),
+              //  child: Align(
+              //  alignment: Alignment.bottomLeft,
+              child: FloatingActionButton.extended(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  label: const Text('Return'),
+                  icon: const Icon(Icons.keyboard_return),
+                  backgroundColor: Colors.blue),
+            ),
+            //   )
           ],
         ),
       ),

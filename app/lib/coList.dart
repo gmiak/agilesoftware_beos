@@ -74,6 +74,7 @@ class _CoListState extends State<CoList> {
     final String email = auth.email;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(commonList.getListName()),
         actions: <Widget>[
           Padding(
@@ -107,7 +108,6 @@ class _CoListState extends State<CoList> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
       ),
     );
