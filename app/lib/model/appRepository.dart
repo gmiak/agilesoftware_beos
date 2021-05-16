@@ -17,10 +17,7 @@ class AppRepository {
 
   AppRepository._internal();
 
-  Stream<QuerySnapshot> getStream() {
-    return moviesCollection.snapshots();
-  }
-
+  /// Get the list of cached movies from Firestore.
   Future<List<Movie>> getMovies() async {
     List<Movie> movies = <Movie>[];
 
@@ -58,10 +55,12 @@ class AppRepository {
         .delete();
   }
 
+  // Add a new movie to the remote cache of movies.
   Future<DocumentReference> addMovie(Movie movie) async {
     return await moviesCollection.add(movie.toJson());
   }
 
+  /// Clear the remote list of cached movies.
   Future<void> clearMovies() async {
     return await moviesCollection.get().then((snapshot) => {
           for (DocumentSnapshot ds in snapshot.docs) {ds.reference.delete()}

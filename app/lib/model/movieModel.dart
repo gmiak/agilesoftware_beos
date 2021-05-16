@@ -32,7 +32,7 @@ class Movie {
     this._liked = liked;
   }
 
-  //Returns an instans of movie from Json
+  /// Convert the JSON response from the TMDB API to an instance of [Movie].
   factory Movie.fromTmdbJson(Map<String, dynamic> json) {
     List<String> _genres = [];
     for (int genre in json["genre_ids"]) {
@@ -54,7 +54,8 @@ class Movie {
         totalVotes: json["vote_count"]);
   }
 
-  // Source: https://stackoverflow.com/a/66840734
+  /// Round a double to x decimal places.
+  /// Source: https://stackoverflow.com/a/66840734
   static double _roundToDecimals(double numToRound, int deciPlaces) {
     double modPlus1 = pow(10.0, deciPlaces + 1);
     String strMP1 = ((numToRound * modPlus1).roundToDouble() / modPlus1)
@@ -72,6 +73,7 @@ class Movie {
         : double.parse(strDblValRound);
   }
 
+  /// Convert the JSON response from the Firestore database to an instance of [Movie].
   factory Movie.fromFBJson(Map<String, dynamic> json) {
     return Movie(
         tmdbId: json["tmdbId"],
@@ -86,6 +88,7 @@ class Movie {
         liked: json["liked"]);
   }
 
+  /// Convert this instance of [Movie] to a Map that can later be stored in the Firestore database.
   Map<String, dynamic> toJson() => <String, dynamic>{
         'tmdbId': this.tmdbId,
         'poster': this.poster,
@@ -103,13 +106,13 @@ class Movie {
     return title;
   }
 
-  // Set if the movie was liked
+  /// Set if the movie was liked
   void setLiked(String listId, bool liked) {
     this._liked = liked;
     MovieController.setMovieLiked(listId, this, liked);
   }
 
-  // Get if the movie was liked
+  /// Get if the movie was liked
   bool getLiked() {
     return this._liked;
   }

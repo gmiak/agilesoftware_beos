@@ -12,14 +12,13 @@ class GenreSelector extends StatefulWidget {
 class _GenreSelector extends State<GenreSelector> {
   Map<String, bool> _genres = {};
 
-  // Function to initiate the movies
   @override
   void initState() {
     super.initState();
     _populateGenres();
   }
 
-  // Function to get all movies we fetched
+  /// Populate all of the local genres, with the ones from [MovieController].
   void _populateGenres() async {
     final genres = await MovieController.getGenres();
 

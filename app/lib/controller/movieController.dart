@@ -7,13 +7,11 @@ import 'package:app/networking/connection.dart';
 import 'package:app/model/movieModel.dart';
 import 'package:tmdb_api/tmdb_api.dart';
 
-
- ///Klassen returnerar en lista med populära filmer från tmdb
- /// tmdb-apiet returnerar cirka 20 filmer/sida
- ///Klassen är en Singleton: Iden med singletonklass är alltså att det i programmet bara
- ///kommer finnas en och endast en instans av klassen och att den som använder klassen inte behöver veta när
- ///den skapas. SingletonKlassen skapas första gången någon ber om en referens till kalssen.
-
+///Klassen returnerar en lista med populära filmer från tmdb
+/// tmdb-apiet returnerar cirka 20 filmer/sida
+///Klassen är en Singleton: Iden med singletonklass är alltså att det i programmet bara
+///kommer finnas en och endast en instans av klassen och att den som använder klassen inte behöver veta när
+///den skapas. SingletonKlassen skapas första gången någon ber om en referens till kalssen.
 
 class MovieController {
   static final int maxPages = 10;
@@ -30,6 +28,7 @@ class MovieController {
   static Future<Null> _isTearingDown;
   static bool _hasSetup = false;
 
+  /// Sets up the core of the app (retrieval of cached videos, liked videos, ..)
   static Future<bool> setUp() async {
     if (await _sanityCheck()) return true;
 
@@ -60,6 +59,10 @@ class MovieController {
     return _hasSetup;
   }
 
+  /// Tears the app down and disposes of the retrieved data from Firestore.
+  ///
+  /// Empties the list of cached movies in the remote database if [emptyMoviesDB] is set to true.
+  /// Empties the list of liked movies for all users if [emptyLikedMoviesDB] is set to true.
   static Future<bool> tearDown(
       {bool emptyMoviesDB = false, bool emptyLikedMoviesDB = false}) async {
     if (!await _sanityCheck()) return true;
@@ -80,30 +83,29 @@ class MovieController {
     return !_hasSetup;
   }
 
+  /// Return the list of cached movies.
   static Future<List<Movie>> getMovies() async {
     if (!await _sanityCheck()) return <Movie>[];
 
     return _movies;
   }
 
-  static Future<List<Movie>> getMoviesByGenre(String genre) async {
-    if (!await _sanityCheck()) return <Movie>[];
-
-    return _movies.where((movie) => movie.genres.contains(genre));
-  }
-
+  /// Return the list of genres collected from the cached movies.
   static Future<Map<String, bool>> getGenres() async {
     if (!await _sanityCheck()) return {};
 
     return _genres;
   }
 
+  /// Select/unselect a genre in the filter.
   static Future<void> selectGenre(String genre, bool selected) async {
     if (!await _sanityCheck()) return {};
 
     if (_genres.containsKey(genre)) _genres[genre] = selected;
   }
 
+  /// Get the list of movies filtered by the current filter.
+  /// Currently only supports filtering by genre(s).
   static Future<List<Movie>> getFilteredMovies() async {
     if (!await _sanityCheck()) return <Movie>[];
 
@@ -116,6 +118,7 @@ class MovieController {
           .toList();
   }
 
+  /// Return the list of cached liked movies.
   static Future<List<Movie>> getLikedMovies() async {
     if (!await _sanityCheck()) return <Movie>[];
 
@@ -126,7 +129,9 @@ class MovieController {
     await _appRepository.addMemberToList(newMember, listId);
   }
 
-  static Future<void> setMovieLiked(String listId, Movie movie, bool liked) async {
+  /// Set a movie as liked.
+  static Future<void> setMovieLiked(
+      String listId, Movie movie, bool liked) async {
     if (!await _sanityCheck()) return;
 
     if (liked && !_likedMovies.contains(movie))
@@ -140,7 +145,7 @@ class MovieController {
     await _appRepository.deleteLikedMovie(listId, movie);
   }
 
-  //Fetches all movies
+  /// Retrieve a new list of movies from the TMDB API.
   static Future<List<Movie>> _reloadMovies() async {
     await Genres.populateGenres();
     Map<dynamic, dynamic> movies = await _connection
@@ -197,6 +202,7 @@ class MovieController {
     throw Exception("Failed to load movies");
   }
 
+  /// Check if there are any pending set up/tear down operations. True, if this is not the case.
   static Future<bool> _sanityCheck() async {
     if (_isSettingUp != null) await _isSettingUp;
     if (_isTearingDown != null) await _isTearingDown;
@@ -204,6 +210,9 @@ class MovieController {
     return _hasSetup;
   }
 
+  /// Get the instance of [Connection].
   static Connection getConnection() => _connection;
+
+  /// Get the instance of [AppRepository].
   static AppRepository getAppRepository() => _appRepository;
 }

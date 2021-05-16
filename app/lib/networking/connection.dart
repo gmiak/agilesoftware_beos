@@ -1,6 +1,5 @@
 import 'package:tmdb_api/tmdb_api.dart';
 
-
 ///This class is responsible for the connection with the movie-database "tmdb"
 
 class Connection {
@@ -13,6 +12,7 @@ class Connection {
     this._tmdb = new TMDB(ApiKeys(apiKey, apiReadAccessTokenV4));
   }
 
+  /// Get the list of genres from TMDB.
   Future<Map<dynamic, dynamic>> getGenres() async {
     return await _tmdb.v3.geners.getMovieList();
   }
