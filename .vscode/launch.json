@@ -8,7 +8,31 @@
             "name": "app",
             "cwd": "app",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "program": "app/lib/main.dart"
+        },
+        {
+            "name": "Android",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "emulator-5554",
+            "program": "app/lib/main.dart"
+        },
+        {
+            "name": "iPhone",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "emulator-5556",
+            "program": "app/lib/main.dart"
+        },
+    ],
+    "compounds": [
+        {
+            "name": "All Devices",
+            "configurations": [
+                "Android",
+                "iPhone",
+            ]
         }
     ]
 }
