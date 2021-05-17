@@ -1,6 +1,7 @@
 import 'package:app/controller/movieController.dart';
 import 'package:app/model/movieModel.dart';
 import 'package:app/view/widgets/movieDetailsDialogScreen.dart';
+import 'package:app/view/widgets/themeBlack.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -156,7 +157,7 @@ class _MovieViewInfoState extends State<MovieViewInfoOwner> {
             secondaryActions: <Widget>[
               IconSlideAction(
                 caption: 'Delete',
-                color: Colors.red,
+                color: primaryYellow,
                 icon: Icons.delete,
                 onTap: () {
                   setState(() {
