@@ -24,6 +24,7 @@ class _CoListState extends State<CoList> {
 
   TextEditingController emailController = new TextEditingController();
   Authentication auth = Authentication();
+  TextStyle yellowText = new TextStyle(color: primaryYellow);
 
   ///Activates the functionallity of the diffrent choices in the bottom menu.
   void _onItemTapped(int index) {
@@ -76,7 +77,10 @@ class _CoListState extends State<CoList> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(commonList.getListName()),
+        title: Text(
+          commonList.getListName(),
+          style: yellowText,
+        ),
         actions: <Widget>[
           Padding(
             padding: EdgeInsets.only(right: 150),
@@ -92,7 +96,7 @@ class _CoListState extends State<CoList> {
               Icons.group_add_sharp,
               size: 40,
             ),
-            label: 'Add Friend',
+            label: 'Add Member',
           ),
           BottomNavigationBarItem(
             icon: Icon(
@@ -121,6 +125,7 @@ class _CoListState extends State<CoList> {
         context: context,
         builder: (ctx) {
           return AlertDialog(
+              backgroundColor: primaryYellow,
               title: Text('Enter email to add new list member.'),
               actions: <Widget>[
                 IconButton(
@@ -139,6 +144,8 @@ class _CoListState extends State<CoList> {
                       child: TextField(
                         controller: emailController,
                         decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
                             border: OutlineInputBorder(),
                             labelText: 'Email',
                             hintText:

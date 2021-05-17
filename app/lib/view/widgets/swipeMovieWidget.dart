@@ -1,5 +1,6 @@
 import 'package:app/model/movieModel.dart';
 import 'package:app/view/widgets/movieDetailsDialogScreen.dart';
+import 'package:app/view/widgets/themeBlack.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tindercard/flutter_tindercard.dart';
 
@@ -42,6 +43,7 @@ class SwipeMovieView extends StatelessWidget {
               )
             },
             child: Card(
+              color: primaryYellow,
               child: movies[index].poster != null
                   ? Image.network(
                       "https://image.tmdb.org/t/p/w780${movies[index].poster}")

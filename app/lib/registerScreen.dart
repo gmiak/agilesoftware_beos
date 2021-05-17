@@ -14,6 +14,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Authentication auth = Authentication();
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
+  TextStyle yellowText = new TextStyle(color: primaryYellow);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text("Register account"),
+        title: Text(
+          "Register account",
+          style: yellowText,
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -116,6 +120,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
+                  foregroundColor: primaryYellow,
                   label: const Text('Return'),
                   icon: const Icon(Icons.keyboard_return),
                   backgroundColor: primaryBlackLight),
