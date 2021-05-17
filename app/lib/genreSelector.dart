@@ -64,6 +64,7 @@ class _GenreSelector extends State<GenreSelector> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
+                    foregroundColor: primaryYellow,
                     label: const Text('Apply'),
                     backgroundColor: primaryBlackLight),
               ),

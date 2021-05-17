@@ -93,6 +93,7 @@ class _SwipeMovie extends State<SwipeMovie> with TickerProviderStateMixin {
                                 CoList(commonList: commonList)),
                       );
                     },
+                    foregroundColor: primaryYellow,
                     label: const Text('Return'),
                     icon: const Icon(Icons.keyboard_return),
                     backgroundColor: primaryBlackLight),
@@ -111,6 +112,7 @@ class _SwipeMovie extends State<SwipeMovie> with TickerProviderStateMixin {
                                   new GenreSelector()))
                           .then((value) => _populateAllMovies());
                     },
+                    foregroundColor: primaryYellow,
                     label: const Text('Filter'),
                     icon: const Icon(Icons.filter_list),
                     backgroundColor: primaryBlackLight),
