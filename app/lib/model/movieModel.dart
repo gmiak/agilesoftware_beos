@@ -1,6 +1,5 @@
-/*
-* Klassen bygger abstraktionen (en objektmodell) av en film.
-* */
+/// Klassen bygger abstraktionen (en objektmodell) av en film.
+
 import 'dart:math';
 
 import 'package:app/controller/movieController.dart';

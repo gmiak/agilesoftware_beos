@@ -3,7 +3,7 @@ import 'package:app/view/homePageView.dart';
 import 'package:app/view/widgets/themeBlack.dart';
 import 'package:flutter/material.dart';
 import 'controller/movieController.dart';
-import 'swipeMovie.dart';
+import 'view/swipeMovieView.dart';
 import 'view/movieViewInfo.dart';
 import 'package:app/networking/authentication.dart';
 import 'view/movieViewInfoOwner.dart';

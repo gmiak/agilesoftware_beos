@@ -1,71 +1,123 @@
-import 'package:app/model/movieModel.dart';
-import 'package:app/view/widgets/movieDetailsDialogScreen.dart';
+import 'package:app/model/listModel.dart';
+import 'package:app/view/widgets/swipeMovieWidget.dart';
 import 'package:app/view/widgets/themeBlack.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_tindercard/flutter_tindercard.dart';
+import 'package:app/controller/movieController.dart';
+import 'package:app/model/movieModel.dart';
+import '../coList.dart';
+import '../genreSelector.dart';
 
-/// Klassen tar in en parameter som är listan av alla filmer,
-/// Därmed målas varje filmer med samma format på skärmen med syftet
-/// att användare ska bärja svepa.
+class SwipeMovie extends StatefulWidget {
+  final CommonList commonList;
 
-class SwipeMovieView extends StatelessWidget {
-  final List<Movie> movies;
-  final Function(int) liked;
-  //constructor
-  SwipeMovieView({this.movies, this.liked});
+  SwipeMovie({Key key, @required this.commonList}) : super(key: key);
+
+  @override
+  _SwipeMovie createState() => _SwipeMovie(commonList);
+}
+
+class _SwipeMovie extends State<SwipeMovie> with TickerProviderStateMixin {
+  List<Movie> _movies = <Movie>[];
+  CommonList commonList;
+  MovieController movieController = MovieController();
+
+  _SwipeMovie(commonList) : this.commonList = commonList;
+
+  var _result = 0;
+  void _resultat(int index) {
+    _movies[index].setLiked(commonList.getListId(), true);
+
+    setState(() {
+      _result++;
+    });
+  }
+
+  // Function to initiate the movies
+  @override
+  void initState() {
+    super.initState();
+    _populateAllMovies();
+  }
+
+  // Function to get all movies we fetched
+  void _populateAllMovies() async {
+    final likedMovies = await MovieController.getLikedMovies();
+    final movies = (await MovieController.getFilteredMovies())
+        .where((movie1) => likedMovies
+            .where((movie2) => movie2.tmdbId == movie1.tmdbId)
+            .isEmpty)
+        .toList();
+
+    setState(() {
+      _movies = movies;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
-    CardController controller; //Use this to trigger swap.
-    return new Center(
-      child: Container(
-        height: MediaQuery.of(context).size.height * 0.6,
-        child: new TinderSwapCard(
-          swipeUp: false,
-          swipeDown: false,
-          orientation: AmassOrientation.BOTTOM,
-          totalNum: movies.length,
-          stackNum: 3,
-          swipeEdge: 4.0,
-          maxWidth: MediaQuery.of(context).size.width * 0.9,
-          maxHeight: MediaQuery.of(context).size.width * 0.9,
-          minWidth: MediaQuery.of(context).size.width * 0.8,
-          minHeight: MediaQuery.of(context).size.width * 0.8,
-          //Making Movie's poster clickable
-          cardBuilder: (context, index) => GestureDetector(
-            onTap: () => {
-              //Showing a custom dialog with movie's description after the user clicks on the poster.
-              showDialog(
-                context: context,
-                builder: (BuildContext context) => MovieDetailsDialogScreen(
-                  movie: movies[index],
-                ),
-              )
-            },
-            child: Card(
-              child: movies[index].poster != null
-                  ? Image.network(
-                      "https://image.tmdb.org/t/p/w780${movies[index].poster}")
-                  : Image.asset('assets/missingPoster.png'),
-            ),
-          ),
-          cardController: controller = CardController(),
-          swipeUpdateCallback: (DragUpdateDetails details, Alignment align) {
-            /// Get swiping card's alignment
-            if (align.x < 0) {
-              //Card is LEFT swiping
-            } else if (align.x > 0) {
-              //Card is RIGHT swiping
-            }
-            //print(align.x);
-          },
-          swipeCompleteCallback: (CardSwipeOrientation orientation, int index) {
-            /// Get orientation & index of swiped card!
-            if (orientation == CardSwipeOrientation.RIGHT) {
-              liked(index);
-            }
-          },
+    return MaterialApp(
+      title: 'Movies App',
+      theme: ThemeData(
+        primarySwatch: primaryBlack,
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text("Swipe"),
         ),
+        body: Stack(alignment: Alignment.bottomRight, children: [
+          Container(
+              child: Column(
+            children: [
+              Padding(padding: EdgeInsets.all(10)),
+              Text(
+                "Liked: $_result",
+                style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+              SwipeMovieView(movies: _movies, liked: _resultat),
+            ],
+          )),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Padding(
+              padding: EdgeInsets.all(14.0),
+              child: Align(
+                alignment: Alignment.bottomLeft,
+                child: FloatingActionButton.extended(
+                    heroTag: 1,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                CoList(commonList: commonList)),
+                      );
+                    },
+                    label: const Text('Return'),
+                    icon: const Icon(Icons.keyboard_return),
+                    backgroundColor: primaryBlackLight),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(14.0),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: FloatingActionButton.extended(
+                    heroTag: 2,
+                    onPressed: () {
+                      Navigator.of(context)
+                          .push(new MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  new GenreSelector()))
+                          .then((value) => _populateAllMovies());
+                    },
+                    label: const Text('Filter'),
+                    icon: const Icon(Icons.filter_list),
+                    backgroundColor: primaryBlackLight),
+              ),
+            ),
+          ]),
+        ]),
       ),
     );
   }

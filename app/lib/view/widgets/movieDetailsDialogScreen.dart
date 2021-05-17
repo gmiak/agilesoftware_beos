@@ -2,9 +2,8 @@ import 'package:app/model/movieModel.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
-/*
-** Shows Movie's details
-*/
+/// Shows Movie's details
+
 // ignore: must_be_immutable
 class MovieDetailsDialogScreen extends StatelessWidget {
   //Variabels

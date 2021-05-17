@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-/*
-** Shows the welcome message.
-*/
+/// Shows the welcome message.
+
 class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
