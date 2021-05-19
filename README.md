@@ -6,3 +6,12 @@ The course provides a practical introduction to Software Engineering. Students w
 * new technologies and tools and fitting ways to use them in order to realise the value proposition based on the students' own learning strategies
 * how to organise themselves in a team in order to reach a joint goal with limited resources
 * how to reflect on their own work and learning to enable a continuous improvement of their way of working
+
+# Members
+
+* Abbelonius: Albin Rössle
+* AndreasPettersson98: Andreas Pettersson
+* Anwarr Shiervani: Anwarr Shiervani
+* dalsher: Dalsher Jalal Kertan
+* mimmilamm: Timmy Malm
+* gmiak: Georges Kayembe
