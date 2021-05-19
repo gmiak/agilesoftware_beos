@@ -23,6 +23,8 @@ class _SwipeMovie extends State<SwipeMovie> with TickerProviderStateMixin {
 
   _SwipeMovie(commonList) : this.commonList = commonList;
 
+  TextStyle yellowText = new TextStyle(color: primaryYellow);
+
   var _result = 0;
   void _resultat(int index) {
     _movies[index].setLiked(commonList.getListId(), true);
@@ -63,18 +65,21 @@ class _SwipeMovie extends State<SwipeMovie> with TickerProviderStateMixin {
       home: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text("Swipe"),
+          title: Text(
+            "Swipe",
+            style: yellowText,
+          ),
         ),
         body: Stack(alignment: Alignment.bottomRight, children: [
           Container(
               child: Column(
             children: [
-              Padding(padding: EdgeInsets.all(10)),
-              Text(
+              Padding(padding: EdgeInsets.all(20)),
+              /*  Text(
                 "Liked: $_result",
                 style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
-              ),
+              ),*/
               SwipeMovieView(movies: _movies, liked: _resultat),
             ],
           )),

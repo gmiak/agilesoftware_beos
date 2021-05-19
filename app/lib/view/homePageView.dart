@@ -20,6 +20,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<CommonList> _commonLists = <CommonList>[];
   TextEditingController listNameController = new TextEditingController();
   Authentication auth = Authentication();
+  TextStyle yellowText = new TextStyle(color: primaryYellow);
 
   @override
   void initState() {
@@ -65,7 +66,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My lists'),
+        title: Text(
+          'My lists',
+          style: yellowText,
+        ),
         automaticallyImplyLeading: false,
       ),
       body: ListViewInfo(
@@ -99,6 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
         context: context,
         builder: (ctx) {
           return AlertDialog(
+              backgroundColor: primaryYellow,
               title: Text('Enter list name.'),
               actions: <Widget>[
                 IconButton(
@@ -117,6 +122,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: TextField(
                         controller: listNameController,
                         decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
                             border: OutlineInputBorder(),
                             labelText: 'List name'),
                       )),

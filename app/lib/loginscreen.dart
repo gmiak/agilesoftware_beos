@@ -15,6 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Authentication auth = Authentication();
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
+  TextStyle yellowText = new TextStyle(color: primaryYellow);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,10 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text("Sign in"),
+        title: Text(
+          "Sign in",
+          style: yellowText,
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(

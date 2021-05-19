@@ -12,6 +12,7 @@ class GenreSelector extends StatefulWidget {
 
 class _GenreSelector extends State<GenreSelector> {
   Map<String, bool> _genres = {};
+  TextStyle yellowText = new TextStyle(color: primaryYellow);
 
   @override
   void initState() {
@@ -37,7 +38,10 @@ class _GenreSelector extends State<GenreSelector> {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Filter"),
+          title: Text(
+            "Filter",
+            style: yellowText,
+          ),
         ),
         body: Stack(alignment: Alignment.bottomRight, children: [
           Container(

@@ -13,6 +13,7 @@ class ResetPasswordScreen extends StatefulWidget {
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   Authentication auth = Authentication();
   TextEditingController emailController = new TextEditingController();
+  TextStyle yellowText = new TextStyle(color: primaryYellow);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text("Reset password"),
+        title: Text(
+          "Reset password",
+          style: yellowText,
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -81,6 +85,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
+                  foregroundColor: primaryYellow,
                   label: const Text('Return'),
                   icon: const Icon(Icons.keyboard_return),
                   backgroundColor: primaryBlackLight),

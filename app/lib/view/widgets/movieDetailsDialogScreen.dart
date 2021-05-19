@@ -1,4 +1,5 @@
 import 'package:app/model/movieModel.dart';
+import 'package:app/view/widgets/themeBlack.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
@@ -21,6 +22,7 @@ class MovieDetailsDialogScreen extends StatelessWidget {
     final _height = MediaQuery.of(context).size.height;
     return Container(
       child: Dialog(
+        backgroundColor: primaryYellow,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(padding),
         ),
@@ -37,9 +39,10 @@ class MovieDetailsDialogScreen extends StatelessWidget {
               //Card for hold the movie's poster
               Center(
                 child: Card(
+                  color: primaryYellow,
                   child: Container(
                     //Set size = 40% of the screen
-                    height: _height * 0.40, //450,
+                    height: _height * 0.36, //450,
                     width: _width * 0.40,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
@@ -80,6 +83,7 @@ class MovieDetailsDialogScreen extends StatelessWidget {
                   children: <Widget>[
                     for (int i = 0; i < movie.genres.length; i++)
                       Card(
+                        color: primaryBlackLight,
                         elevation: 5,
                         child: Padding(
                           padding: const EdgeInsets.only(
@@ -89,9 +93,9 @@ class MovieDetailsDialogScreen extends StatelessWidget {
                               Text(
                                 movie.genres[i],
                                 style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: primaryYellow),
                               )
                             ],
                           ),
@@ -103,6 +107,7 @@ class MovieDetailsDialogScreen extends StatelessWidget {
               //Create space between movie's genres and movie's year
               SizedBox(height: padding),
               Card(
+                color: primaryBlackLight,
                 elevation: 5,
                 child: Padding(
                   padding: const EdgeInsets.only(
@@ -112,14 +117,14 @@ class MovieDetailsDialogScreen extends StatelessWidget {
                       Icon(
                         Icons.calendar_today,
                         size: 45,
-                        color: Theme.of(context).primaryColor,
+                        color: primaryYellow,
                       ),
                       Text(
                         movie.date,
                         style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: primaryYellow),
                       )
                     ],
                   ),
