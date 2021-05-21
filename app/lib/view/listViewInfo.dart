@@ -3,6 +3,7 @@ import 'package:app/model/listModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:app/networking/authentication.dart';
+import 'package:app/view/widgets/themeBlack.dart';
 
 import '../coList.dart';
 
@@ -62,9 +63,34 @@ class _ListViewInfoState extends State<ListViewInfo> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(list.listName != null
-                            ? list.listName
-                            : 'default value')
+                        SizedBox(
+                          height: 20,
+                        ),
+                        list.listName != null
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                    Icon(
+                                      Icons.list,
+                                      size: 40,
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    Text(list.listName),
+                                  ])
+                            : Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                    Icon(
+                                      Icons.list,
+                                      size: 40,
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    Text('list'),
+                                  ])
                       ],
                     ),
                   ),
@@ -83,7 +109,7 @@ class _ListViewInfoState extends State<ListViewInfo> {
           secondaryActions: <Widget>[
             IconSlideAction(
               caption: getmessage(index),
-              color: Colors.red,
+              color: primaryYellow,
               icon: getIcon(index),
               onTap: () {
                 setState(() {
