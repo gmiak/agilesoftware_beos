@@ -139,17 +139,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 style: TextStyle(color: primaryBlackLight, fontSize: 15),
               ),
             ),
-            TextButton(
-              onPressed: () async {
-                await auth.signIn('test@testsson.se', 'testar');
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => MyHomePage()));
-              },
-              child: Text(
-                'Debug',
-                style: TextStyle(color: primaryBlackLight, fontSize: 15),
-              ),
-            )
           ],
         ),
       ),
