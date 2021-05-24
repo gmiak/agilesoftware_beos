@@ -15,8 +15,8 @@ Här följer strukturen i repot för de saker som kan tänkas relevanta vid bed�
   * beos.apk //Program-fil
   * dokument //Här finns viktiga styrdokument som socialt kontrakt, designdokument, dokumentation m.m.
   * reflektioner
-   * team reflections //Laget tidigare reflektioner
-   * individuella reflektioner
+        * team reflections //Laget tidigare reflektioner
+        * individuella reflektioner
   * scope //Mapp gällande initiala omfattningen.
   
 Hur kör jag programmet? 
