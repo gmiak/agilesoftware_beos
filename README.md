@@ -8,15 +8,15 @@ Vem är vem?
 
 Struktur: 
 Här följer strukturen i repot för de saker som kan tänkas relevanta vid bedömning av projektet. 
-* gmiak/agilesoftware_beos
+gmiak/agilesoftware_beos
   * readme.md
   * slutrapport.pdf 
   * app //Här ligger koden)
   * beos.apk //Program-fil
   * dokument //Här finns viktiga styrdokument som socialt kontrakt, designdokument, dokumentation m.m.
   * reflektioner
-        * team reflections //Laget tidigare reflektioner
-        * individuella reflektioner
+    * team reflections //Laget tidigare reflektioner
+    * individuella reflektioner
   * scope //Mapp gällande initiala omfattningen.
   
 Hur kör jag programmet? 
