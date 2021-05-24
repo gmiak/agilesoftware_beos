@@ -1,10 +1,10 @@
 Vem är vem?
-  * Georges Kayembe - Gmiak
-  * Dalsher Jalal Kertan - dalsher
-  * Timmy Malm - mimmilamm
-  * Andreas Pettersson - AndreasPettersson98
-  * Albin Rössle - Abbelonius
-  * Anwarr Shiervani - Anwarr Shiervani
+  * Georges Kayembe - @Gmiak
+  * Dalsher Jalal Kertan - @dalsher
+  * Timmy Malm - @mimmilamm
+  * Andreas Pettersson - @AndreasPettersson98
+  * Albin Rössle - @Abbelonius
+  * Anwarr Shiervani - @Anwarr Shiervani
 
 Struktur: 
 
