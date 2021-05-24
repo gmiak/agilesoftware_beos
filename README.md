@@ -8,16 +8,16 @@ Vem är vem?
 
 Struktur: 
 Här följer strukturen i repot för de saker som kan tänkas relevanta vid bedömning av projektet. 
-gmiak/agilesoftware_beos
-  readme.md
-  slutrapport.pdf 
-  app //Här ligger koden)
-  beos.apk //Program-fil
-  dokument //Här finns viktiga styrdokument som socialt kontrakt, designdokument, dokumentation m.m.
-  reflektioner
-    team reflections //Laget tidigare reflektioner
-    individuella reflektioner
-  scope //Mapp gällande initiala omfattningen.
+* gmiak/agilesoftware_beos
+  * readme.md
+  * slutrapport.pdf 
+  * app //Här ligger koden)
+  * beos.apk //Program-fil
+  * dokument //Här finns viktiga styrdokument som socialt kontrakt, designdokument, dokumentation m.m.
+  * reflektioner
+   * team reflections //Laget tidigare reflektioner
+   * individuella reflektioner
+  * scope //Mapp gällande initiala omfattningen.
   
 Hur kör jag programmet? 
   Det enklaste är att installera apk-filen i roten på en android-telefon eller android emulator via t.ex. android-studio alternativt klona app-mappen och importera projektet till android studio eller Visual Studio Code för att köra koden på emulator. Emulatorn i android studio ligger under Configure/AVD Manager. Om man vill köra koden via VS Code som de flesta av oss så startar man VS Code efter emulatorn är igång så hittas den ordentligt. 
