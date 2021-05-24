@@ -1,8 +1,31 @@
-# Content
+Vem är vem?
+  Georges Kayembe - Gmiak
+  Dalsher Jalal Kertan - dalsher
+  Timmy Malm - mimmilamm
+  Andreas Pettersson - AndreasPettersson98
+  Albin Rössle - Abbelonius
+  Anwarr Shiervani - Anwarr Shiervani
 
-The course provides a practical introduction to Software Engineering. Students work on an open problem that is defined by stakeholders outside of the students' team. That means that students will not be able to define the project they work on themselves. In order to address this challenge, students will learn:
-* a software development process to structure their work
-* how to specify and evaluate requirements and the collaboration with stakeholders to assure that was is being delivered is perceived as valuable
-* new technologies and tools and fitting ways to use them in order to realise the value proposition based on the students' own learning strategies
-* how to organise themselves in a team in order to reach a joint goal with limited resources
-* how to reflect on their own work and learning to enable a continuous improvement of their way of working
+Struktur
+Här följer strukturen i repot för de saker som kan tänkas relevanta vid bedömning av projektet. 
+gmiak/agilesoftware_beos
+  readme.md
+  slutrapport.pdf 
+  app //Här ligger koden)
+  beos.apk //Program-fil
+  dokument //Här finns viktiga styrdokument som socialt kontrakt, designdokument, dokumentation m.m.
+  reflektioner
+    team reflections //Laget tidigare reflektioner
+    individuella reflektioner
+  scope //Mapp gällande initiala omfattningen.
+  
+Hur kör jag programmet? 
+  Det enklaste är att installera apk-filen i roten på en android-telefon eller android emulator via t.ex. android-studio alternativt klona app-mappen och importera projektet till android studio eller Visual Studio Code för att köra koden på emulator. Emulatorn i android studio ligger under Configure/AVD Manager. Om man vill köra koden via VS Code som de flesta av oss så startar man VS Code efter emulatorn är igång så hittas den ordentligt. 
+
+Gitinfo
+Det kan tas i beaktning vid bedömning att Dalsher och Georges har parprogrammerat en del. 
+
+Link to Jira: https://agilesoftware-beos.atlassian.net/jira/software/projects/BEOS/boards/1/backlog
+Här finns vår Scrum board, backlog och om man går in under rapporter(på svenska) kan man följa KPI:erna Velocity och Burndown-chart.
+
+Link to Drive: https://drive.google.com/drive/folders/1fKeJfC9yBan8wV6ormA4bI-AeyPs0P5R?usp=sharing
