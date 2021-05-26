@@ -1,3 +1,5 @@
+Det här är kodrepot för lag BeOS i kursen DAT257.
+
 Vem är vem?
   * Georges Kayembe - Gmiak
   * Dalsher Jalal Kertan - dalsher
