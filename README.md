@@ -16,7 +16,9 @@ gmiak/agilesoftware_beos
   * readme.md
   * slutrapport.pdf 
   * app //Här ligger koden)
-  * beos.apk //Program-fil
+  * beos-arm64-v8a-release.apk // Program-fil för arm64 arkitektur
+  * beos-armeabi-v7a-release.apk // Program-fil för arm arkitektur
+  * beos-x86_64-release.apk // Program-fil för x86_64 arkitektur
   * dokument //Här finns viktiga styrdokument som socialt kontrakt, designdokument, dokumentation m.m.
   * reflektioner
     * team reflections //Laget tidigare reflektioner
@@ -25,7 +27,7 @@ gmiak/agilesoftware_beos
   
 Hur kör jag programmet? 
   
-  Det enklaste är att installera apk-filen i roten på en android-telefon eller android emulator via t.ex. android-studio alternativt klona app-mappen och importera projektet till android studio eller Visual Studio Code för att köra koden på emulator. Emulatorn i android studio ligger under Configure/AVD Manager. Om man vill köra koden via VS Code som de flesta av oss så startar man VS Code efter emulatorn är igång så hittas den ordentligt. 
+  Det enklaste är att installera respektive APK-fil på en ordinarie Android-telefon eller inuti en Android Emulator via t.ex. Android Studio. Alternativt så kan man klona app-mappen och importera projektet till android studio eller Visual Studio Code för att köra koden på emulator. Emulatorn i android studio ligger under Configure/AVD Manager. Om man vill köra koden via VS Code som de flesta av oss så startar man VS Code efter emulatorn är igång så hittas den ordentligt. 
 
 Gitinfo: 
 Det kan tas i beaktning vid bedömning att Dalsher och Georges har parprogrammerat en del. 
