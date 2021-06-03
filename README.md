@@ -28,6 +28,7 @@ gmiak/agilesoftware_beos
 Hur kör jag programmet? 
   
   Det enklaste är att installera respektive APK-fil på en ordinarie Android-telefon eller inuti en Android Emulator via t.ex. Android Studio. Alternativt så kan man klona app-mappen och importera projektet till android studio eller Visual Studio Code för att köra koden på emulator. Emulatorn i android studio ligger under Configure/AVD Manager. Om man vill köra koden via VS Code som de flesta av oss så startar man VS Code efter emulatorn är igång så hittas den ordentligt. 
+Man behöver också installera flutter enligt https://flutter.dev/docs/get-started/install om man kör på annat vis än apk-fil. Om apk-filen strular kan man testa att installera flutter och köra kommandot "flutter install" när ens telefon är kopplad till datorn. 
 
 Gitinfo: 
 Det kan tas i beaktning vid bedömning att Dalsher och Georges har parprogrammerat en del. 
