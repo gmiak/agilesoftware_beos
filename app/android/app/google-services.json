@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "986079514042",
+    "project_id": "beos-tda257",
+    "storage_bucket": "beos-tda257.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:986079514042:android:053411c44757da2880e183",
+        "android_client_info": {
+          "package_name": "com.tda257.beos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "986079514042-5r7ns89al20mdj8rtpqmnl0a76d3qgk0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXxYoHVuq3FBZgg0w7xJykBtvfHPX2fVo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "986079514042-5r7ns89al20mdj8rtpqmnl0a76d3qgk0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
