@@ -37,3 +37,6 @@ Här finns vår Scrum board, backlog och om man går in under rapporter(på sven
 
 Länk till Drive: https://drive.google.com/drive/folders/1fKeJfC9yBan8wV6ormA4bI-AeyPs0P5R?usp=sharing
 Här är vårt kompletta dokumentrepo för den nyfikne men borde inte behövas undersökas för bedömning. 
+
+Länken till KPI-filerna i excell: 
+https://docs.google.com/spreadsheets/d/1lhrxVqz3DC38j80dcB8dDYnbmMDECMV8mNqdUQToHms/edit?usp=sharing
